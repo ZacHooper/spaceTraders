@@ -50,7 +50,7 @@ if __name__ == "__main__":
   profit = []
   # Runs the trading run function 50 times
   # Changes the direction automatically
-  for x in range(20):
+  for x in range(10):
     print("Trading run: " + str(x) + " Profit so far: " + str(sum(profit)))
     if gravager.location == "OE-PM-TR":
       destination = "OE-PM"

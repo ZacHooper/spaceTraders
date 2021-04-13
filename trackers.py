@@ -6,6 +6,8 @@ import datetime
 import sqlite3
 import sqlalchemy
 import logging
+import time
+from rich.progress import track
 
 DATABASE_LOCATION = 'sqlite:///SpaceTraders_DB.sqlite'
 
@@ -13,14 +15,17 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=lo
 
 def write_marketplace_to_db(marketplace, location):
   # Add a unique time to every record
-  marketplace['time'] = [datetime.datetime.now() for _ in range(len(prime.index))]
+  def get_time_now():
+    time.sleep(.00001)
+    return datetime.datetime.now()
+
+  marketplace['time'] = [get_time_now() for _ in range(len(marketplace.index))]
   marketplace['location'] = location
 
   # Drop the spread column as it's not needed
-  print(marketplace.columns)
   if 'spread' in marketplace.columns:
     marketplace = marketplace.drop('spread', axis=1)
-  print(marketplace.columns)
+  
   # --- Load to DB ---
 
   # Init engine, conn & cursor
@@ -51,18 +56,40 @@ def write_marketplace_to_db(marketplace, location):
   try:
     logging.info("Adding {0} records to table: marketplace_tracker".format(len(marketplace)))
     marketplace.to_sql("marketplace_tracker", engine, index=False, if_exists="append")
-  except:
+  except Exception as e:
+    logging.warning(e)
     logging.warning("Data already exists in the database. {0} records not added to Database".format(len(marketplace)))
 
   # Close the DB
   conn.close()
   logging.info("Diconnected from Database")
 
-if __name__ == "__main__":
-  get_marketplace = lambda x: pd.DataFrame(st.Game().location(x).marketplace())
-  prime = get_marketplace("OE-PM")
+def get_trackers(ships):
+    tracker_ships = lambda x: x.manufacturer == "Jackshaw"
+    trackers=filter(tracker_ships, ships)
+    return trackers
 
-  write_marketplace_to_db(prime, "OE-PM")
+def track_markets(repeat):
+  get_marketplace = lambda x: pd.DataFrame(st.Game().location(x).marketplace())
+  user = st.get_user("JimHawkins")
+  trackers = get_trackers(user.get_ships())
+  tracker_locations = [tracker.location for tracker in trackers]
+  for x in range(repeat):
+    for loc in tracker_locations:
+      logging.info("Premptive pause for throttle")
+      for n in track(range(5), description="Pausing..."):
+        time.sleep(1)
+      print("Adding Market Records for: " + loc)
+      write_marketplace_to_db(get_marketplace(loc), loc)
+    logging.info("Sleeping")
+    for n in track(range(60), description="Sleeping..."):
+      time.sleep(1)
+    
+
+if __name__ == "__main__":
+  track_markets(10)
+
+  
 
 
   

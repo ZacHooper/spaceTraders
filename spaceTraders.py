@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import math
 import time
-from rich.progress import Progress
+from rich.progress import Progress, track
 import logging
 
 URL = "https://api.spacetraders.io/"
@@ -233,8 +233,14 @@ def generic_get_call(endpoint, params=None):
     if r.ok:
         return r.json()
     else:
-        print("Something went wrong")
-        print(r.json())
+        logging.warning("Something went wrong when hitting: {0} with parameters: {1}".format(URL+endpoint, params))
+        logging.warning("Error: " + str(r.json()))
+        # Handle Throttling errors by pausing and trying again
+        logging.info("Pausing to wait for throttle")
+        for n in track(range(10), description="Pausing..."):
+          time.sleep(1)
+        return generic_get_call(endpoint, params)
+
 
 # Generic call to API
 def generic_post_call(endpoint, params=None):
@@ -243,8 +249,14 @@ def generic_post_call(endpoint, params=None):
     if r.ok:
         return r.json()
     else:
-        print("Something went wrong")
-        print(r.json())
+        logging.warning("Something went wrong when hitting: {0} with parameters: {1}".format(URL+endpoint, params))
+        logging.warning("Error: " + str(r.json()))
+        # Handle Throttling errors by pausing and trying again
+        if r.json()['error']['code'] == '42901':
+          logging.info("Pausing to wait for throttle")
+          for n in track(range(10), description="Pausing..."):
+            time.sleep(1)
+          return generic_post_call(endpoint, params)
 
 def get_user(username):
   '''Get the user and return a User Object'''
