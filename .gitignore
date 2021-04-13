@@ -1,0 +1,4 @@
+# Required locally
+/venv
+/__pycache__
+.gitattributes
