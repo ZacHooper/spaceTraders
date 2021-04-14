@@ -52,7 +52,52 @@ class Ship(object):
   def get_fuel_level(self):
     fuel = lambda x: x['good'] == "FUEL"
     cargo_fuel=filter(fuel,self.cargo)
-    return list(cargo_fuel)[0]['quantity']
+    if len(list(cargo_fuel)) > 0:
+      return list(cargo_fuel)[0]['quantity']
+    else:
+      return 0
+
+  def calculate_fuel_usage(self, distance):
+    return round((9/37) * distance + 2)
+
+  def update_cargo(self, new_cargo, new_spaceAvailable):
+    logging.info("Updating Cargo & Space Available of ship: {0}. Previous Cargo: {1}. New Cargo: {2}. Previous Space Available: {3}. New Space Available: {4}".format(self.id, self.cargo, new_cargo, self.spaceAvailable, new_spaceAvailable))
+    self.cargo = new_cargo
+    self.spaceAvailable = new_spaceAvailable
+    return True
+  
+  def __repr__(self):
+    return """
+      id : {0}
+      manufacturer : {1}
+      kind : {2}
+      type : {3}
+      location : {4}
+      x : {5}
+      y : {6}
+      speed : {7}
+      plating : {8}
+      weapons : {9}
+      maxCargo : {10}
+      spaceAvailable : {11}
+      cargo : {12}
+    """.format(self.id, self.manufacturer, "temp class", self.type, self.location, self.x, self.y, self.speed, self.plating, self.weapons, self.maxCargo, self.spaceAvailable, self.cargo)
+  def __str__(self):
+    return """
+      id : {0}
+      manufacturer : {1}
+      kind : {2}
+      type : {3}
+      location : {4}
+      x : {5}
+      y : {6}
+      speed : {7}
+      plating : {8}
+      weapons : {9}
+      maxCargo : {10}
+      spaceAvailable : {11}
+      cargo : {12}
+    """.format(self.id, self.manufacturer, "temp class", self.type, self.location, self.x, self.y, self.speed, self.plating, self.weapons, self.maxCargo, self.spaceAvailable, self.cargo)
 
 class User:
   '''User Object
@@ -197,7 +242,7 @@ class Market:
     symbol = self.best_buy(Game().location(ship.location), Game().location(destination))
     # Work out many units to buy
     units_to_buy = self.how_much_to_buy(symbol['volume'], ship.spaceAvailable)
-    return {"symbol": symbol['symbol'], "units": units_to_buy, "total_cost": symbol['cost'] * units_to_buy, "expected_profit": symbol['profit'] * units_to_buy}
+    return {"symbol": symbol['symbol'], "units": units_to_buy, "total_cost": symbol['cost'] * units_to_buy, "expected_profit": symbol['profit'] * units_to_buy, "profit_per_volume": symbol['profit'], "good_volume": symbol['volume']}
 
 class Game:
   # See if the game is currently up
@@ -210,6 +255,10 @@ class Game:
 
   def get_available_ships(self, kind=None):
     return generic_get_call("game/ships", params={"class":kind})['ships']
+
+  def calculate_distance(from_x, from_y, to_x, to_y):
+    return round(math.sqrt(math.pow((loc_x - ship_x),2) + math.pow((loc_y - ship_y),2)))
+
 
 class Location:
   def __init__(self, **kwargs):

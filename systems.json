@@ -1,0 +1,189 @@
+[
+    {
+        "symbol": "OE",
+        "name": "Omicron Eridani",
+        "locations": [
+            {
+                "symbol": "OE-PM",
+                "type": "PLANET",
+                "name": "Prime",
+                "x": 20,
+                "y": -25,
+                "ships": []
+            },
+            {
+                "symbol": "OE-PM-TR",
+                "type": "MOON",
+                "name": "Tritus",
+                "x": 23,
+                "y": -28,
+                "ships": []
+            },
+            {
+                "symbol": "OE-CR",
+                "type": "PLANET",
+                "name": "Carth",
+                "x": 16,
+                "y": 17,
+                "ships": []
+            },
+            {
+                "symbol": "OE-KO",
+                "type": "PLANET",
+                "name": "Koria",
+                "x": -48,
+                "y": -7,
+                "ships": []
+            },
+            {
+                "symbol": "OE-BO",
+                "type": "GAS_GIANT",
+                "name": "Bo",
+                "x": -64,
+                "y": -89,
+                "ships": []
+            },
+            {
+                "symbol": "OE-NY",
+                "type": "ASTEROID",
+                "name": "Nyon",
+                "x": 74,
+                "y": 50,
+                "ships": []
+            },
+            {
+                "symbol": "OE-UC",
+                "type": "PLANET",
+                "name": "Ucarro",
+                "x": -75,
+                "y": 82,
+                "ships": []
+            },
+            {
+                "symbol": "OE-UC-AD",
+                "type": "MOON",
+                "name": "Ado",
+                "x": -82,
+                "y": 82,
+                "ships": []
+            },
+            {
+                "symbol": "OE-UC-OB",
+                "type": "MOON",
+                "name": "Obo",
+                "x": -77,
+                "y": 78,
+                "ships": []
+            },
+            {
+                "symbol": "OE-XV-91-2",
+                "type": "WORMHOLE",
+                "name": "Wormhole",
+                "x": 0,
+                "y": 145,
+                "ships": [],
+                "messages": [
+                    "Extensive research has revealed a partially functioning warp gate harnessing the power of an unstable but traversable wormhole.",
+                    "The scientific community has determined a means of stabilizing the ancient structure.",
+                    "Enter at your own risk.",
+                    "POST https://api.spacetraders.io/game/structures/:structureId/deposit shipId=:shipId good=:goodSymbol quantity=:quantity",
+                    "POST https://api.spacetraders.io/users/{username}/warp-jump shipId=:shipId"
+                ]
+            }
+        ]
+    },
+    {
+        "symbol": "XV",
+        "name": "Xiav",
+        "locations": [
+            {
+                "symbol": "XV-BN",
+                "type": "NEBULA",
+                "name": "Bear Nebula",
+                "x": 102,
+                "y": 92,
+                "ships": []
+            },
+            {
+                "symbol": "XV-ST",
+                "type": "PLANET",
+                "name": "Straxabos",
+                "x": -16,
+                "y": 26,
+                "ships": []
+            },
+            {
+                "symbol": "XV-ST-BG",
+                "type": "MOON",
+                "name": "Bragi",
+                "x": -26,
+                "y": 28,
+                "ships": []
+            },
+            {
+                "symbol": "XV-XA",
+                "type": "PLANET",
+                "name": "Xamarin",
+                "x": 9,
+                "y": 12,
+                "ships": []
+            },
+            {
+                "symbol": "XV-TLF",
+                "type": "PLANET",
+                "name": "Thorix LF",
+                "x": -79,
+                "y": -18,
+                "ships": []
+            },
+            {
+                "symbol": "XV-OS",
+                "type": "PLANET",
+                "name": "Osuhines",
+                "x": -64,
+                "y": -35,
+                "ships": []
+            },
+            {
+                "symbol": "XV-SN",
+                "type": "PLANET",
+                "name": "Sinope",
+                "x": 43,
+                "y": -37,
+                "ships": []
+            },
+            {
+                "symbol": "XV-CB",
+                "type": "PLANET",
+                "name": "Ciubus",
+                "x": 105,
+                "y": -22,
+                "ships": []
+            },
+            {
+                "symbol": "XV-CB-NM",
+                "type": "MOON",
+                "name": "Nami",
+                "x": 111,
+                "y": -12,
+                "ships": []
+            },
+            {
+                "symbol": "XV-CB-IT",
+                "type": "MOON",
+                "name": "Ito",
+                "x": 112,
+                "y": -25,
+                "ships": []
+            },
+            {
+                "symbol": "XV-OE-2-91",
+                "type": "WORMHOLE",
+                "name": "Wormhole",
+                "x": 145,
+                "y": 0,
+                "ships": []
+            }
+        ]
+    }
+]
