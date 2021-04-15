@@ -2,13 +2,14 @@ import requests
 import pandas as pd
 import math
 import time
+import json
 from rich.progress import Progress, track
 import logging
 
 URL = "https://api.spacetraders.io/"
 TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
 R  = '\033[31m' # red
 G  = '\033[32m' # green
@@ -45,26 +46,52 @@ class Ship(object):
   
   # Get Good to sell
   def get_cargo_to_sell(self):
+    '''
+    Return a list of all the cargo on the ship execpt for FUEL
+    '''
     cargo_not_fuel = lambda x: x['good'] != "FUEL"
-    cargo_to_sell=filter(cargo_not_fuel,self.cargo)
+    cargo_to_sell=list(filter(cargo_not_fuel,self.cargo))
     return cargo_to_sell
 
   def get_fuel_level(self):
+    '''
+    Returns an 'int' of the current FUEL onboard the ship
+    '''
     fuel = lambda x: x['good'] == "FUEL"
-    cargo_fuel=filter(fuel,self.cargo)
-    if len(list(cargo_fuel)) > 0:
-      return list(cargo_fuel)[0]['quantity']
-    else:
-      return 0
-
-  def calculate_fuel_usage(self, distance):
-    return round((9/37) * distance + 2)
+    cargo_fuel=list(filter(fuel,self.cargo))
+    return cargo_fuel[0]['quantity'] if len(cargo_fuel) > 0 else 0
 
   def update_cargo(self, new_cargo, new_spaceAvailable):
+    '''
+    Updates the cargo & spaceAvailable attributes of this Ship object.
+
+    Enures that any downstream calls of this object have the correct information. Ensure to use this method after any orders.
+    '''
     logging.info("Updating Cargo & Space Available of ship: {0}. Previous Cargo: {1}. New Cargo: {2}. Previous Space Available: {3}. New Space Available: {4}".format(self.id, self.cargo, new_cargo, self.spaceAvailable, new_spaceAvailable))
     self.cargo = new_cargo
     self.spaceAvailable = new_spaceAvailable
     return True
+
+  def calculate_fuel_usage(self, *args):
+    '''
+    NOT A PERFECT RESULT
+
+    Based on the distance provided to a location works out the estimated fuel required to fly there
+
+    USAGE:
+    Provide already calculated distance 
+    OR
+    Provide the x & y coordinates of the destination
+    '''
+    # Distance supplied
+    if len(args) == 1:
+      return round((9/37) * args[0] + 2 + 2)
+    if len(args) == 2:
+      return round((9/37) * self.calculate_distance(args[0], args[1]) + 2 + 2)
+    
+  
+  def calculate_distance(self, to_x, to_y):
+    return round(math.sqrt(math.pow((to_x - ship.x),2) + math.pow((to_y - ship.y),2)))
   
   def __repr__(self):
     return """
@@ -106,12 +133,8 @@ class User:
   def __init__(self, username, credits, ships, loans):
     self.username = username
     self.credits = credits
-    self.ships = ships
+    self.ships = self.get_ships(ships)
     self.loans = loans
-
-  # Get User Details
-  def get_user(self):
-    return generic_get_call("users/" + self.username)
 
   def request_loan(self, type):
     # TODO: Return a loan object
@@ -119,14 +142,24 @@ class User:
 
   def buy_ship(self, location, type):
     # TODO: return a ship object
+    # Update the 'ships' attribute of the user
     return generic_post_call("users/{0}/ships".format(self.username), 
                              params={"location": location, "type": type})
   
-  def get_ships(self):
-    return [Ship(ship) for ship in self.ships]
+  def get_ships(self, ships=None):
+    '''
+    Returns a list of Ship objects that the user currently owns
+    '''
+    return [Ship(ship) for ship in ships] if ships is not None else self.ships
   
   def get_ship(self, shipId):
-    return Ship(generic_get_call("users/{0}/ships/{1}".format(self.username, shipId))['ship'])
+    '''
+    Returns a Ship object for the shipId provided. 
+    
+    :Param shipId : str
+    :Return ship : Ship 
+    '''
+    return next((ship for ship in self.ships if ship.id == shipId), None)
 
   def new_order(self, shipId, good, quantity):
     # Prepare for call
@@ -202,6 +235,7 @@ class Loan:
 
 class Market:
   def how_much_to_buy(self, unit_volume, hull_capacity):
+    '''Returns max amount of units that can fit into the ship'''
     return math.trunc(hull_capacity / unit_volume)
 
   def profit_margin(self, good_compare):
@@ -209,6 +243,7 @@ class Market:
 
   # Expect DataFrames to be passed to it
   def market_compare(self, from_market, to_market):
+    """Returns a DataFrame with matching Goods and the profit made/lost if sold from the 'from_market' to the 'to_market'"""
     # Convert to DataFrames if String value of Symbol provided
     if isinstance(from_market, str):
       from_market = pd.DataFrame(Game().location(from_market).marketplace())
@@ -218,46 +253,112 @@ class Market:
     market_compare = from_market.join(to_market.set_index('symbol'), on="symbol", how="inner", lsuffix="_from", rsuffix="_to")
     # Get the Profit Margins - factoring in volume of the good
     market_compare['profit'] = market_compare.apply(self.profit_margin, axis=1)
+    market_compare['profit_per_volume'] = market_compare.apply(lambda x: x['profit'] / x['volumePerUnit_from'], axis=1)
     return market_compare
   
   def best_buy(self, from_destination, to_destination):
-    # Convert to Location if String value of Symbol provided
+    """Returns a JSON object with the best Good to buy at the 'from_destination' if wanting to sell goods at the 'to_destination'"""
+    # Convert to Location and get market if String value of Symbol provided
     if isinstance(from_destination, str):
-      from_destination = Game().location(from_destination)
+      from_market = pd.DataFrame(Game().location(from_destination).marketplace())
     if isinstance(to_destination, str):
-      to_destination = Game().location(to_destination)
-    # Get markets of each destination as DataFrames
-    from_market = pd.DataFrame(from_destination.marketplace())
-    to_market = pd.DataFrame(to_destination.marketplace())
+      to_market = pd.DataFrame(Game().location(to_destination).marketplace())
     # Get the market comparison
     market_comparison = self.market_compare(from_market, to_market)
     # Get the record for the best good - factor in the profit per unit volume
-    market_comparison['profit_per_volume'] = market_comparison.apply(lambda x: x['profit'] / x['volumePerUnit_from'], axis=1)
     best_good = market_comparison.loc[market_comparison['profit_per_volume'].idxmax()]
-    return {"symbol": best_good['symbol'], "cost": best_good['purchasePricePerUnit_from'], "profit": best_good['profit'], "volume": best_good['volumePerUnit_from']}
+    return {"symbol": best_good['symbol'], 
+            "cost": best_good['purchasePricePerUnit_from'],  
+            "volume": best_good['volumePerUnit_from'],
+            "profit": best_good['profit'],
+            "profit_per_volume": best_good['profit_per_volume']}
 
   # Returns the best good to buy, how many units to buy of it and the expected profit
   def what_should_I_buy(self, ship, destination):
+    """
+    Returns a JSON object with the best good to buy and how many units of it for a particular ship when travelling to a particular destination
+    
+    :param ship : Ship - a Ship class object
+    :param destination : str - the symbol of the destination to travel too
+    :return JSON : best buy
+        {
+          "symbol": The symbol of the good, 
+          "units": How many units you should buy for this ship, 
+          "total_cost": Total cost of this order, 
+          "expected_profit": Expected profit from this order,
+          "profit": Profit selling good per unit at destination,
+          "profit_per_volume": Profit per volume of selling good at destination, 
+          "good_volume": Volume of the good,
+          "total_volume": Amount of volume unit will take on the ship,
+          "fuel_required": The fuel required to make the trip
+        }
+    """
+    loc = Game().locations[destination]
     # Get the best good to buy
-    symbol = self.best_buy(Game().location(ship.location), Game().location(destination))
+    best_good = self.best_buy(ship.location, loc.symbol)
+    # How much fuel would be required
+    fuel_required = ship.calculate_fuel_usage(loc.x, loc.y)
     # Work out many units to buy
-    units_to_buy = self.how_much_to_buy(symbol['volume'], ship.spaceAvailable)
-    return {"symbol": symbol['symbol'], "units": units_to_buy, "total_cost": symbol['cost'] * units_to_buy, "expected_profit": symbol['profit'] * units_to_buy, "profit_per_volume": symbol['profit'], "good_volume": symbol['volume']}
+    units_to_buy = self.how_much_to_buy(best_good['volume'], ship.maxCargo - fuel_required)
+    return {"symbol": best_good['symbol'], 
+            "units": units_to_buy, 
+            "total_cost": best_good['cost'] * units_to_buy, 
+            "expected_profit": best_good['profit'] * units_to_buy,
+            "profit": best_good['profit'],
+            "profit_per_volume": best_good['profit_per_volume'], 
+            "good_volume": best_good['volume'],
+            "total_volume": best_good['volume'] * units_to_buy,
+            "fuel_required": fuel_required}
 
 class Game:
+  def __init__(self):
+    self.systems = self.load_sytems()
+    self.locations = self.load_locations()
   # See if the game is currently up
   def status(self):
+    """Returns whether the game is Up or Not"""
     return generic_get_call("game/status")
 
   # Get a specific location - returns a location object
   def location(self, symbol):
-    return Location(**generic_get_call("game/locations/{0}".format(symbol))['location'])
+    """Returns a Location object for the symbol provided"""
+    return self.locations[symbol]
 
   def get_available_ships(self, kind=None):
+    """
+    Get all the available ships for sale
+    
+    :param : kind : str - Filter the list of ships to the class of ship provided eg. "MK-I"
+    :return : list - List of ships available for purchase
+
+    **CALL TO API**
+    """
     return generic_get_call("game/ships", params={"class":kind})['ships']
 
   def calculate_distance(from_x, from_y, to_x, to_y):
     return round(math.sqrt(math.pow((loc_x - ship_x),2) + math.pow((loc_y - ship_y),2)))
+  
+  def calculate_fuel_usage(self, distance):
+    '''
+    NOT A PERFECT RESULT
+
+    Based on the distance provided to a location works out the estimated fuel required to fly there
+    '''
+    return round((9/37) * distance + 2 + 2)
+
+  def load_sytems(self):
+    '''
+    This will simply load the complete JSON file with no further transformations
+    '''
+    with open('systems.json', 'r') as infile:
+      return json.load(infile)
+  
+  def load_locations(self):
+    '''
+    This will return a dict of Location objects for all the locations across both systems. The key is the locations symbol.
+    '''
+    # Return each location as an object with it's symbol as the key
+    return {loc['symbol']: Location(**loc) for sys in self.systems for loc in sys['locations']}
 
 
 class Location:
@@ -267,12 +368,17 @@ class Location:
   def marketplace(self):
     endpoint = "game/locations/{0}/marketplace".format(self.symbol)
     return generic_get_call(endpoint)['location']['marketplace']
+  
+  def __repr__(self):
+    return "Symbol: " + self.symbol + ", Name: " + self.name
+
+  def __str__(self):
+    return "Symbol: " + self.symbol + ", Name: " + self.name
 
 # Get New User 
 def post_create_user(username):
   endpoint = "users/{0}/".format(username)
   return generic_post_call(endpoint, params=None)
-
 
 # Misc Functions
 # Generic get call to API
@@ -324,8 +430,10 @@ if __name__ == "__main__":
   username = "JimHawkins"
   game = Game()
   user = get_user(username)
+  ship = user.get_ship("cknegaohp5912821bs6d0ws1xr1")
+  print(Market().what_should_I_buy(ship, "OE-PM-TR"))
+  print(ship)
   
-
 
   
 
