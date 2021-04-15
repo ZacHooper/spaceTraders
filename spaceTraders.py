@@ -449,11 +449,10 @@ def generic_post_call(endpoint, params=None):
         logging.warning("Something went wrong when hitting: {0} with parameters: {1}".format(URL+endpoint, params))
         logging.warning("Error: " + str(r.json()))
         # Handle Throttling errors by pausing and trying again
-        if r.json()['error']['code'] == '42901':
-          logging.info("Pausing to wait for throttle")
-          for n in track(range(10), description="Pausing..."):
-            time.sleep(1)
-          return generic_post_call(endpoint, params)
+        logging.info("Pausing to wait for throttle")
+        for n in track(range(10), description="Pausing..."):
+          time.sleep(1)
+        return generic_post_call(endpoint, params)
 
 def get_user(username):
   '''Get the user and return a User Object'''

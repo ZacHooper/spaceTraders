@@ -111,33 +111,39 @@ def any_dest_trading_run(ship):
   if did_buy_goods:
     # Sell Order
     sell_order = user.sell_order(ship.id, flight_path['symbol'], flight_path['units'])
+    print(G+"Sold {} units of {} for {} with a profit of {}".\
+        format(flight_path['units'], 
+               flight_path['symbol'], 
+               sell_order['order']['total'], 
+               sell_order['order']['total'] - buy_order['order']['total'])+W)
     # Update Ship
     ship.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
     return sell_order['order']['total'] - buy_order['order']['total']
   else:
     return 0
 
-  
-
-if __name__ == "__main__":
-  gravager = user.get_ship('cknegaohp5912821bs6d0ws1xr1')
-  
-  # Get the 
+def do_trading_run(shipId, times):
+  ship = user.get_ship(shipId)
   start = datetime.datetime.now()
   profit = []
-  
-  for x in range(2):
-    profit.append(any_dest_trading_run(gravager))
 
-  # goods = gravager.get_cargo_to_sell()
-  # for good in goods:
-  #   sell_order = user.sell_order(gravager.id, good['good'], good['quantity'])
-  #   gravager.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
+  # Perform the trading runs
+  for x in range(times):
+    profit.append(any_dest_trading_run(ship))
+    print(R+"Total money made so far: " + str(sum(profit))+W)
+    now = datetime.datetime.now() - start
+    print(R+"Time taken so far: " + str(now)+W)
+    profit_per_hour = round( sum(profit) / (now.total_seconds() / 3600), 2)
+    print(R+"Current profit per Hour: " + str(profit_per_hour)+W)
 
+  # Display Results
   print("Total money made: " + str(sum(profit)))
   now = datetime.datetime.now() - start
   print("Time taken: " + str(now))
   profit_per_hour = round( sum(profit) / (now.total_seconds() / 3600), 2)
   print("Profit per Hour: " + str(profit_per_hour))
+
+if __name__ == "__main__":
+  pass
 
   
