@@ -4,3 +4,4 @@
 .gitattributes
 spaceTraders.pyc
 /.ipynb_checkpoints
+SpaceTraders_DB.sqlite
