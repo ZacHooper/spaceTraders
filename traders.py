@@ -2,13 +2,14 @@ import SpaceTraders as st
 import datetime
 import time
 import trackers
+import math
 
 URL = "https://api.spacetraders.io/"
 TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
+GAME = st.Game()
 username = "JimHawkins"
 
 user = st.get_user(username)
-game = st.Game()
 
 # Colours
 R  = '\033[31m' # red
@@ -43,90 +44,80 @@ def trading_run(ship, destination):
     # Return the profit of the run
     return order['order']['total'] - what_to_buy['total_cost']
 
-def get_locations_being_tracked(ships=None):
-    if ships is None:
-        ships = user.get_ships()
-    tracker_ships = trackers.get_trackers(ships)
-    return [ship.location for ship in tracker_ships]
-
 def find_optimum_trade_route(ship):
     # Get tracked markets and remove the current market
-    all_tracker_locs = get_locations_being_tracked()
+    all_tracker_locs = [ship.location for ship in user.get_trackers()]
     # remove current market of ship
     all_tracker_locs.remove(ship.location)
 
+    # Get marketplace of ships current location - lessons calls to API
+    ship_marketplace = GAME.locations[ship.location].marketplace()
+
     # Work out the best trade
-    potential_trades = [st.Market().what_should_I_buy(ship, loc) for loc in all_tracker_locs]
+    potential_trades = [st.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
     # Pair up loc with best trade
     pt_loc = list(zip(all_tracker_locs, potential_trades))
     # Return trade with Max expected profit
     return max(pt_loc, key=lambda d: d[1]['expected_profit']) 
 
+def find_optimum_trade_routes(ship):
+    # Get tracked markets and remove the current market
+    all_tracker_locs = [ship.location for ship in user.get_trackers()]
+    # remove current market of ship
+    all_tracker_locs.remove(ship.location)
+
+    # Get marketplace of ships current location - lessons calls to API
+    ship_marketplace = GAME.locations[ship.location].marketplace()
+
+    # Work out the best trades
+    return [st.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
+
 def any_dest_trading_run(ship):
-    # fill up 
-    if ship.get_fuel_level() < 30:
-      print(G+"Filling up Fuel"+W)
-      # Place order
-      fuel_order = user.new_order(ship.id, "FUEL", 30 - ship.get_fuel_level())
-      # Update ship
-      ship.update_cargo(fuel_order['ship']['cargo'], fuel_order['ship']['spaceAvailable'])
-
-    # Work out good to buy and destination
-    trade_route = find_optimum_trade_route(ship)
+  did_buy_goods = False
+  # Get the optimum trade routes - USES 9 API Calls
+  trade_routes = find_optimum_trade_routes(ship)
+  # Drop non-profitable trades
+  trade_routes_profit = list(filter(lambda x: x['profit'] > 0, trade_routes))
+  
+  # Handle not profitable trades
+  if len(trade_routes_profit) == 0:
+    print("No Profitable Trades")
+    # Calculate distance to closest location
+    closet_location = ship.get_closest_location()
+    flight_path = {"to": closet_location[0].symbol, "fuel_required": ship.calculate_fuel_usage(closet_location[1])}
+  else:
+    flight_path = max(trade_routes_profit, key=lambda tr: tr['expected_profit'])
+    # Buy Good
     print(G+"Buying {} units of {} for {} with an expected profit of {}".\
-      format(trade_route[1]['units'], trade_route[1]['symbol'], trade_route[1]['total_cost'], trade_route[1]['expected_profit'])+W)
-
-    # Place order
-    buy_order = user.new_order(ship.id, trade_route[1]['symbol'], trade_route[1]['units'])
+        format(flight_path['units'], 
+               flight_path['symbol'], 
+               flight_path['total_cost'], 
+               flight_path['expected_profit'])+W)
+    buy_order = user.new_order(ship.id, flight_path['symbol'], flight_path['units'])
     # Update Ship
     ship.update_cargo(buy_order['ship']['cargo'], buy_order['ship']['spaceAvailable'])
+    did_buy_goods = True
+  
+  # Buy Fuel
+  fuel_order = user.new_order(ship.id, "FUEL", flight_path['fuel_required'] - ship.get_fuel_level())
+  # Update Ship
+  ship.update_cargo(fuel_order['ship']['cargo'], fuel_order['ship']['spaceAvailable'])
 
-    # Fly to destination
-    flight = user.fly(ship.id, trade_route[0], track=True)
-    # Update Ship
-    ship = user.get_ship(ship.id)
+  # Fly
+  flight = user.fly(ship.id, flight_path['to'], track=True)
+  # Update Ship
+  ship.update_location(GAME.location(flight_path['to']).x, GAME.location(flight_path['to']).y, flight_path['to'])
 
-    # Sell Goods
-    sell_order = user.sell_order(ship.id, trade_route[1]['symbol'], trade_route[1]['units'])
-    print(G+"Sold {} units of {} at {} with a profit of {}".\
-      format(trade_route[1]['units'], trade_route[1]['symbol'], sell_order['order']['total'], sell_order['order']['total']-trade_route[1]['total_cost'])+W)
+  if did_buy_goods:
+    # Sell Order
+    sell_order = user.sell_order(ship.id, flight_path['symbol'], flight_path['units'])
     # Update Ship
     ship.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
+    return sell_order['order']['total'] - buy_order['order']['total']
+  else:
+    return 0
 
-    return sell_order['order']['total'] - trade_route[1]['total_cost']
-
-def any_dest_trading_run2(ship):
-  # fill up 
-  if ship.get_fuel_level() < 30:
-    print(G+"Filling up Fuel"+W)
-    # Place order
-    fuel_order = user.new_order(ship.id, "FUEL", 30 - ship.get_fuel_level())
-    # Update ship
-    ship.update_cargo(fuel_order['ship']['cargo'], fuel_order['ship']['spaceAvailable'])
-
-  # Work out good to buy and destination
-  trade_route = find_optimum_trade_route(ship)
-  print(G+"Buying {} units of {} for {} with an expected profit of {}".\
-    format(trade_route[1]['units'], trade_route[1]['symbol'], trade_route[1]['total_cost'], trade_route[1]['expected_profit'])+W)
-
-  # Place order
-  buy_order = user.new_order(ship.id, trade_route[1]['symbol'], trade_route[1]['units'])
-  # Update Ship
-  ship.update_cargo(buy_order['ship']['cargo'], buy_order['ship']['spaceAvailable'])
-
-  # Fly to destination
-  flight = user.fly(ship.id, trade_route[0], track=True)
-  # Update Ship
-  ship = user.get_ship(ship.id)
-
-  # Sell Goods
-  sell_order = user.sell_order(ship.id, trade_route[1]['symbol'], trade_route[1]['units'])
-  print(G+"Sold {} units of {} at {} with a profit of {}".\
-    format(trade_route[1]['units'], trade_route[1]['symbol'], sell_order['order']['total'], sell_order['order']['total']-trade_route[1]['total_cost'])+W)
-  # Update Ship
-  ship.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
-
-  return sell_order['order']['total'] - trade_route[1]['total_cost']
+  
 
 if __name__ == "__main__":
   gravager = user.get_ship('cknegaohp5912821bs6d0ws1xr1')
@@ -134,9 +125,15 @@ if __name__ == "__main__":
   # Get the 
   start = datetime.datetime.now()
   profit = []
-
-  profit.append(any_dest_trading_run2(gravager))
   
+  for x in range(2):
+    profit.append(any_dest_trading_run(gravager))
+
+  # goods = gravager.get_cargo_to_sell()
+  # for good in goods:
+  #   sell_order = user.sell_order(gravager.id, good['good'], good['quantity'])
+  #   gravager.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
+
   print("Total money made: " + str(sum(profit)))
   now = datetime.datetime.now() - start
   print("Time taken: " + str(now))

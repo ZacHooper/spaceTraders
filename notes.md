@@ -1,5 +1,9 @@
 # Misc note
 
+# Basic Functionality and Throttle Cost
+- Trader: minimum 5 calls to with 3 in close proxmity - currently 15 with 13 in close proximity
+- Tracker: minimum 11 calls
+
 ## Fuel
 **Distance Formula:** $\sqrt{(x_{2} - x_{1})^2 + (y_{2} - y_{1})^2}$
 ```python 

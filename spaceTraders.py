@@ -9,7 +9,7 @@ import logging
 URL = "https://api.spacetraders.io/"
 TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 R  = '\033[31m' # red
 G  = '\033[32m' # green
@@ -72,6 +72,14 @@ class Ship(object):
     self.spaceAvailable = new_spaceAvailable
     return True
 
+  def update_location(self, new_x, new_y, new_location):
+    logging.info("Updating location of ship. Previous Location: {0}. Previous X: {1}. Previous Y: {2}. New Location: {3}, New X: {4}, New Y: {5}".\
+      format(self.location, self.x, self.y, new_location, new_x, new_y))
+    self.location = new_location
+    self.x = new_x
+    self.y = new_y
+    return True
+
   def calculate_fuel_usage(self, *args):
     '''
     NOT A PERFECT RESULT
@@ -91,7 +99,19 @@ class Ship(object):
     
   
   def calculate_distance(self, to_x, to_y):
-    return round(math.sqrt(math.pow((to_x - ship.x),2) + math.pow((to_y - ship.y),2)))
+    return round(math.sqrt(math.pow((to_x - self.x),2) + math.pow((to_y - self.y),2)))
+
+  def get_closest_location(self):
+    """
+    Returns a tuple containing the clostest location to the ship
+    
+    [0]: A Location object of the closet location
+    [1]: Distance to the location
+    """
+    locations = Game().locations
+    closet_location = min(locations.values(), key=lambda loc: self.calculate_distance(loc.x, loc.y))
+    return (closet_location, self.calculate_distance(closet_location.x, closet_location.y))
+
   
   def __repr__(self):
     return """
@@ -160,6 +180,15 @@ class User:
     :Return ship : Ship 
     '''
     return next((ship for ship in self.ships if ship.id == shipId), None)
+
+  def get_trackers(self):
+    '''
+    Returns a list of all the Jackshaw "Tracker" ships.
+    Jackshaws are the cheapest ship type and are used to station at each location for marketplace tracking.
+    '''
+    tracker_ships = lambda x: x.manufacturer == "Jackshaw"
+    trackers=list(filter(tracker_ships, self.ships))
+    return trackers
 
   def new_order(self, shipId, good, quantity):
     # Prepare for call
@@ -256,13 +285,13 @@ class Market:
     market_compare['profit_per_volume'] = market_compare.apply(lambda x: x['profit'] / x['volumePerUnit_from'], axis=1)
     return market_compare
   
-  def best_buy(self, from_destination, to_destination):
+  def best_buy(self, from_market, to_market):
     """Returns a JSON object with the best Good to buy at the 'from_destination' if wanting to sell goods at the 'to_destination'"""
     # Convert to Location and get market if String value of Symbol provided
-    if isinstance(from_destination, str):
-      from_market = pd.DataFrame(Game().location(from_destination).marketplace())
-    if isinstance(to_destination, str):
-      to_market = pd.DataFrame(Game().location(to_destination).marketplace())
+    if isinstance(from_market, str):
+      from_market = pd.DataFrame(Game().location(from_market).marketplace())
+    if isinstance(to_market, str):
+      to_market = pd.DataFrame(Game().location(to_market).marketplace())
     # Get the market comparison
     market_comparison = self.market_compare(from_market, to_market)
     # Get the record for the best good - factor in the profit per unit volume
@@ -274,7 +303,7 @@ class Market:
             "profit_per_volume": best_good['profit_per_volume']}
 
   # Returns the best good to buy, how many units to buy of it and the expected profit
-  def what_should_I_buy(self, ship, destination):
+  def what_should_I_buy(self, ship, destination, ship_marketplace=None):
     """
     Returns a JSON object with the best good to buy and how many units of it for a particular ship when travelling to a particular destination
     
@@ -284,6 +313,7 @@ class Market:
         {
           "symbol": The symbol of the good, 
           "units": How many units you should buy for this ship, 
+          "cost": Cost per unit for good
           "total_cost": Total cost of this order, 
           "expected_profit": Expected profit from this order,
           "profit": Profit selling good per unit at destination,
@@ -295,20 +325,32 @@ class Market:
     """
     loc = Game().locations[destination]
     # Get the best good to buy
-    best_good = self.best_buy(ship.location, loc.symbol)
+    if ship_marketplace is None:
+      logging.debug("Getting the best goods to trade for from {0} to {1} - Ships Marketplace not supplied".format(ship.location, loc.symbol))
+      best_good = self.best_buy(ship.location, loc.symbol)
+    else:
+      logging.debug("Getting the best goods to trade for from {0} to {1} - Ships Marketplace supplied".format(ship.location, loc.symbol))
+      best_good = self.best_buy(pd.DataFrame(ship_marketplace), loc.symbol)
     # How much fuel would be required
     fuel_required = ship.calculate_fuel_usage(loc.x, loc.y)
+    logging.debug("Estimated fuel required from {0} to {1} is: {2}".format(ship.location, loc.symbol, fuel_required))
     # Work out many units to buy
     units_to_buy = self.how_much_to_buy(best_good['volume'], ship.maxCargo - fuel_required)
-    return {"symbol": best_good['symbol'], 
-            "units": units_to_buy, 
-            "total_cost": best_good['cost'] * units_to_buy, 
-            "expected_profit": best_good['profit'] * units_to_buy,
-            "profit": best_good['profit'],
-            "profit_per_volume": best_good['profit_per_volume'], 
-            "good_volume": best_good['volume'],
-            "total_volume": best_good['volume'] * units_to_buy,
-            "fuel_required": fuel_required}
+    logging.debug("Given fuel requirement of: {0}, max cargo of: {1}, good volume of: {2}, {3} units should be purchased.".format(fuel_required, ship.maxCargo, best_good['volume'], units_to_buy))
+    trade_details = {"symbol": best_good['symbol'], 
+                     "units": units_to_buy, 
+                     "cost": best_good['cost'],
+                     "total_cost": best_good['cost'] * units_to_buy, 
+                     "expected_profit": best_good['profit'] * units_to_buy,
+                     "profit": best_good['profit'],
+                     "profit_per_volume": best_good['profit_per_volume'], 
+                     "good_volume": best_good['volume'],
+                     "total_volume": best_good['volume'] * units_to_buy,
+                     "fuel_required": fuel_required,
+                     "from": ship.location,
+                     "to": loc.symbol}
+    logging.debug("Best good to buy when trading from {} to {} is {}. Trade Details: {}".format(ship.location, loc.symbol, trade_details['symbol'], trade_details))
+    return trade_details
 
 class Game:
   def __init__(self):
@@ -336,7 +378,7 @@ class Game:
     return generic_get_call("game/ships", params={"class":kind})['ships']
 
   def calculate_distance(from_x, from_y, to_x, to_y):
-    return round(math.sqrt(math.pow((loc_x - ship_x),2) + math.pow((loc_y - ship_y),2)))
+    return round(math.sqrt(math.pow((to_x - from_x),2) + math.pow((to_y - from_y),2)))
   
   def calculate_fuel_usage(self, distance):
     '''
@@ -431,8 +473,7 @@ if __name__ == "__main__":
   game = Game()
   user = get_user(username)
   ship = user.get_ship("cknegaohp5912821bs6d0ws1xr1")
-  print(Market().what_should_I_buy(ship, "OE-PM-TR"))
-  print(ship)
+  print(len(user.get_trackers()), len(user.ships))
   
 
   
