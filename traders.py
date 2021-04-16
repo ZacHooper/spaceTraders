@@ -3,6 +3,8 @@ import datetime
 import time
 import trackers
 import math
+from db_handler import write_buy_order_to_db, write_sell_order_to_db, write_flight_path_to_db
+import pandas as pd
 
 URL = "https://api.spacetraders.io/"
 TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
@@ -94,6 +96,15 @@ def any_dest_trading_run(ship):
                flight_path['total_cost'], 
                flight_path['expected_profit'])+W)
     buy_order = user.new_order(ship.id, flight_path['symbol'], flight_path['units'])
+
+    # Collate Data to Upload to Datebase
+    data = [[datetime.datetime.now(), ship.location, flight_path['symbol'],
+            flight_path['units'], flight_path['cost'], flight_path['total_cost'], 
+            flight_path['profit'], flight_path['profit_per_volume'], flight_path['expected_profit'], 
+            flight_path['to']]]
+    columns = ['time', 'location', 'symbol', 'units', 'cost', 'total_cost', 'profit',
+               'profit_per_volume', 'expected_profit', 'sell_location']
+    write_buy_order_to_db(pd.DataFrame(data, columns=columns))
     # Update Ship
     ship.update_cargo(buy_order['ship']['cargo'], buy_order['ship']['spaceAvailable'])
     did_buy_goods = True
@@ -105,6 +116,15 @@ def any_dest_trading_run(ship):
 
   # Fly
   flight = user.fly(ship.id, flight_path['to'], track=True)
+  # Collate Data to Upload to Datebase
+  to = GAME.locations[flight_path['to']]
+  data = [[datetime.datetime.now(), ship.location, flight_path['to'],
+          flight['distance'], flight_path['fuel_required'], flight['fuelConsumed'], 
+          flight['timeRemainingInSeconds'], ship.manufacturer, ship.speed, 
+          ship.maxCargo - ship.spaceAvailable, ship.plating, ship.weapons]]
+  columns = ['time', 'from_loc', 'to_loc', 'distance', 'estimated_fuel_required', 'actual_fuel_required',
+              'time_taken', 'ship_manufactorer', 'speed', 'totalVolume', 'plating', 'weapons']
+  write_flight_path_to_db(pd.DataFrame(data, columns=columns))
   # Update Ship
   ship.update_location(GAME.location(flight_path['to']).x, GAME.location(flight_path['to']).y, flight_path['to'])
 
@@ -116,6 +136,13 @@ def any_dest_trading_run(ship):
                flight_path['symbol'], 
                sell_order['order']['total'], 
                sell_order['order']['total'] - buy_order['order']['total'])+W)
+    # Collate Data to Upload to Datebase
+    data = [[datetime.datetime.now(), ship.location, flight_path['symbol'],
+            flight_path['units'], flight_path['cost'], flight_path['total_cost'], 
+            flight_path['expected_profit'], flight_path['from']]]
+    columns = ['time', 'location', 'symbol', 'units', 'sell_price', 'total_sell_amount',
+               'expected_profit', 'buy_location']
+    write_sell_order_to_db(pd.DataFrame(data, columns=columns))
     # Update Ship
     ship.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
     return sell_order['order']['total'] - buy_order['order']['total']

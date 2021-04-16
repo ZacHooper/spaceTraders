@@ -91,11 +91,20 @@ class Ship(object):
     OR
     Provide the x & y coordinates of the destination
     '''
+    calc_fuel = lambda d, extra: round((9/37) * d + 4 + extra)
+
     # Distance supplied
     if len(args) == 1:
-      return round((9/37) * args[0] + 2 + 2)
+      # Handle extra required for Class 2 Gravs
+      if self.type == "GR-MK-II":
+        return calc_fuel(args[0], 2)
+
+      return calc_fuel(args[0], 0)
     if len(args) == 2:
-      return round((9/37) * self.calculate_distance(args[0], args[1]) + 2 + 2)
+      # Handle extra required for Class 2 Gravs
+      if self.type == "GR-MK-II":
+        return calc_fuel(self.calculate_distance(args[0], args[1]), 2)
+      return calc_fuel(self.calculate_distance(args[0], args[1]), 0)
     
   
   def calculate_distance(self, to_x, to_y):
@@ -111,7 +120,6 @@ class Ship(object):
     locations = Game().locations
     closet_location = min(locations.values(), key=lambda loc: self.calculate_distance(loc.x, loc.y))
     return (closet_location, self.calculate_distance(closet_location.x, closet_location.y))
-
   
   def __repr__(self):
     return """
@@ -150,11 +158,12 @@ class User:
   '''User Object
   
   https://api.spacetraders.io/#api-users'''
-  def __init__(self, username, credits, ships, loans):
+  def __init__(self, username, credits, ships, loans, full_json):
     self.username = username
     self.credits = credits
     self.ships = self.get_ships(ships)
     self.loans = loans
+    self.full_json = full_json
 
   def request_loan(self, type):
     # TODO: Return a loan object
@@ -170,6 +179,7 @@ class User:
     '''
     Returns a list of Ship objects that the user currently owns
     '''
+
     return [Ship(ship) for ship in ships] if ships is not None else self.ships
   
   def get_ship(self, shipId):
@@ -464,7 +474,7 @@ def get_user(username):
   credits = user['user']['credits']
   ships = user['user']['ships']
   loans = user['user']['loans']
-  return User(username, credits, ships, loans)
+  return User(username, credits, ships, loans, user)
 
 
 if __name__ == "__main__":

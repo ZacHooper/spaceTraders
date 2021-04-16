@@ -1,6 +1,18 @@
 # Misc note
 
-# Basic Functionality and Throttle Cost
+## Trading Stats
+### 15/16 April
+#### Ship 1
+**Total:** 232080
+**Time:** 8:03:40
+**Profit per Hour:** 28789.54
+
+#### Ship 2
+**Total:** 232370
+**Time:** 8:03:01
+**Profit per Hour:** 28863.88
+
+## Basic Functionality and Throttle Cost
 - Trader: minimum 5 calls to with 3 in close proxmity - currently 15 with 13 in close proximity
 - Tracker: minimum 11 calls
 
@@ -37,5 +49,8 @@ lambda d: (9/37) * d + 2
 - Nyon (OE-NY) -> Ado (OE-UC-AD) : 41 Fuel : ? Seconds : ? distance *(for Grav)*
 
 ### Carth
-- Carth (OE-CR) -> Prime (OE-PM) : 14 Fuel : 243 Seconds : distance 92 *(for Grav)*
+- Carth (OE-CR) -> Prime (OE-PM) : 14 Fuel : ? Seconds : distance ? *(for Grav)*
+
+### Ucarras
+- Ucarras (CE-UC) -> BO (OE-BO) : 47 Fuel : ? Seconds : distance 171 *(for Grav 2)*
 
