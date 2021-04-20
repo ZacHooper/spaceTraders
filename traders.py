@@ -89,25 +89,45 @@ def any_dest_trading_run(ship):
     flight_path = {"to": closet_location[0].symbol, "fuel_required": ship.calculate_fuel_usage(closet_location[1])}
   else:
     flight_path = max(trade_routes_profit, key=lambda tr: tr['expected_profit'])
-    # Buy Good
-    print(G+"Buying {} units of {} for {} with an expected profit of {}".\
-        format(flight_path['units'], 
-               flight_path['symbol'], 
-               flight_path['total_cost'], 
-               flight_path['expected_profit'])+W)
-    buy_order = user.new_order(ship.id, flight_path['symbol'], flight_path['units'])
+    if flight_path['total_cost'] > user.credits:
+      print("Not enough money to do trade")
+      # Calculate distance to closest location
+      closet_location = ship.get_closest_location()
+      flight_path = {"to": closet_location[0].symbol, "fuel_required": ship.calculate_fuel_usage(closet_location[1])}
+    else: 
+      # Buy Good
+      print(G+"Buying {} units of {} for {} with an expected profit of {}".\
+          format(flight_path['units'], 
+                flight_path['symbol'], 
+                flight_path['total_cost'], 
+                flight_path['expected_profit'])+W)
+      
+      # Handle cases where Grav III is buying more than 300 units - throws a server error otherwise
+      if flight_path['units'] > 300:
+        # Rounding up - how many order to make
+        count = math.ceil(flight_path['units'] / 300)
+        temp_units = flight_path['units']
+        # Do buy order as many times as requried
+        for i in range(count):
+            if temp_units / 300 > 1:
+                buy_order = user.new_order(ship.id, flight_path['symbol'], 300)
+                temp_units = temp_units - 300
+            else:
+                buy_order = user.new_order(ship.id, flight_path['symbol'], temp_units)
+      else:
+        buy_order = user.new_order(ship.id, flight_path['symbol'], flight_path['units'])
 
-    # Collate Data to Upload to Datebase
-    data = [[datetime.datetime.now(), ship.location, flight_path['symbol'],
-            flight_path['units'], flight_path['cost'], flight_path['total_cost'], 
-            flight_path['profit'], flight_path['profit_per_volume'], flight_path['expected_profit'], 
-            flight_path['to']]]
-    columns = ['time', 'location', 'symbol', 'units', 'cost', 'total_cost', 'profit',
-               'profit_per_volume', 'expected_profit', 'sell_location']
-    write_buy_order_to_db(pd.DataFrame(data, columns=columns))
-    # Update Ship
-    ship.update_cargo(buy_order['ship']['cargo'], buy_order['ship']['spaceAvailable'])
-    did_buy_goods = True
+      # Collate Data to Upload to Datebase
+      data = [[datetime.datetime.now(), ship.location, flight_path['symbol'],
+              flight_path['units'], flight_path['cost'], flight_path['total_cost'], 
+              flight_path['profit'], flight_path['profit_per_volume'], flight_path['expected_profit'], 
+              flight_path['to']]]
+      columns = ['time', 'location', 'symbol', 'units', 'cost', 'total_cost', 'profit',
+                'profit_per_volume', 'expected_profit', 'sell_location']
+      write_buy_order_to_db(pd.DataFrame(data, columns=columns))
+      # Update Ship
+      ship.update_cargo(buy_order['ship']['cargo'], buy_order['ship']['spaceAvailable'])
+      did_buy_goods = True
   
   # Buy Fuel
   fuel_order = user.new_order(ship.id, "FUEL", flight_path['fuel_required'] - ship.get_fuel_level())
@@ -130,7 +150,20 @@ def any_dest_trading_run(ship):
 
   if did_buy_goods:
     # Sell Order
-    sell_order = user.sell_order(ship.id, flight_path['symbol'], flight_path['units'])
+    # Handle cases where Grav III is buying more than 300 units - throws a server error otherwise
+    if flight_path['units'] > 300:
+      # Rounding up - how many order to make
+      count = math.ceil(flight_path['units'] / 300)
+      temp_units = flight_path['units']
+      # Do buy order as many times as requried
+      for i in range(count):
+          if temp_units / 300 > 1:
+              sell_order = user.sell_order(ship.id, flight_path['symbol'], 300)
+              temp_units = temp_units - 300
+          else:
+              sell_order = user.sell_order(ship.id, flight_path['symbol'], temp_units)
+    else:
+      sell_order = user.sell_order(ship.id, flight_path['symbol'], flight_path['units'])
     print(G+"Sold {} units of {} for {} with a profit of {}".\
         format(flight_path['units'], 
                flight_path['symbol'], 
@@ -171,6 +204,6 @@ def do_trading_run(shipId, times):
   print("Profit per Hour: " + str(profit_per_hour))
 
 if __name__ == "__main__":
-  pass
+  do_trading_run('cknoj34cd6480541ds6mlnvsxh2', 100)
 
   

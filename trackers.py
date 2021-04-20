@@ -49,7 +49,7 @@ def track_markets(repeat):
     
 
 if __name__ == "__main__":
-  track_markets(1000)
+  track_markets(100)
 
   
 

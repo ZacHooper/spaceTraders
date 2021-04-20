@@ -1,0 +1,32 @@
+{
+    "buy_order": {
+        "credits": 122334,
+        "order": {
+            "good": "FUEL",
+            "quantity": 1,
+            "pricePerUnit": 3,
+            "total": 3
+        },
+        "ship": {
+            "id": "cknoj8i776706221ds6cs4n42m0",
+            "location": "OE-PM",
+            "x": 20,
+            "y": -25,
+            "cargo": [
+                {
+                    "good": "FUEL",
+                    "quantity": 49,
+                    "totalVolume": 49
+                }
+            ],
+            "spaceAvailable": 1,
+            "type": "JW-MK-I",
+            "class": "MK-I",
+            "maxCargo": 50,
+            "speed": 1,
+            "manufacturer": "Jackshaw",
+            "plating": 5,
+            "weapons": 5
+        }
+    }
+}

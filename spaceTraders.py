@@ -5,9 +5,10 @@ import time
 import json
 from rich.progress import Progress, track
 import logging
+from os import getcwd
 
 URL = "https://api.spacetraders.io/"
-TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
+TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -38,11 +39,32 @@ class Ship(object):
   '''
   def __init__(self, *initial_data, **kwargs):
       self.cargo = initial_data[0]['cargo']
+      self.location = initial_data[0]['location'] if 'location' in initial_data[0] else "IN-TRANSIT"
+      self.x = initial_data[0]['x'] if 'location' in initial_data[0] else None
+      self.y = initial_data[0]['y'] if 'location' in initial_data[0] else None
+      self.kind = initial_data[0]['class']
       for dictionary in initial_data:
           for key in dictionary:
               setattr(self, key, dictionary[key])
       for key in kwargs:
           setattr(self, key, kwargs[key])
+
+  def as_dict(self):
+    return {
+      "id": self.id,
+      "manufacturer": self.manufacturer,
+      "class": self.kind,
+      "type": self.type,
+      "location": self.location,
+      "x": self.x,
+      "y": self.y,
+      "speed": self.speed,
+      "plating": self.plating,
+      "weapons": self.weapons,
+      "maxCargo": self.maxCargo,
+      "spaceAvailable": self.spaceAvailable,
+      "cargo": self.cargo
+    }
   
   # Get Good to sell
   def get_cargo_to_sell(self):
@@ -98,12 +120,16 @@ class Ship(object):
       # Handle extra required for Class 2 Gravs
       if self.type == "GR-MK-II":
         return calc_fuel(args[0], 2)
+      if self.type == "GR-MK-III":
+        return calc_fuel(args[0], 4)
 
       return calc_fuel(args[0], 0)
     if len(args) == 2:
       # Handle extra required for Class 2 Gravs
       if self.type == "GR-MK-II":
         return calc_fuel(self.calculate_distance(args[0], args[1]), 2)
+      if self.type == "GR-MK-III":
+        return calc_fuel(self.calculate_distance(args[0], args[1]), 4)
       return calc_fuel(self.calculate_distance(args[0], args[1]), 0)
     
   
@@ -118,7 +144,12 @@ class Ship(object):
     [1]: Distance to the location
     """
     locations = Game().locations
-    closet_location = min(locations.values(), key=lambda loc: self.calculate_distance(loc.x, loc.y))
+    # Remove the ships current location
+    locations.pop(self.location)
+    # Remove all locations not in the same system as ship
+    locations_filtered = {k:v for k,v in locations.items() if self.location[:2] in k}
+    # Calculate the closet location
+    closet_location = min(locations_filtered.values(), key=lambda loc: self.calculate_distance(loc.x, loc.y))
     return (closet_location, self.calculate_distance(closet_location.x, closet_location.y))
   
   def __repr__(self):
@@ -166,21 +197,44 @@ class User:
     self.full_json = full_json
 
   def request_loan(self, type):
+    '''
+    API CALL: https://api.spacetraders.io/#api-loans-NewLoan
+    '''
     # TODO: Return a loan object
     return generic_post_call("users/{0}/loans".format(self.username), params={"type": type})
 
   def buy_ship(self, location, type):
+    '''
+    API CALL: https://api.spacetraders.io/#api-ships-NewShip
+    '''
     # TODO: return a ship object
     # Update the 'ships' attribute of the user
     return generic_post_call("users/{0}/ships".format(self.username), 
                              params={"location": location, "type": type})
   
-  def get_ships(self, ships=None):
+  def get_ships(self, ships=None, as_df=False, fields=None, sort_by=None, filter_by=None):
     '''
     Returns a list of Ship objects that the user currently owns
     '''
+    if ships is not None:
+      return [Ship(ship) for ship in ships]
 
-    return [Ship(ship) for ship in ships] if ships is not None else self.ships
+    return_ships = self.ships
+    if filter_by is not None:
+      for f in filter_by:
+        return_ships = list(filter((lambda x: getattr(x, f[0]) == f[1]), return_ships))
+    if sort_by is not None:
+      return_ships.sort(key = lambda x: tuple(getattr(x, s) for s in sort_by))
+    if as_df:
+      return_ships = pd.DataFrame([ship.as_dict() for ship in return_ships])
+      if fields is not None:
+        return_ships = return_ships.loc[:,fields]
+
+      
+
+    #   return df
+
+    return return_ships
   
   def get_ship(self, shipId):
     '''
@@ -201,6 +255,37 @@ class User:
     return trackers
 
   def new_order(self, shipId, good, quantity):
+    '''Makes a request to the API to make a buy order. User needs to have suffient funds and can only purchase a maximum of 300 goods at once.
+    
+    API CALL: https://api.spacetraders.io/#api-purchase_orders-NewPurchaseOrder
+    
+    Parameters
+    ----------
+    username : str 
+        Username of the user making the buy order
+    shipId : str 
+        The id of the ship to load the goods onto
+    good : str 
+        The symbol of the good you want to purchase
+    quantity : int 
+        The quantity units of the good to buy (Max 300)
+
+    Returns
+    -------
+    json : a json object
+      - credits : contains the user's remaining credits
+      - order : contains a json object with details about the buy order
+      - ship : contains an updated ship json object with the new goods updated in the cargo
+
+    Errors
+    ------
+    Status Code : 400
+        Error Code : 2003 : Quantity exceeds available cargo space on ship.
+    Status Code : 422
+        Error Code : 42201 : The payload was invalid. 
+            - Ensure all parameters are present and valid.
+            - Ensure quantity isn't greater than 300
+    '''
     # Prepare for call
     endpoint = "users/{0}/purchase-orders".format(self.username)
     params = {"shipId": shipId, 
@@ -216,6 +301,18 @@ class User:
     return order
 
   def sell_order(self, shipId, good, quantity):
+    """Makes a request to the API to sell the goods specifed from the ship specified.
+
+    API CALL: https://api.spacetraders.io/#api-sell_orders-NewSellOrder
+
+    Args:
+        shipId ([str]): [id of the ship to sell the goods from]
+        good ([str]): [the symbol of the good to sell]
+        quantity ([int]): [how many units of the good to sell (Max 300)]
+
+    Returns:
+        [json]: [Returns a JSON object containing the user's new credits, the sell order details & the updated ship as a json object]
+    """    
     # Prepare for call
     endpoint = "users/{0}/sell-orders".format(self.username)
     params = {
@@ -363,8 +460,8 @@ class Market:
     return trade_details
 
 class Game:
-  def __init__(self):
-    self.systems = self.load_sytems()
+  def __init__(self, systems_path=None):
+    self.systems = self.load_sytems() if systems_path is None else self.load_sytems(systems_path)
     self.locations = self.load_locations()
   # See if the game is currently up
   def status(self):
@@ -398,11 +495,13 @@ class Game:
     '''
     return round((9/37) * distance + 2 + 2)
 
-  def load_sytems(self):
+  def load_sytems(self, systems_path=None):
     '''
     This will simply load the complete JSON file with no further transformations
     '''
-    with open('systems.json', 'r') as infile:
+    # Path handling to account for non relative path usage
+    path = 'systems.json' if systems_path is None else systems_path
+    with open(path, 'r') as infile:
       return json.load(infile)
   
   def load_locations(self):
@@ -481,9 +580,8 @@ if __name__ == "__main__":
   username = "JimHawkins"
   game = Game()
   user = get_user(username)
-  ship = user.get_ship("cknegaohp5912821bs6d0ws1xr1")
-  print(len(user.get_trackers()), len(user.ships))
-  
+  print(user.get_ships(as_df=True))
+  user.sell_order()
 
   
 

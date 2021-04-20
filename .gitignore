@@ -3,5 +3,12 @@
 /__pycache__
 .gitattributes
 spaceTraders.pyc
-/".ipynb_checkpoints"
+/.ipynb_checkpoints
+
+# Misc Folders
+/Archived_Databases
+
+# Dbs
+SpaceTraders_DB*.sqlite
+SpaceTraders_DB.sqlite
 SpaceTraders_DB.sqlite
