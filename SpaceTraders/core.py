@@ -5,7 +5,6 @@ import time
 import json
 from rich.progress import Progress, track
 import logging
-from os import getcwd
 
 URL = "https://api.spacetraders.io/"
 TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
@@ -189,12 +188,15 @@ class User:
   '''User Object
   
   https://api.spacetraders.io/#api-users'''
-  def __init__(self, username, credits, ships, loans, full_json):
-    self.username = username
-    self.credits = credits
-    self.ships = self.get_ships(ships)
-    self.loans = loans
-    self.full_json = full_json
+  def __init__(self, *args, **kwargs):
+    if len(args) == 1:
+      self.username = args[0]['username']
+      self.credits = args[0]['credits']
+      self.ships = self.get_ships(ships=args[0]['ships'])
+      self.loans = args[0]['loans']
+    else:
+      for key in kwargs:
+          setattr(self, key, kwargs[key])
 
   def request_loan(self, type):
     '''
@@ -216,6 +218,8 @@ class User:
     '''
     Returns a list of Ship objects that the user currently owns
     '''
+    # Check if the list of ships contains original json data or Ship objects
+    # If JSON convert into Ship objects and return
     if ships is not None:
       return [Ship(ship) for ship in ships]
 
@@ -230,10 +234,6 @@ class User:
       if fields is not None:
         return_ships = return_ships.loc[:,fields]
 
-      
-
-    #   return df
-
     return return_ships
   
   def get_ship(self, shipId):
@@ -244,15 +244,6 @@ class User:
     :Return ship : Ship 
     '''
     return next((ship for ship in self.ships if ship.id == shipId), None)
-
-  def get_trackers(self):
-    '''
-    Returns a list of all the Jackshaw "Tracker" ships.
-    Jackshaws are the cheapest ship type and are used to station at each location for marketplace tracking.
-    '''
-    tracker_ships = lambda x: x.manufacturer == "Jackshaw"
-    trackers=list(filter(tracker_ships, self.ships))
-    return trackers
 
   def new_order(self, shipId, good, quantity):
     '''Makes a request to the API to make a buy order. User needs to have suffient funds and can only purchase a maximum of 300 goods at once.
@@ -569,15 +560,7 @@ def generic_post_call(endpoint, params=None):
 def get_user(username):
   '''Get the user and return a User Object'''
   # Make a call to the API to retrive the user data
-  user = generic_get_call("users/" + username)
-
-  # Pull out the data and return a user object
-  username = user['user']['username']
-  credits = user['user']['credits']
-  ships = user['user']['ships']
-  loans = user['user']['loans']
-  return User(username, credits, ships, loans, user)
-
+  return User(generic_get_call("users/" + username)['user'])
 
 if __name__ == "__main__":
     # Load Constants

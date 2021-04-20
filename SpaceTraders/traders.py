@@ -1,17 +1,15 @@
-import core as st
-import datetime
+from SpaceTraders import core, trackers, db_handler
 import time
-import trackers
+import datetime
 import math
-from db_handler import write_buy_order_to_db, write_sell_order_to_db, write_flight_path_to_db
 import pandas as pd
 
 URL = "https://api.spacetraders.io/"
-TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
-GAME = st.Game()
+# TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
+GAME = core.Game()
 username = "JimHawkins"
 
-user = st.get_user(username)
+user = core.get_user(username)
 
 # Colours
 R  = '\033[31m' # red
@@ -27,7 +25,7 @@ def trading_run(ship, destination):
       ship = user.get_ship(ship.id)
     
     # Buy Best Good
-    what_to_buy = st.Market().what_should_I_buy(ship, destination)
+    what_to_buy = core.Market().what_should_I_buy(ship, destination)
     print(G+"Buying {} units of {} for {} with an expected profit of {}".\
       format(what_to_buy['units'], what_to_buy['symbol'], what_to_buy['total_cost'], what_to_buy['expected_profit'])+W)
     user.new_order(ship.id, what_to_buy['symbol'], what_to_buy['units'])
@@ -48,7 +46,7 @@ def trading_run(ship, destination):
 
 def find_optimum_trade_route(ship):
     # Get tracked markets and remove the current market
-    all_tracker_locs = [ship.location for ship in user.get_trackers()]
+    all_tracker_locs = [ship.location for ship in user.get_ships(filter_by=[('manufacturer', 'Jackshaw')])]
     # remove current market of ship
     all_tracker_locs.remove(ship.location)
 
@@ -56,7 +54,7 @@ def find_optimum_trade_route(ship):
     ship_marketplace = GAME.locations[ship.location].marketplace()
 
     # Work out the best trade
-    potential_trades = [st.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
+    potential_trades = [core.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
     # Pair up loc with best trade
     pt_loc = list(zip(all_tracker_locs, potential_trades))
     # Return trade with Max expected profit
@@ -64,7 +62,7 @@ def find_optimum_trade_route(ship):
 
 def find_optimum_trade_routes(ship):
     # Get tracked markets and remove the current market
-    all_tracker_locs = [ship.location for ship in user.get_trackers()]
+    all_tracker_locs = [ship.location for ship in user.get_ships(filter_by=[('manufacturer', 'Jackshaw')])]
     # remove current market of ship
     all_tracker_locs.remove(ship.location)
 
@@ -72,7 +70,7 @@ def find_optimum_trade_routes(ship):
     ship_marketplace = GAME.locations[ship.location].marketplace()
 
     # Work out the best trades
-    return [st.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
+    return [core.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
 
 def any_dest_trading_run(ship):
   did_buy_goods = False
@@ -124,7 +122,7 @@ def any_dest_trading_run(ship):
               flight_path['to']]]
       columns = ['time', 'location', 'symbol', 'units', 'cost', 'total_cost', 'profit',
                 'profit_per_volume', 'expected_profit', 'sell_location']
-      write_buy_order_to_db(pd.DataFrame(data, columns=columns))
+      db_handler.write_buy_order_to_db(pd.DataFrame(data, columns=columns))
       # Update Ship
       ship.update_cargo(buy_order['ship']['cargo'], buy_order['ship']['spaceAvailable'])
       did_buy_goods = True
@@ -144,7 +142,7 @@ def any_dest_trading_run(ship):
           ship.maxCargo - ship.spaceAvailable, ship.plating, ship.weapons]]
   columns = ['time', 'from_loc', 'to_loc', 'distance', 'estimated_fuel_required', 'actual_fuel_required',
               'time_taken', 'ship_manufactorer', 'speed', 'totalVolume', 'plating', 'weapons']
-  write_flight_path_to_db(pd.DataFrame(data, columns=columns))
+  db_handler.write_flight_path_to_db(pd.DataFrame(data, columns=columns))
   # Update Ship
   ship.update_location(GAME.location(flight_path['to']).x, GAME.location(flight_path['to']).y, flight_path['to'])
 
@@ -175,7 +173,7 @@ def any_dest_trading_run(ship):
             flight_path['expected_profit'], flight_path['from']]]
     columns = ['time', 'location', 'symbol', 'units', 'sell_price', 'total_sell_amount',
                'expected_profit', 'buy_location']
-    write_sell_order_to_db(pd.DataFrame(data, columns=columns))
+    db_handler.write_sell_order_to_db(pd.DataFrame(data, columns=columns))
     # Update Ship
     ship.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
     return sell_order['order']['total'] - buy_order['order']['total']

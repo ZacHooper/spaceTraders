@@ -16,3 +16,5 @@ SpaceTraders_DB.sqlite
 
 # Personal Notes
 
+# Personal Notebooks
+*.ipynb

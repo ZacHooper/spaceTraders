@@ -1,7 +1,8 @@
 import unittest
 import logging
 import json
-from SpaceTraders.core import Ship, Location, Game
+from SpaceTraders.core import Ship, Location, Game, User
+from pandas import DataFrame
 
 DOCKED_SHIP = {
     'id': 'cknoj34cd6480541ds6mlnvsxh2', 
@@ -86,6 +87,138 @@ LOCATIONS = {
         }
 }
 
+USER = {
+        "username": "JimHawkins",
+        "credits": 244288,
+        "ships": [
+            {
+                "id": "cknoj8i776706221ds6cs4n42m0",
+                "location": "OE-PM",
+                "x": 20,
+                "y": -25,
+                "cargo": [
+                    {
+                        "good": "FUEL",
+                        "quantity": 49,
+                        "totalVolume": 49
+                    }
+                ],
+                "spaceAvailable": 1,
+                "type": "JW-MK-I",
+                "class": "MK-I",
+                "maxCargo": 50,
+                "speed": 1,
+                "manufacturer": "Jackshaw",
+                "plating": 5,
+                "weapons": 5
+            },
+            {
+                "id": "cknoj34cd6480541ds6mlnvsxh2",
+                "cargo": [
+                    {
+                        "good": "METALS",
+                        "quantity": 95,
+                        "totalVolume": 95
+                    },
+                    {
+                        "good": "FUEL",
+                        "quantity": 3,
+                        "totalVolume": 3
+                    }
+                ],
+                "spaceAvailable": 2,
+                "type": "GR-MK-I",
+                "class": "MK-I",
+                "maxCargo": 100,
+                "speed": 1,
+                "manufacturer": "Gravager",
+                "plating": 10,
+                "weapons": 5
+            },
+            {
+                "id": "cknoj8eu56698741ds65uiuy9mi",
+                "cargo": [
+                    {
+                        "good": "FUEL",
+                        "quantity": 11,
+                        "totalVolume": 11
+                    }
+                ],
+                "spaceAvailable": 39,
+                "type": "JW-MK-I",
+                "class": "MK-I",
+                "maxCargo": 50,
+                "speed": 1,
+                "manufacturer": "Jackshaw",
+                "plating": 5,
+                "weapons": 5
+            },
+            {
+                "id": "cknpjmxt54378181bs6gbptfs9q",
+                "cargo": [
+                    {
+                        "good": "SHIP_PARTS",
+                        "quantity": 23,
+                        "totalVolume": 92
+                    },
+                    {
+                        "good": "FUEL",
+                        "quantity": 1,
+                        "totalVolume": 1
+                    }
+                ],
+                "spaceAvailable": 7,
+                "type": "GR-MK-I",
+                "class": "MK-I",
+                "maxCargo": 100,
+                "speed": 1,
+                "manufacturer": "Gravager",
+                "plating": 10,
+                "weapons": 5
+            },
+            {
+                "id": "cknppm8el10590111bs6dmm0o7z8",
+                "location": "OE-PM-TR",
+                "x": 23,
+                "y": -28,
+                "cargo": [],
+                "spaceAvailable": 50,
+                "type": "JW-MK-I",
+                "class": "MK-I",
+                "maxCargo": 50,
+                "speed": 1,
+                "manufacturer": "Jackshaw",
+                "plating": 5,
+                "weapons": 5
+            },
+            {
+                "id": "cknppgtu510080651bs6hc90sb4s",
+                "location": "OE-UC-AD",
+                "x": -82,
+                "y": 82,
+                "cargo": [],
+                "spaceAvailable": 300,
+                "type": "GR-MK-II",
+                "class": "MK-II",
+                "maxCargo": 300,
+                "speed": 1,
+                "manufacturer": "Gravager",
+                "plating": 10,
+                "weapons": 5
+            }
+        ],
+        "loans": [
+            {
+                "id": "cknoj2ix26449261ds6pl7v41x5",
+                "due": "2021-04-21T11:41:34.403Z",
+                "repaymentAmount": 280000,
+                "status": "CURRENT",
+                "type": "STARTUP"
+            }
+        ]
+    }
+
+
 class TestShipInit(unittest.TestCase):
     # Does a docked ship Class Initiate when given a valid JSON
     def test_init_docked_ship(self):
@@ -102,7 +235,6 @@ class TestShipMethods(unittest.TestCase):
     
     def tearDown(self):
         logging.disable(logging.NOTSET)
-
 
     # Tests the return Ship as a dict method
     def test_return_ship_as_dict(self):
@@ -163,15 +295,74 @@ class TestShipMethods(unittest.TestCase):
         # Make sure the clostest location isn't an impossible value
         self.assertLess(closet_location[1], 100, "Returned a distance that would not be expected as the closet location")
 
+class TestUserInit(unittest.TestCase):
+    def test_init_user(self):
+        self.assertIsInstance(User(USER), User, "Falied to initiate a User object")
+
+class TestUserMethods(unittest.TestCase):
+    def setUp(self):
+        self.user = User(USER)
+    
+    # No filter, sorts or df applied
+    # Should just return a list of Ship Objects
+    def test_get_ships(self):
+        ships = self.user.get_ships()
+        # Check if list is returned
+        self.assertIsInstance(ships, list, "Returned value is not a list")
+        # Check if the list 
+        self.assertTrue(all(isinstance(ship, Ship) for ship in ships), "Not all of the ships are a Ship Object")
+
+    # Should return a DataFrame
+    def test_get_ships_df(self):
+        ships = self.user.get_ships(as_df=True)
+        # Check if DataFrame is returned
+        self.assertIsInstance(ships, DataFrame, "Returned value is not a DataFrame")
+
+    # Should return a Filtered List of Ship Objects
+    def test_get_ships_filter(self):
+        ships = self.user.get_ships(filter_by=[('manufacturer', 'Gravager')])
+        # Check if list is returned
+        self.assertIsInstance(ships, list, "Returned value is not a list")
+        # Check that the length of the list is correct - Note orginal is 6
+        self.assertEqual(len(ships), 3, "Didn't filter the right number of ships")
+        # Check that the right manufacturer of ships were returned
+        self.assertTrue(all(ship.manufacturer == 'Gravager' for ship in ships), 
+                        "Not all the ships in the filtered list were filtered correctly")
+    
+    # Should return a sorted list of Ship objects
+    def test_get_ships_sort(self):
+        ships = self.user.get_ships(sort_by=['manufacturer'])
+        # Check if list is returned
+        self.assertIsInstance(ships, list, "Returned value is not a list")
+        # Check that the length of the list is correct - Note orginal is 6
+        self.assertEqual(len(ships), 6, "Some ships were filtered when they shouldn't have been")
+        # Check the the sort worked
+        self.assertEqual(ships[0].manufacturer, 'Gravager', "The Max value wasn't what was expected")
+        self.assertEqual(ships[5].manufacturer, 'Jackshaw', "The Min value wasn't what was expected")
+
+    # Should return a DataFrame with a filtered columns
+    def test_get_ships_fields(self):
+        ships = self.user.get_ships(as_df=True, fields=['manufacturer'])
+        # Check if list is returned
+        self.assertIsInstance(ships, DataFrame, "Returned value is not a DataFrame")
+        # Check if only the expected fields were returned
+        self.assertEqual(len(ships.columns), 1, "More than the 1 expected fields were present")
+
+    # Test the get_ship method
+    def test_get_ship(self):
+        self.assertEqual(self.user.get_ship('cknppgtu510080651bs6hc90sb4s').id, 
+                        'cknppgtu510080651bs6hc90sb4s', "The correct ship object was not returned")
+
 class TestGameInit(unittest.TestCase):
-    # Try to init a Game class
     def setUp(self):
         # Load the constant systems json file to stop API call
         with open('./SpaceTraders/constants/systems.json', 'r') as infile:
             self.systems = json.load(infile)
-
+            
+    # Try to init a Game class
     def test_init_game(self):
         self.assertIsInstance(Game(self.systems), Game, "Failed to initiate a Game")
+        
 if __name__ == '__main__':
     unittest.main()
   

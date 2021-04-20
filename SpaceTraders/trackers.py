@@ -1,12 +1,11 @@
 # Use DBeaver to view db
 
-import core as st
 import pandas as pd
 import datetime
 import logging
 import time
+from SpaceTraders import core, db_handler
 from rich.progress import track
-import db_handler
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -32,8 +31,8 @@ def get_trackers(ships):
     return trackers
 
 def track_markets(repeat):
-  get_marketplace = lambda x: pd.DataFrame(st.Game().location(x).marketplace())
-  user = st.get_user("JimHawkins")
+  get_marketplace = lambda x: pd.DataFrame(core.Game().location(x).marketplace())
+  user = core.get_user("JimHawkins")
   trackers = get_trackers(user.get_ships())
   tracker_locations = [tracker.location for tracker in trackers]
   for x in range(repeat):

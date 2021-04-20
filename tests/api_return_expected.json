@@ -28,5 +28,137 @@
             "plating": 5,
             "weapons": 5
         }
+    },
+    "user": {
+        "user": {
+            "username": "JimHawkins",
+            "credits": 244288,
+            "ships": [
+                {
+                    "id": "cknoj8i776706221ds6cs4n42m0",
+                    "location": "OE-PM",
+                    "x": 20,
+                    "y": -25,
+                    "cargo": [
+                        {
+                            "good": "FUEL",
+                            "quantity": 49,
+                            "totalVolume": 49
+                        }
+                    ],
+                    "spaceAvailable": 1,
+                    "type": "JW-MK-I",
+                    "class": "MK-I",
+                    "maxCargo": 50,
+                    "speed": 1,
+                    "manufacturer": "Jackshaw",
+                    "plating": 5,
+                    "weapons": 5
+                },
+                {
+                    "id": "cknoj34cd6480541ds6mlnvsxh2",
+                    "cargo": [
+                        {
+                            "good": "METALS",
+                            "quantity": 95,
+                            "totalVolume": 95
+                        },
+                        {
+                            "good": "FUEL",
+                            "quantity": 3,
+                            "totalVolume": 3
+                        }
+                    ],
+                    "spaceAvailable": 2,
+                    "type": "GR-MK-I",
+                    "class": "MK-I",
+                    "maxCargo": 100,
+                    "speed": 1,
+                    "manufacturer": "Gravager",
+                    "plating": 10,
+                    "weapons": 5
+                },
+                {
+                    "id": "cknoj8eu56698741ds65uiuy9mi",
+                    "cargo": [
+                        {
+                            "good": "FUEL",
+                            "quantity": 11,
+                            "totalVolume": 11
+                        }
+                    ],
+                    "spaceAvailable": 39,
+                    "type": "JW-MK-I",
+                    "class": "MK-I",
+                    "maxCargo": 50,
+                    "speed": 1,
+                    "manufacturer": "Jackshaw",
+                    "plating": 5,
+                    "weapons": 5
+                },
+                {
+                    "id": "cknpjmxt54378181bs6gbptfs9q",
+                    "cargo": [
+                        {
+                            "good": "SHIP_PARTS",
+                            "quantity": 23,
+                            "totalVolume": 92
+                        },
+                        {
+                            "good": "FUEL",
+                            "quantity": 1,
+                            "totalVolume": 1
+                        }
+                    ],
+                    "spaceAvailable": 7,
+                    "type": "GR-MK-I",
+                    "class": "MK-I",
+                    "maxCargo": 100,
+                    "speed": 1,
+                    "manufacturer": "Gravager",
+                    "plating": 10,
+                    "weapons": 5
+                },
+                {
+                    "id": "cknppm8el10590111bs6dmm0o7z8",
+                    "location": "OE-PM-TR",
+                    "x": 23,
+                    "y": -28,
+                    "cargo": [],
+                    "spaceAvailable": 50,
+                    "type": "JW-MK-I",
+                    "class": "MK-I",
+                    "maxCargo": 50,
+                    "speed": 1,
+                    "manufacturer": "Jackshaw",
+                    "plating": 5,
+                    "weapons": 5
+                },
+                {
+                    "id": "cknppgtu510080651bs6hc90sb4s",
+                    "location": "OE-UC-AD",
+                    "x": -82,
+                    "y": 82,
+                    "cargo": [],
+                    "spaceAvailable": 300,
+                    "type": "GR-MK-II",
+                    "class": "MK-II",
+                    "maxCargo": 300,
+                    "speed": 1,
+                    "manufacturer": "Gravager",
+                    "plating": 10,
+                    "weapons": 5
+                }
+            ],
+            "loans": [
+                {
+                    "id": "cknoj2ix26449261ds6pl7v41x5",
+                    "due": "2021-04-21T11:41:34.403Z",
+                    "repaymentAmount": 280000,
+                    "status": "CURRENT",
+                    "type": "STARTUP"
+                }
+            ]
+        }
     }
 }
