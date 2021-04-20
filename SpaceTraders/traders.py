@@ -1,4 +1,4 @@
-import SpaceTraders as st
+import core as st
 import datetime
 import time
 import trackers
@@ -204,6 +204,6 @@ def do_trading_run(shipId, times):
   print("Profit per Hour: " + str(profit_per_hour))
 
 if __name__ == "__main__":
-  do_trading_run('cknoj34cd6480541ds6mlnvsxh2', 100)
+  do_trading_run('cknoj34cd6480541ds6mlnvsxh2', 1)
 
   

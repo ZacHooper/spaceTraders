@@ -1,6 +1,6 @@
 # Use DBeaver to view db
 
-import SpaceTraders as st
+import core as st
 import pandas as pd
 import datetime
 import logging
@@ -38,18 +38,18 @@ def track_markets(repeat):
   tracker_locations = [tracker.location for tracker in trackers]
   for x in range(repeat):
     for loc in tracker_locations:
+      print("Adding Market Records for: " + loc)
+      write_marketplace_to_db(get_marketplace(loc), loc)
       logging.info("Premptive pause for throttle")
       for n in track(range(5), description="Pausing..."):
         time.sleep(1)
-      print("Adding Market Records for: " + loc)
-      write_marketplace_to_db(get_marketplace(loc), loc)
     logging.info("Sleeping")
     for n in track(range(60), description="Sleeping..."):
       time.sleep(1)
     
 
 if __name__ == "__main__":
-  track_markets(100)
+  track_markets(1)
 
   
 

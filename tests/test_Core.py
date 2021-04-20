@@ -1,6 +1,7 @@
 import unittest
 import logging
-from SpaceTraders import Ship, Location, Game
+import json
+from SpaceTraders.core import Ship, Location, Game
 
 DOCKED_SHIP = {
     'id': 'cknoj34cd6480541ds6mlnvsxh2', 
@@ -164,8 +165,13 @@ class TestShipMethods(unittest.TestCase):
 
 class TestGameInit(unittest.TestCase):
     # Try to init a Game class
+    def setUp(self):
+        # Load the constant systems json file to stop API call
+        with open('./SpaceTraders/constants/systems.json', 'r') as infile:
+            self.systems = json.load(infile)
+
     def test_init_game(self):
-        self.assertIsInstance(Game(), Game, "Failed to initiate a Game")
+        self.assertIsInstance(Game(self.systems), Game, "Failed to initiate a Game")
 if __name__ == '__main__':
     unittest.main()
   

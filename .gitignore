@@ -1,6 +1,7 @@
 # Required locally
 /venv
 /__pycache__
+*/__pycache__
 .gitattributes
 spaceTraders.pyc
 /.ipynb_checkpoints

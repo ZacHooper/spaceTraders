@@ -460,9 +460,14 @@ class Market:
     return trade_details
 
 class Game:
-  def __init__(self, systems_path=None):
-    self.systems = self.load_sytems() if systems_path is None else self.load_sytems(systems_path)
+  """A Game holds constants about the game
+
+  You can save a call to API by initialising a Game object with the systems.json constant
+  """    
+  def __init__(self, systems=None):
+    self.systems = self.load_sytems() if systems is None else systems
     self.locations = self.load_locations()
+  
   # See if the game is currently up
   def status(self):
     """Returns whether the game is Up or Not"""
@@ -495,14 +500,12 @@ class Game:
     '''
     return round((9/37) * distance + 2 + 2)
 
-  def load_sytems(self, systems_path=None):
+  def load_sytems(self):
     '''
     This will simply load the complete JSON file with no further transformations
     '''
     # Path handling to account for non relative path usage
-    path = 'systems.json' if systems_path is None else systems_path
-    with open(path, 'r') as infile:
-      return json.load(infile)
+    return generic_get_call("game/systems")['systems']
   
   def load_locations(self):
     '''
@@ -577,11 +580,15 @@ def get_user(username):
 
 
 if __name__ == "__main__":
-  username = "JimHawkins"
-  game = Game()
-  user = get_user(username)
-  print(user.get_ships(as_df=True))
-  user.sell_order()
+    # Load Constants
+    with open('constants/systems.json', 'r') as infile:
+        systems = json.load(infile)
+    
+    username = "JimHawkins"
+
+    game = Game(systems=systems)
+    user = get_user(username)
+    print(user.get_ships(as_df=True))
 
   
 

@@ -3,7 +3,8 @@ import sqlalchemy
 import logging
 import pandas as pd
 
-DATABASE_LOCATION = 'sqlite:///SpaceTraders_DB.sqlite'
+DATABASE_LOCATION = 'sqlite:////Users/zachooper/Documents/Personal/Projects/SpaceTraders/spaceTraders/SpaceTraders_DB.sqlite'
+
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -11,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=lo
 engine = sqlalchemy.create_engine(DATABASE_LOCATION)
 
 def write_to_db(df, table, create_table_sql):
-  conn = sqlite3.connect('SpaceTraders_DB.sqlite')
+  conn = sqlite3.connect('/Users/zachooper/Documents/Personal/Projects/SpaceTraders/spaceTraders/SpaceTraders_DB.sqlite')
   logging.info("Connecting to Database: 'SpaceTraders_DB.sqlite'")
   cursor = conn.cursor()
   # Create Table if not already created
