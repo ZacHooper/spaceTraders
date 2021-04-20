@@ -4,6 +4,8 @@ import json
 from SpaceTraders.core import Ship, Location, Game, User
 from pandas import DataFrame
 
+TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
+
 DOCKED_SHIP = {
     'id': 'cknoj34cd6480541ds6mlnvsxh2', 
     'manufacturer': 'Gravager', 
@@ -222,15 +224,15 @@ USER = {
 class TestShipInit(unittest.TestCase):
     # Does a docked ship Class Initiate when given a valid JSON
     def test_init_docked_ship(self):
-        self.assertIsInstance(Ship(DOCKED_SHIP), Ship, "Failed to initiate a docked ship")
+        self.assertIsInstance(Ship(TOKEN, DOCKED_SHIP), Ship, "Failed to initiate a docked ship")
 
     # Does a docked ship Class Initiate when given a valid JSON
     def test_init_transit_ship(self):
-        self.assertIsInstance(Ship(TRANSIT_SHIP), Ship, "Failed to initiate a ship in transit")
+        self.assertIsInstance(Ship(TOKEN, TRANSIT_SHIP), Ship, "Failed to initiate a ship in transit")
 
 class TestShipMethods(unittest.TestCase):
     def setUp(self):
-        self.ship = Ship(DOCKED_SHIP)
+        self.ship = Ship(TOKEN, DOCKED_SHIP)
         logging.disable(logging.INFO)
     
     def tearDown(self):
@@ -297,11 +299,11 @@ class TestShipMethods(unittest.TestCase):
 
 class TestUserInit(unittest.TestCase):
     def test_init_user(self):
-        self.assertIsInstance(User(USER), User, "Falied to initiate a User object")
+        self.assertIsInstance(User(TOKEN, USER), User, "Falied to initiate a User object")
 
 class TestUserMethods(unittest.TestCase):
     def setUp(self):
-        self.user = User(USER)
+        self.user = User(TOKEN, USER)
     
     # No filter, sorts or df applied
     # Should just return a list of Ship Objects
@@ -361,7 +363,7 @@ class TestGameInit(unittest.TestCase):
             
     # Try to init a Game class
     def test_init_game(self):
-        self.assertIsInstance(Game(self.systems), Game, "Failed to initiate a Game")
+        self.assertIsInstance(Game(TOKEN, self.systems), Game, "Failed to initiate a Game")
         
 if __name__ == '__main__':
     unittest.main()

@@ -7,7 +7,7 @@ from rich.progress import Progress, track
 import logging
 
 URL = "https://api.spacetraders.io/"
-TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
+
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -36,7 +36,8 @@ class Ship(object):
   spaceAvailable : int
   cargo : List
   '''
-  def __init__(self, *initial_data, **kwargs):
+  def __init__(self, token, *initial_data, **kwargs):
+      self.token = token
       self.cargo = initial_data[0]['cargo']
       self.location = initial_data[0]['location'] if 'location' in initial_data[0] else "IN-TRANSIT"
       self.x = initial_data[0]['x'] if 'location' in initial_data[0] else None
@@ -142,7 +143,7 @@ class Ship(object):
     [0]: A Location object of the closet location
     [1]: Distance to the location
     """
-    locations = Game().locations
+    locations = Game(self.token).locations
     # Remove the ships current location
     locations.pop(self.location)
     # Remove all locations not in the same system as ship
@@ -188,7 +189,8 @@ class User:
   '''User Object
   
   https://api.spacetraders.io/#api-users'''
-  def __init__(self, *args, **kwargs):
+  def __init__(self, token, *args, **kwargs):
+    self.token = token
     if len(args) == 1:
       self.username = args[0]['username']
       self.credits = args[0]['credits']
@@ -203,7 +205,7 @@ class User:
     API CALL: https://api.spacetraders.io/#api-loans-NewLoan
     '''
     # TODO: Return a loan object
-    return generic_post_call("users/{0}/loans".format(self.username), params={"type": type})
+    return generic_post_call("users/{0}/loans".format(self.username), params={"type": type}, token=self.token)
 
   def buy_ship(self, location, type):
     '''
@@ -212,7 +214,8 @@ class User:
     # TODO: return a ship object
     # Update the 'ships' attribute of the user
     return generic_post_call("users/{0}/ships".format(self.username), 
-                             params={"location": location, "type": type})
+                             params={"location": location, "type": type},
+                             token=self.token)
   
   def get_ships(self, ships=None, as_df=False, fields=None, sort_by=None, filter_by=None):
     '''
@@ -221,7 +224,7 @@ class User:
     # Check if the list of ships contains original json data or Ship objects
     # If JSON convert into Ship objects and return
     if ships is not None:
-      return [Ship(ship) for ship in ships]
+      return [Ship(self.token, ship) for ship in ships]
 
     return_ships = self.ships
     if filter_by is not None:
@@ -283,7 +286,7 @@ class User:
               "good": good,
               "quantity": quantity}
     # Make call
-    order = generic_post_call(endpoint, params=params)
+    order = generic_post_call(endpoint, params=params, token=self.token)
     # Log the result
     logging.info("Buying {0} units of {1} for {2} at {3}. Remaining credits: {4}. Loading Goods onto ship: {5}"\
       .format(order['order']['quantity'], order['order']['good'], 
@@ -312,7 +315,7 @@ class User:
       "quantity": quantity
     }
     # Make call
-    order = generic_post_call(endpoint, params=params)
+    order = generic_post_call(endpoint, params=params, token=self.token)
     # Log the result
     logging.info("Selling {0} units of {1} for {2} at {3}. Remaining credits: {4}. Offloading Goods from ship: {5}"\
       .format(order['order']['quantity'], order['order']['good'], 
@@ -326,7 +329,7 @@ class User:
     # Track the flights progress in the console
     if track:
       flight = generic_post_call(endpoint, params={"shipId": shipId,
-                                                   "destination": destination})['flightPlan']
+                                                   "destination": destination}, token=self.token)['flightPlan']
       logging.info("Ship {0} has left {1} and is flying to {2}".format(shipId, flight['departure'], destination))
       # Create Progress Bar
       with Progress() as progress:
@@ -347,10 +350,10 @@ class User:
     return generic_post_call(endpoint, params={
       "shipId": shipId,
       "destination": destination
-    })
+    }, token=self.token)
 
   def flight(self, flightPlanId):
-    return generic_get_call("users/{0}/flight-plans/{1}".format(self.username, flightPlanId))
+    return generic_get_call("users/{0}/flight-plans/{1}".format(self.username, flightPlanId), token=self.token)
 
 class Loan:
   def __init__(self, id, due, repaymentAmount, status, type):
@@ -359,7 +362,7 @@ class Loan:
     self.repaymentAmount = repaymentAmount
     self.status = status
     self.type = type
-
+  
 class Market:
   def how_much_to_buy(self, unit_volume, hull_capacity):
     '''Returns max amount of units that can fit into the ship'''
@@ -455,14 +458,15 @@ class Game:
 
   You can save a call to API by initialising a Game object with the systems.json constant
   """    
-  def __init__(self, systems=None):
+  def __init__(self, token, systems=None):
+    self.token = token
     self.systems = self.load_sytems() if systems is None else systems
     self.locations = self.load_locations()
   
   # See if the game is currently up
   def status(self):
     """Returns whether the game is Up or Not"""
-    return generic_get_call("game/status")
+    return generic_get_call("game/status", token=self.token)
 
   # Get a specific location - returns a location object
   def location(self, symbol):
@@ -478,7 +482,7 @@ class Game:
 
     **CALL TO API**
     """
-    return generic_get_call("game/ships", params={"class":kind})['ships']
+    return generic_get_call("game/ships", params={"class":kind}, token=self.token)['ships']
 
   def calculate_distance(from_x, from_y, to_x, to_y):
     return round(math.sqrt(math.pow((to_x - from_x),2) + math.pow((to_y - from_y),2)))
@@ -496,23 +500,24 @@ class Game:
     This will simply load the complete JSON file with no further transformations
     '''
     # Path handling to account for non relative path usage
-    return generic_get_call("game/systems")['systems']
+    return generic_get_call("game/systems", token=self.token)['systems']
   
   def load_locations(self):
     '''
     This will return a dict of Location objects for all the locations across both systems. The key is the locations symbol.
     '''
     # Return each location as an object with it's symbol as the key
-    return {loc['symbol']: Location(**loc) for sys in self.systems for loc in sys['locations']}
+    return {loc['symbol']: Location(self.token, **loc) for sys in self.systems for loc in sys['locations']}
 
 
 class Location:
-  def __init__(self, **kwargs):
+  def __init__(self, token, **kwargs):
+      self.token = token
       self.__dict__.update(kwargs)
   
   def marketplace(self):
     endpoint = "game/locations/{0}/marketplace".format(self.symbol)
-    return generic_get_call(endpoint)['location']['marketplace']
+    return generic_get_call(endpoint, token=self.token)['location']['marketplace']
   
   def __repr__(self):
     return "Symbol: " + self.symbol + ", Name: " + self.name
@@ -527,8 +532,8 @@ def post_create_user(username):
 
 # Misc Functions
 # Generic get call to API
-def generic_get_call(endpoint, params=None):
-    headers = {'Authorization': 'Bearer ' + TOKEN}
+def generic_get_call(endpoint, params=None, token=None):
+    headers = {'Authorization': 'Bearer ' + token}
     r = requests.get(URL + endpoint, headers=headers, params=params)
     if r.ok:
         return r.json()
@@ -543,8 +548,8 @@ def generic_get_call(endpoint, params=None):
 
 
 # Generic call to API
-def generic_post_call(endpoint, params=None):
-    headers = {'Authorization': 'Bearer ' + TOKEN}
+def generic_post_call(endpoint, params=None, token=None):
+    headers = {'Authorization': 'Bearer ' + token}
     r = requests.post(URL + endpoint, headers=headers, params=params)
     if r.ok:
         return r.json()
@@ -557,10 +562,10 @@ def generic_post_call(endpoint, params=None):
           time.sleep(1)
         return generic_post_call(endpoint, params)
 
-def get_user(username):
+def get_user(username, token):
   '''Get the user and return a User Object'''
   # Make a call to the API to retrive the user data
-  return User(generic_get_call("users/" + username)['user'])
+  return User(generic_get_call("users/" + username, token=token)['user'])
 
 if __name__ == "__main__":
     # Load Constants
@@ -568,9 +573,9 @@ if __name__ == "__main__":
         systems = json.load(infile)
     
     username = "JimHawkins"
-
+    # TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
     game = Game(systems=systems)
-    user = get_user(username)
+    user = get_user(username, TOKEN)
     print(user.get_ships(as_df=True))
 
   
