@@ -560,7 +560,7 @@ def generic_get_call(endpoint, params=None, token=None):
     if r.ok:
         return r.json()
     else:
-        logging.warning("Something went wrong when hitting: {0} with parameters: {1}".format(URL+endpoint, params))
+        logging.warning(f"Something went wrong when hitting: {r.request.method} {r.url} with parameters: {params}")
         error = r.json()
         code = error['error']['code']
         message = error['error']['message']
@@ -581,7 +581,7 @@ def generic_post_call(endpoint, params=None, token=None):
     if r.ok:
         return r.json()
     else:
-        logging.warning("Something went wrong when hitting: {0} with parameters: {1}".format(URL+endpoint, params))
+        logging.warning(f"Something went wrong when hitting: {r.request.method} {r.url} with parameters: {params}")
         error = r.json()
         code = error['error']['code']
         message = error['error']['message']
@@ -591,9 +591,57 @@ def generic_post_call(endpoint, params=None, token=None):
           logging.info("Throttle limit was reached. Pausing to wait for throttle")
           for n in track(range(10), description="Pausing..."):
             time.sleep(1)
-          return generic_get_call(endpoint, params, token)
+          return generic_post_call(endpoint, params, token)
         else:
           logging.exception(f"Something broke the script. Code: {code} Error Message: {message} ")
+
+def make_request(method, url, headers, params):
+  """Checks which method to use and then makes the request to Space Traders API
+
+  Args:
+      method (str): The HTTP method to use
+      url (str): The URL of the request
+      headers (dict): the request headers holding the Auth
+      params (dict): parameters of the request
+
+  Returns:
+      Request: Returns the request
+
+  Exceptions:
+      Exception: Invalid method - must be GET, POST or PUT
+  """
+  if method == "POST":
+    return requests.post(url, headers=headers, params=params)
+  if method == "GET":
+    return requests.get(url, headers=headers, params=params)
+  if method == "PUT":
+    return requests.put(url, headers=headers, params=params)
+  else:
+    logging.exception(f"Invalid method provided: {method}")
+
+def generic_api_call(method, endpoint, params=None, token=None):
+  headers = {'Authorization': 'Bearer ' + token}
+  # Make the request to the Space Traders API
+  r = make_request(method, URL + endpoint, headers, params)  
+  if r.ok:
+      return r.json()
+  else:
+      logging.warning(f"Something went wrong when hitting: {r.request.method} {r.url} with parameters: {params}")
+      error = r.json()
+      code = error['error']['code']
+      message = error['error']['message']
+      logging.warning("Error: " + str(error))
+      # Check if the error was due to throttline
+      if str(code) == '42901':
+        # Handle Throttling errors by pausing and trying again
+        logging.info("Throttle limit was reached. Pausing to wait for throttle")
+        for n in track(range(10), description="Pausing..."):
+          time.sleep(1)
+        # Recall this method to make the request again. 
+        return generic_api_call(method, endpoint, params, token)
+      # If not due to throttling raise exception
+      else:
+        logging.exception(f"Something broke the script. Code: {code} Error Message: {message} ")
 
 def get_user(token, username):
   '''Get the user and return a User Object'''
