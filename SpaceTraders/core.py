@@ -572,8 +572,7 @@ def generic_get_call(endpoint, params=None, token=None):
             time.sleep(1)
           return generic_get_call(endpoint, params, token)
         else:
-          logging.exception()
-          logging.fatal(f"Something broke the script. Code: {code} Error Message: {message} ")
+          logging.exception(f"Something broke the script. Code: {code} Error Message: {message} ")
 
 # Generic call to API
 def generic_post_call(endpoint, params=None, token=None):
@@ -594,8 +593,7 @@ def generic_post_call(endpoint, params=None, token=None):
             time.sleep(1)
           return generic_get_call(endpoint, params, token)
         else:
-          logging.exception()
-          logging.fatal(f"Something broke the script. Code: {code} Error Message: {message} ")
+          logging.exception(f"Something broke the script. Code: {code} Error Message: {message} ")
 
 def get_user(token, username):
   '''Get the user and return a User Object'''

@@ -77,6 +77,15 @@ def find_optimum_trade_routes(ship):
     return [core.Market(GAME).what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
 
 def any_dest_trading_run(ship):
+  # First sell any existing cargo
+  if len(ship.cargo) > 0:
+    if any(x['good'] != "FUEL" for x in ship.cargo):
+      print(f"{R}Goods still left on ship that require selling{W}")
+      cargo_to_sell = next(good for good in ship.cargo if good['good'] != "FUEL")
+      sell_order = user.sell_order(ship.id, cargo_to_sell['good'], cargo_to_sell['quantity'])
+      print(f"{G}Sold {cargo_to_sell['quantity']} units of {cargo_to_sell['good']} for {sell_order['order']['total']}{W}")
+      ship.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
+
   did_buy_goods = False
   # Get the optimum trade routes - USES 9 API Calls
   trade_routes = find_optimum_trade_routes(ship)

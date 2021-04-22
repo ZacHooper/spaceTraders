@@ -8,7 +8,7 @@
     - Can handle equals, not equals, etc - likely add a third element to the tuple. 
   
   ### General
-  - Track Total Credits
+  - Track Total Credits - or at least equity so value of goods also containined on ships - and out of curiosity assests
   - Track Ship Count
   - Build out testing suite
 
