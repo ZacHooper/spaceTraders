@@ -9,7 +9,410 @@
                 "name": "Prime",
                 "x": 20,
                 "y": -25,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknoejq5o1825731ds6obghxuxt",
+                        "username": "proud-gray-skink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "ckno9u9sh16481ds6as56xpqw",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoeecpc1750551ds64f8wg8ij",
+                        "username": "grotesque-black-trout-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoj8i776706221ds6cs4n42m0",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknopdsq83434501ds6pg2f4o1y",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknoggjup2988671ds6w32y1yjs",
+                        "username": "strict-harlequin-rabbit-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoel7xz1856191ds632byzdxa",
+                        "username": "random-rose-wolf-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoeuy022017171ds6ew1bzqy3",
+                        "username": "identical-azure-panther-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoetc1g1981391ds6dlgcm80n",
+                        "username": "aware-turquoise-cod-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoi7pky5018221ds6prwkig45",
+                        "username": "spcoder",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpv35ah8002515s6jlw7uzd8",
+                        "username": "well-peach-lobster-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknognb5v3164981ds6ge1uu7jc",
+                        "username": "unfair-blush-ferret-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoiibm35433361ds64i73off8",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknors8ma8951551ds6u167yemh",
+                        "username": "increasing-coffee-krill-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqz0rjz141564515s67t5gcvof",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknooxaep2383601ds663h65aay",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknopy4q34782361ds64ok0bbxw",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknonukch317801ds69u30096y",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknomg7yt14383371ds6rjpp9l3v",
+                        "username": "golden-cyan-viper-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknonv75y357691ds6zccubpng",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknor9glc7799701ds6rdnqunhc",
+                        "username": "growing-orange-gull-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknou6b2p15843801ds6apvl189e",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqz0wo2141703215s6kcpvosa9",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpfyexh10277671bs622j8nisj",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknph4vrq13927641bs6uqrwpk7b",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqz0yuq141750115s67vdzag7w",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpk5u096254801bs6wtvvmoat",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpk5qj96239681bs68tv5r3ez",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqz0udv141651415s6ku00x0h0",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknorzlfj9412631ds61gml29wh",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknorg8z28214331ds6rbwtm7z3",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpi3pw516486561bs61366mhlq",
+                        "username": "good-yellow-whitefish-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpx7fb494110915s6igvhzq63",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpvsba837953415s62v6dcr1f",
+                        "username": "uncomfortable-jade-wildebeest-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpwze7f85077915s6ingj56ru",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknoojk051608201ds6r3lksvav",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpx7g7o94155015s6ojhw0utm",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpx7jqe94247015s6zuushn1g",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpx79z693923015s6hvkks2ub",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpx7au393951715s6e1sd2poe",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqy0i6m105995715s6r0uww746",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqy0kij106071415s60k0orbx1",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqey0zn113037415s677t9lfuz",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqexq5p112710115s60tvhztul",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqexpao112680315s6yp4z3g5d",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqy0fjh105901115s6n7yhh0di",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqexwc2112888515s6p1f4rd21",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqobq3i131268715s6e5486959",
+                        "username": "willhall",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknql7xq926934315s6kwur5bhz",
+                        "username": "whurval",
+                        "shipType": "EM-MK-I"
+                    },
+                    {
+                        "shipId": "cknqexx8t112923115s6q9bmmxib",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp7khim4231021bs6rootu58p",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqlawc629437815s6cho5eqde",
+                        "username": "upset-orange-swift-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqou6cf150040015s6zj6xipit",
+                        "username": "irrelevant-magenta-bobolink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqn6k0e95290015s6n1bvpafd",
+                        "username": "rex",
+                        "shipType": "GR-MK-I"
+                    },
+                    {
+                        "shipId": "cknqldqll32187015s6hu9r6dbo",
+                        "username": "eastern-ivory-meadowlark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqlgzn135414315s6yd6hgd89",
+                        "username": "whurval",
+                        "shipType": "EM-MK-I"
+                    },
+                    {
+                        "shipId": "cknqn71km95813015s6mgrx5ea1",
+                        "username": "rex",
+                        "shipType": "HM-MK-I"
+                    },
+                    {
+                        "shipId": "cknqhu80w62620715s68e53vm8w",
+                        "username": "BinaryKiwi",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqjgv40127953815s6hxbp3e6o",
+                        "username": "Redcrafter",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqrta6x84481815s6etqmnf8e",
+                        "username": "systematic-yellow-sole-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxcolu81114815s6jgdmy1np",
+                        "username": "panicky-violet-wildcat-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxf61j83025915s6v2v4nach",
+                        "username": "automatic-red-boar-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxklnp88133315s6pgsjmgtk",
+                        "username": "Percy",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoxn0mn10410121ds63eyq1r9l",
+                        "username": "Vocivos",
+                        "shipType": "EM-MK-II"
+                    },
+                    {
+                        "shipId": "cknr5mgjf38554015s6tqawzkc5",
+                        "username": "tropical-teal-sheep-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpi8bps16763071bs6eregjdgo",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknr1p37082417515s6koqe4oo2",
+                        "username": "insufficient-tomato-lizard-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr73lng90127915s6bk6n3h41",
+                        "username": "plain-gray-leopard-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr5zqx849827715s6rww13wni",
+                        "username": "plain-gray-leopard-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr6p46i74991615s6nerdjwym",
+                        "username": "tropical-apricot-spider-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr64fwl53938715s639qbdelz",
+                        "username": "tropical-apricot-spider-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr70i3f86734415s69mmz9x30",
+                        "username": "Akerus",
+                        "shipType": "HM-MK-II"
+                    },
+                    {
+                        "shipId": "cknr6pzg176062315s67187t9my",
+                        "username": "young-magenta-constrictor-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr5zzyl50085615s641e8esy5",
+                        "username": "plain-gray-leopard-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpdxw935525831bs64nl7e2to",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknr127of57744815s6fal9fwov",
+                        "username": "corporate-beige-ladybug-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpfyl7510290781bs618rdjow4",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknr5k0w236413815s6iy5epzzf",
+                        "username": "minor-tomato-unicorn-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr64bhp53787815s6jshyklwg",
+                        "username": "tropical-apricot-spider-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqexy7x112947815s6p5m68oud",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "OE-PM-TR",
@@ -17,7 +420,40 @@
                 "name": "Tritus",
                 "x": 23,
                 "y": -28,
-                "ships": []
+                "allowsConstruction": true,
+                "ships": [
+                    {
+                        "shipId": "ckno99rqo01411ds6dccwchfj",
+                        "username": "joel",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": [
+                    {
+                        "id": "cknoqq0vm6628641ds6le688tcv",
+                        "type": "MINE",
+                        "location": "OE-PM-TR",
+                        "ownedBy": {
+                            "username": "Foonisher"
+                        }
+                    },
+                    {
+                        "id": "cknoxwxbq11283341ds6hfuxsar9",
+                        "type": "CHEMICAL_PLANT",
+                        "location": "OE-PM-TR",
+                        "ownedBy": {
+                            "username": "Foonisher"
+                        }
+                    },
+                    {
+                        "id": "cknoxwxq211284071ds6i1duoruk",
+                        "type": "FARM",
+                        "location": "OE-PM-TR",
+                        "ownedBy": {
+                            "username": "Foonisher"
+                        }
+                    }
+                ]
             },
             {
                 "symbol": "OE-CR",
@@ -25,7 +461,180 @@
                 "name": "Carth",
                 "x": 16,
                 "y": 17,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknoejus11827141ds639jwoo2c",
+                        "username": "proud-gray-skink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "ckno9tmm408631ds62srmoz83",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoeeh8z1751171ds6tm4lyq5y",
+                        "username": "grotesque-black-trout-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknognfka3168961ds6tjdiy6qb",
+                        "username": "unfair-blush-ferret-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoelcg01858601ds684b1jlx2",
+                        "username": "random-rose-wolf-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoggpo42991611ds65oh6viuo",
+                        "username": "strict-harlequin-rabbit-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknohjmtu4121161ds6js7f5dl1",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoetgis1983681ds6k7wzv2jh",
+                        "username": "aware-turquoise-cod-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoev2kq2019031ds6h921jn26",
+                        "username": "identical-azure-panther-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknou5kae15784311ds6j4js4zc5",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoweplf6400871ds63hi6fkic",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknor9kvk7805491ds6o2izgs0q",
+                        "username": "growing-orange-gull-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpv39ja8167615s6cvsxbz7i",
+                        "username": "well-peach-lobster-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpi3tx816494081bs6gajotff1",
+                        "username": "good-yellow-whitefish-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp6dawr640781bs6nlyaoekv",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp9d2vp9892481bs66ydlyzwz",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp8o4a47703101bs6v8pj01vr",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknorsgz18967241ds6ujjjdrey",
+                        "username": "increasing-coffee-krill-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknorzpl29423381ds6jww7fxrl",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr4rq2a12840115s6bs94x6ji",
+                        "username": "Fio",
+                        "shipType": "EM-MK-II"
+                    },
+                    {
+                        "shipId": "cknpvsfhg38073115s61ztro0ez",
+                        "username": "uncomfortable-jade-wildebeest-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr5k4ym36559715s6hqjqls7u",
+                        "username": "minor-tomato-unicorn-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqlb0fj29552115s6j77f42zw",
+                        "username": "upset-orange-swift-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqouae2150195115s6gtps4wk8",
+                        "username": "irrelevant-magenta-bobolink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqouefv150309015s6nj86d4zz",
+                        "username": "irrelevant-magenta-bobolink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqrteh884638215s691dvyxg0",
+                        "username": "systematic-yellow-sole-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqtva7m146395715s6kv0mn5af",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxfb6t83157815s6mkurru58",
+                        "username": "automatic-red-boar-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxcsnf81232015s67pc3nyq5",
+                        "username": "panicky-violet-wildcat-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr1p7jn82545815s6f3dalvpu",
+                        "username": "insufficient-tomato-lizard-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr12byr57888315s64l85e4o1",
+                        "username": "corporate-beige-ladybug-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr4udqa15117415s6a69qr8zr",
+                        "username": "Fio",
+                        "shipType": "GR-MK-I"
+                    },
+                    {
+                        "shipId": "cknr6q5ku76221615s6olvcc36w",
+                        "username": "young-magenta-constrictor-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp5vbyf4502391ds6zsdl8ydc",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "OE-KO",
@@ -33,7 +642,400 @@
                 "name": "Koria",
                 "x": -48,
                 "y": -7,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "ckno9tpsg10381ds6nbem1so6",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoejzbd1829961ds6ptv8r53j",
+                        "username": "proud-gray-skink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoeelsp1751961ds6y8z8sh65",
+                        "username": "grotesque-black-trout-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoelgwj1859751ds6vg1iqa6e",
+                        "username": "random-rose-wolf-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoggtwt2993931ds6ktxwzme3",
+                        "username": "strict-harlequin-rabbit-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknold6b111508631ds6rxah6kzg",
+                        "username": "Foonisher",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknq75htf145659815s61bkicdip",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknowep6i6399801ds6tdfzn5wu",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp7i42b4028001bs6pope0q9g",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknoetl2t1984881ds69fll98vz",
+                        "username": "aware-turquoise-cod-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpv3dro8344315s6nduwomx6",
+                        "username": "well-peach-lobster-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoev7492020171ds6g4ljibml",
+                        "username": "identical-azure-panther-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknognjyd3175431ds6g993g6t9",
+                        "username": "unfair-blush-ferret-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknq8j60b25286015s6to4frl1z",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknog7br92786881ds6jj5kd9a0",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknorscuo8958401ds6eshhz37l",
+                        "username": "increasing-coffee-krill-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknor9rf47814291ds6yvgsjzvy",
+                        "username": "growing-orange-gull-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknongrjb16384891ds6zsch6z8w",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp9e0g39978111bs67c1xab7q",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpc0vm21652521bs6lmjinbq2",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp81m775759931bs67pi7fab1",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknovhusy3510341ds6xua14web",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp3utfo15475961ds6figzwcun",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-II"
+                    },
+                    {
+                        "shipId": "cknoxswtn10912151ds65jymfb9s",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-I"
+                    },
+                    {
+                        "shipId": "cknoz06c415176411ds6hjym0yh3",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-I"
+                    },
+                    {
+                        "shipId": "cknp79lzw3325311bs6z23vr827",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp54zek2387321ds6hrjlc91t",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpaq3kk14100381bs6qskaxksb",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknor44mb7418041ds6alkm4xkz",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp0tbby4690221ds62xs4qa6z",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-II"
+                    },
+                    {
+                        "shipId": "cknpi3xyh16499201bs6kpnrmjrm",
+                        "username": "good-yellow-whitefish-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqy00sr105377015s6620b20m2",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpp791z9226451bs6pt7rddtn",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknos2t9g9610411ds6cnj12kk3",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqv65vh14928015s6n53m3vit",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp8ka2j7357661bs6sl5x2xbt",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp8ow6w7770481bs6kbg9hwic",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp0idqi3581011ds6lz68g28d",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-I"
+                    },
+                    {
+                        "shipId": "cknpmlc1c16308531bs69pq8rnmm",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpnb8vx2446861bs6y38nfwq5",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpoo3947509791bs6cata60yq",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknplui2j13235761bs62h1smm6o",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpvsjol38295915s6ukkmacbc",
+                        "username": "uncomfortable-jade-wildebeest-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpo25wo5478931bs6buvge1kd",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpij65a738831bs60njwi0tv",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpbmhk5308601bs6ro0mjzse",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknqc8npq14809615s600po5sns",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqt2wx4121082315s6nlvn68el",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknq8z6ki42223315s6yutfcn75",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqz0o69141488215s6c214yp6x",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknq43tdn34126015s60dcva2gm",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknqr1xiq55482915s60pnfe2iq",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqplyfe6809915s6p3t2z116",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqldzvt32436815s6ist9cf7y",
+                        "username": "eastern-ivory-meadowlark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr5k91z36644015s67jlcqsse",
+                        "username": "minor-tomato-unicorn-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqouje0150412915s6zposyeny",
+                        "username": "irrelevant-magenta-bobolink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqlb4i329657915s6tjpzdx6e",
+                        "username": "upset-orange-swift-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqrtirk84772215s6wox6gobt",
+                        "username": "systematic-yellow-sole-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqex8zr112315815s6veno3caa",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqkulvx15307815s6gg4q0qeo",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqjyqhj149073415s62vx01udv",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqtvcxi146460915s6c0nsllnc",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxftaj83550615s67wpaax4t",
+                        "username": "automatic-red-boar-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxcwop81339215s62n4kx725",
+                        "username": "panicky-violet-wildcat-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqv7n9c16107115s6z6q4lqku",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpax4ip14739631bs6xtn0j92m",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqy0cx5105809715s6xsntrhqs",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqxy149103185915s6p1zxlol4",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknr12gbk57991415s6hdy39chv",
+                        "username": "corporate-beige-ladybug-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknq410cf30732515s62b69njvl",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr1pbn182641815s63oi40aft",
+                        "username": "insufficient-tomato-lizard-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxy0ws103177015s65gwqqd6u",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknqin6w994697415s6276b52jx",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp36ow413098051ds681tnzfk4",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-II"
+                    },
+                    {
+                        "shipId": "cknqpwv7017799815s653ccnada",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknq41ssk31745915s6kovjevox",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr6qa6a76366715s6bp8tuk8n",
+                        "username": "young-magenta-constrictor-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqz2w9c143680015s6w3kze64h",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "OE-BO",
@@ -41,7 +1043,236 @@
                 "name": "Bo",
                 "x": -64,
                 "y": -89,
-                "ships": []
+                "allowsConstruction": true,
+                "ships": [
+                    {
+                        "shipId": "cknphh5wc15047681bs6t1gnzeen",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "ckno9gder07761ds669m8fez6",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknovs7ld4442541ds6tyctneof",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknog7g7a2790591ds6hrdccgye",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoweo146396661ds6ac7h0mal",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknohwwwv4609761ds6ou4e1uzr",
+                        "username": "Foonisher",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqy03sh105473315s66vb6a1yy",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknphf6nx14922771bs654qeu1ms",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknoq3hfi5159641ds6ghrnmr4l",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknorareu7895941ds65z3wla4b",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpjyp4h5537661bs6o4fdodlo",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpl8pyi10711061bs6mjvxgmn1",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknp9fnta10124691bs65i6anote",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknphi0kz15088161bs6e9izwoyu",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknq8ge8z22445315s6omt2kbwt",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpbldg1200871bs6uxglo4ob",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpkm9e48115661bs6ci440r1q",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpj80no2837161bs66w230o1e",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknoylc8513549821ds6gfnsin2v",
+                        "username": "Vocivos",
+                        "shipType": "EM-MK-II"
+                    },
+                    {
+                        "shipId": "cknpbja5x16784751bs6qqbj9apt",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp9fdla10098791bs6nf7kri0e",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknoqnq506519361ds69k2wxqfe",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknq8gij122550015s6xlde01al",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknq46nuj37716715s60ettnn1b",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknq8gadp22349015s6dnr0rr5d",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqy0695105573215s6ler5nj5v",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknq8gg3322496615s67uyj62xz",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknq8gchh22408515s6dow1os29",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqy0ntr106163215s60ermfkad",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpmj0u016051341bs65i9wolpj",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknqqbyau31478015s6xz0e46ry",
+                        "username": "totallymike",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp9f6xm10086011bs6xvegob8o",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknqtv7pj146358215s6rsmju4r1",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqy0amz105730015s6h3uv1km6",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqy08go105641215s6f2ickuwo",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknphfuek14967651bs6o1efhu6g",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpknkgm8272201bs64gbh71ha",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    }
+                ],
+                "structures": [
+                    {
+                        "id": "cknpsbxrp3102121bs6w6fge5qu",
+                        "type": "FUEL_REFINERY",
+                        "location": "OE-BO",
+                        "ownedBy": {
+                            "username": "ZERG"
+                        }
+                    },
+                    {
+                        "id": "cknpshj7i3600491bs60no8xa37",
+                        "type": "FUEL_REFINERY",
+                        "location": "OE-BO",
+                        "ownedBy": {
+                            "username": "ZERG"
+                        }
+                    },
+                    {
+                        "id": "cknpshuz13619481bs6w1i4lm3b",
+                        "type": "FUEL_REFINERY",
+                        "location": "OE-BO",
+                        "ownedBy": {
+                            "username": "ZERG"
+                        }
+                    },
+                    {
+                        "id": "cknpsi3yf3643621bs6mu3tlpgz",
+                        "type": "FUEL_REFINERY",
+                        "location": "OE-BO",
+                        "ownedBy": {
+                            "username": "ZERG"
+                        }
+                    },
+                    {
+                        "id": "cknpws7nm77389215s6kahx62ei",
+                        "type": "FUEL_REFINERY",
+                        "location": "OE-BO",
+                        "ownedBy": {
+                            "username": "Foonisher"
+                        }
+                    }
+                ]
             },
             {
                 "symbol": "OE-NY",
@@ -49,7 +1280,245 @@
                 "name": "Nyon",
                 "x": 74,
                 "y": 50,
-                "ships": []
+                "allowsConstruction": true,
+                "ships": [
+                    {
+                        "shipId": "cknoek3vk1831851ds6n2tzmb26",
+                        "username": "proud-gray-skink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "ckno9tr3911191ds6g91jsn3l",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknosqggy11197381ds6ja8h6w1v",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoeeqar1752571ds6fqxsl6kv",
+                        "username": "grotesque-black-trout-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknotl1pu13798011ds65k9ib89y",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoellg11860981ds6ntzg74dg",
+                        "username": "random-rose-wolf-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoweopf6399201ds6w45pihu7",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknou9slb16200001ds62rz3mppq",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr5kd4k36740515s6nvq2r10o",
+                        "username": "minor-tomato-unicorn-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknognoex3183371ds6hlyptrcc",
+                        "username": "unfair-blush-ferret-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoetpib1986841ds663q444t9",
+                        "username": "aware-turquoise-cod-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoevbk42020781ds6uoo7s541",
+                        "username": "identical-azure-panther-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoggyse2996551ds6ylv4bccw",
+                        "username": "strict-harlequin-rabbit-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknogcw042897161ds65x1r32ai",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknor9w2y7820611ds6lhvi8gyu",
+                        "username": "growing-orange-gull-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp2s1u911686061ds61zsd8mxp",
+                        "username": "Foonisher",
+                        "shipType": "ZA-MK-III"
+                    },
+                    {
+                        "shipId": "cknorbonr7944591ds6tuf20r19",
+                        "username": "fine-coral-bobcat-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpv3hzw8529315s6plffpoku",
+                        "username": "well-peach-lobster-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknodt1zy1523611ds6mvjevspt",
+                        "username": "ZERG",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknort3hj9007631ds6hk9q5pgy",
+                        "username": "increasing-coffee-krill-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknorzxvt9435831ds649r2n1ow",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknou9ev616160151ds65slwv3bp",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknorztpu9430921ds6i7imnm3r",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoe8stq1683541ds6qe0lmhr4",
+                        "username": "ZERG",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknpi420316509431bs6r2puz25x",
+                        "username": "good-yellow-whitefish-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknovopql4131221ds68vggsmzd",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpvsnzr38443815s6hnvf3xa2",
+                        "username": "uncomfortable-jade-wildebeest-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknobx2e3733781ds6adqwhryc",
+                        "username": "ZERG",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknov0zsy1895201ds6sl4w0aeo",
+                        "username": "disciplinary-gold-catshark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqggbsz6451715s6cyopkfd6",
+                        "username": "neurons4me",
+                        "shipType": "GR-MK-I"
+                    },
+                    {
+                        "shipId": "cknqfwggm151599915s6bairc7jg",
+                        "username": "Foonisher",
+                        "shipType": "ZA-MK-III"
+                    },
+                    {
+                        "shipId": "cknqbale9146561315s62vrdo1wy",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknqldi7231897815s6rvj98rmp",
+                        "username": "eastern-ivory-meadowlark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqoupv9150551115s6k8tn4gph",
+                        "username": "irrelevant-magenta-bobolink-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqlb8l229753415s69vh8mjep",
+                        "username": "upset-orange-swift-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqldmf832061315s64oo6w9u4",
+                        "username": "eastern-ivory-meadowlark-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr4l5r97584415s6pkxx947g",
+                        "username": "cookie",
+                        "shipType": "EM-MK-II"
+                    },
+                    {
+                        "shipId": "cknqrtn1384885515s6eidqxf29",
+                        "username": "systematic-yellow-sole-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqtv554146321515s6n1wuz130",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqvqf4t34181615s6x144k9ol",
+                        "username": "Kent",
+                        "shipType": "GR-MK-II"
+                    },
+                    {
+                        "shipId": "cknqxfy4k83730415s6smckfts9",
+                        "username": "automatic-red-boar-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqxd0rj81425415s65d7pe8gr",
+                        "username": "panicky-violet-wildcat-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr5mp4x38791115s62vvjide0",
+                        "username": "tropical-teal-sheep-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr1pfq682716915s62gh1bt8n",
+                        "username": "insufficient-tomato-lizard-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknqdd5p554447215s6z8n4xug6",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknr12kms58109415s6x77yfzif",
+                        "username": "corporate-beige-ladybug-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr6qefe76459515s6ew06v0m6",
+                        "username": "young-magenta-constrictor-§",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "OE-UC",
@@ -57,7 +1526,50 @@
                 "name": "Ucarro",
                 "x": -75,
                 "y": 82,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknoaxqvi344851ds64dtiogo4",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknog7kqo2794801ds6vgov4br6",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknovskru4464091ds6wz9bm7pj",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpfyih810283681bs6lw81xaen",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp9duor9964091bs63hf2c9ac",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr0u2a548029915s6ybesgcpp",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr5wruw47012615s6adoiefaf",
+                        "username": "Bavar",
+                        "shipType": "GR-MK-II"
+                    },
+                    {
+                        "shipId": "cknqoji07140260915s69hyo6i1s",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "OE-UC-AD",
@@ -65,7 +1577,65 @@
                 "name": "Ado",
                 "x": -82,
                 "y": 82,
-                "ships": []
+                "allowsConstruction": true,
+                "ships": [
+                    {
+                        "shipId": "cknoah9ws190851ds6jk9esorq",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoj34cd6480541ds6mlnvsxh2",
+                        "username": "JimHawkins",
+                        "shipType": "GR-MK-I"
+                    },
+                    {
+                        "shipId": "cknok8quv8823071ds6lbh28kf4",
+                        "username": "Foonisher",
+                        "shipType": "GR-MK-II"
+                    },
+                    {
+                        "shipId": "cknp2rof411651481ds69in8drhx",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-II"
+                    },
+                    {
+                        "shipId": "cknog7pb62795951ds6m5i3wxpa",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoj8eu56698741ds65uiuy9mi",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknow9pqo5929371ds62ja87hrm",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknpg60xz10957921bs6bgfgwvbv",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknp9e32b9983261bs63uzd3vtq",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp9jjbn10459921bs6sudo3t76",
+                        "username": "Dunador",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknppgtu510080651bs6hc90sb4s",
+                        "username": "JimHawkins",
+                        "shipType": "GR-MK-II"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "OE-UC-OB",
@@ -73,7 +1643,45 @@
                 "name": "Obo",
                 "x": -77,
                 "y": 78,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknoa7crg112211ds648fh7ys8",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknog7tsj2798261ds6268gbseu",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknp9dzge9974921bs67ljpfv8r",
+                        "username": "SilverSpar",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknowbqct6120601ds6h16wzzuw",
+                        "username": "Dunador",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknq4uvk562383715s6i9rfn5lb",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknph4so613914291bs6a3z7hz4r",
+                        "username": "Vocivos",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknr0u70t48237315s6hs0trtlq",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "OE-XV-91-2",
@@ -81,13 +1689,87 @@
                 "name": "Wormhole",
                 "x": 0,
                 "y": 145,
-                "ships": [],
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknogd0l42900751ds6wx8np4im",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknop6y572985051ds66mzpko4v",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknppr28111070671bs6rczm7gkp",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknprz1qk1864521bs62ku70knd",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknps2fnp2177711bs6k8kjfypd",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpr9uzi16246841bs6unavsvk5",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpqobqw14185891bs6r3ogarmq",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpr75th15968661bs6lylf7cf0",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpssi1f4733071bs6mwhd07ez",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpq135012010821bs65i6fv68h",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknpspdjl4401491bs6eehwdkoz",
+                        "username": "SilverSpar",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknq0kinz64074915s6dy8yfdnd",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    },
+                    {
+                        "shipId": "cknq0kxc864475615s6nlas936b",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "GR-MK-III"
+                    }
+                ],
                 "messages": [
                     "Extensive research has revealed a partially functioning warp gate harnessing the power of an unstable but traversable wormhole.",
                     "The scientific community has determined a means of stabilizing the ancient structure.",
                     "Enter at your own risk.",
                     "POST https://api.spacetraders.io/game/structures/:structureId/deposit shipId=:shipId good=:goodSymbol quantity=:quantity",
                     "POST https://api.spacetraders.io/users/{username}/warp-jump shipId=:shipId"
+                ],
+                "structures": [
+                    {
+                        "id": "ckno95wyx1570lzwwi1o4w1f7",
+                        "type": "WARP_GATE",
+                        "location": "OE-XV-91-2"
+                    }
                 ]
             }
         ]
@@ -102,7 +1784,45 @@
                 "name": "Bear Nebula",
                 "x": 102,
                 "y": 92,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodomgs1480241ds6fl4t2zk2",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr53v8d22689915s6jrr96jpk",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr51lyf20992515s6q6c6omx3",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr14duu59861715s6pzwf2ioz",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr1olef81988815s6qaghsbmc",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr1dw5k70752415s67nsto9c9",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr0296116861315s60w9jkt8t",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-ST",
@@ -110,7 +1830,20 @@
                 "name": "Straxabos",
                 "x": -16,
                 "y": 26,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodo7wf1473731ds6sye6lz5w",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknog0fx62642641ds61e3aj6ye",
+                        "username": "ZERG",
+                        "shipType": "GR-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-ST-BG",
@@ -118,7 +1851,75 @@
                 "name": "Bragi",
                 "x": -26,
                 "y": 28,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodo5ve1473101ds6hqwblvgn",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr3rd3i151067215s6pedyhq7i",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr3tbbi152583015s6inlee17v",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr016ju15778215s63kji4vs9",
+                        "username": "WellermanThree",
+                        "shipType": "EM-MK-IV"
+                    },
+                    {
+                        "shipId": "cknof95u12232631ds65yzw8463",
+                        "username": "ZERG",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr6cvz462116715s6adoe186h",
+                        "username": "Soulweave",
+                        "shipType": "EM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr62kz252289315s6qz0fx45d",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr6twz779918015s651ucn8s0",
+                        "username": "Scrat",
+                        "shipType": "EM-MK-IV"
+                    },
+                    {
+                        "shipId": "cknr3p7c5149302515s62o8bgxzz",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr2genm112409915s6ftfp2y4r",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknofiwcz2363791ds6ht08fwri",
+                        "username": "ZERG",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknr1hdat74643315s67sjibvjf",
+                        "username": "Dunador",
+                        "shipType": "HM-MK-III"
+                    },
+                    {
+                        "shipId": "cknoetqhs1987651ds6ud12ebev",
+                        "username": "ZERG",
+                        "shipType": "HM-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-XA",
@@ -126,7 +1927,20 @@
                 "name": "Xamarin",
                 "x": 9,
                 "y": 12,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodo1vl1471511ds6e1nvvo5x",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknohq97q4371711ds62ydaodpj",
+                        "username": "ZERG",
+                        "shipType": "GR-MK-III"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-TLF",
@@ -134,7 +1948,20 @@
                 "name": "Thorix LF",
                 "x": -79,
                 "y": -18,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodo3uo1472141ds68zf3z7s0",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknohfckr3983551ds61wtdqx77",
+                        "username": "Foonisher",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-OS",
@@ -142,7 +1969,20 @@
                 "name": "Osuhines",
                 "x": -64,
                 "y": -35,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodocfw1474991ds64y8scocd",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknohr6fi4409031ds69cj2iwbl",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-SN",
@@ -150,7 +1990,15 @@
                 "name": "Sinope",
                 "x": 43,
                 "y": -37,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodoafc1474361ds61jlzv25m",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-CB",
@@ -158,7 +2006,15 @@
                 "name": "Ciubus",
                 "x": 105,
                 "y": -22,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodokj51479111ds6rv2bzjll",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-CB-NM",
@@ -166,7 +2022,20 @@
                 "name": "Nami",
                 "x": 111,
                 "y": -12,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodoed11476001ds61iesq3ej",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoiw44i6161181ds6hk9z46un",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-CB-IT",
@@ -174,7 +2043,20 @@
                 "name": "Ito",
                 "x": 112,
                 "y": -25,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknodoh5j1477311ds6hhv4kn73",
+                        "username": "ZERG",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoi31dh4824021ds6fmeeu0uz",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": []
             },
             {
                 "symbol": "XV-OE-2-91",
@@ -182,7 +2064,51 @@
                 "name": "Wormhole",
                 "x": 145,
                 "y": 0,
-                "ships": []
+                "allowsConstruction": false,
+                "ships": [
+                    {
+                        "shipId": "cknois6415978941ds6meplmw92",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoi7mhj5014421ds6myt8flpt",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknohnpmb4278941ds6z9rkmr47",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoh8hla3766151ds6pdeea747",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknoh4vaf3659801ds6q1hs9wws",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknogdsbb2918041ds6r0f9lbfk",
+                        "username": "everyday-silver-possum-§",
+                        "shipType": "JW-MK-I"
+                    },
+                    {
+                        "shipId": "cknr0u4q748130215s69w2mc5fl",
+                        "username": "JimHawkins",
+                        "shipType": "JW-MK-I"
+                    }
+                ],
+                "structures": [
+                    {
+                        "id": "ckno95x0s1588lzww9gbftsue",
+                        "type": "WARP_GATE",
+                        "location": "XV-OE-2-91"
+                    }
+                ]
             }
         ]
     }

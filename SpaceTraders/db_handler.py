@@ -98,10 +98,12 @@ def write_flight_path_to_db(flightPath):
     actual_fuel_required INT,
     time_taken INT,
     ship_manufactorer VARCHAR(200),
+    ship_type VARCHAR(200),
     speed INT,
     totalVolume INT,
     plating INT,
     weapons INT,
+    flight_reason VARCHAR(200),
     CONSTRAINT primary_key_constraint PRIMARY KEY (time)
   )
   """

@@ -31,6 +31,18 @@ $(\frac{9}{37}) \times d + 2$
 lambda d: (9/37) * d + 2
 ```
 
+Have looked at the data collected from last week the formula to workout fuel required based on distance is<br> 
+$Fuel = \frac{1}{4} * Distance + 1 + Penalties$
+
+or $y = \frac{1}{4}x + 1 + p$
+
+The current known penalties:
+- Planet: 2
+- GR MK-II: 1 - If from planet
+- GR MK-III: 2 - If from planet
+
+*Note that the ship class penalities only occur when flying FROM a planet. If any other kind of location type there is no penalty.*
+
 ### Tritus
 - Tritus (OE-PM-TR) -> Prime (OE-PM) : 2 Fuel *(for Grav)*
 - Tritus (OE-PM-TR) -> Carth (OE-CR) : 13 Fuel *(for Jack)*
@@ -54,3 +66,5 @@ lambda d: (9/37) * d + 2
 ### Ucarras
 - Ucarras (CE-UC) -> BO (OE-BO) : 47 Fuel : ? Seconds : distance 171 *(for Grav 2)*
 
+### OE Wormhole
+- There is no market so make sure not to dock any Jackshaws there. 

@@ -84,8 +84,44 @@ LOCATIONS = {
     "OE-PM-TR" : 
         {
             "symbol": "OE-PM-TR",
+            "type": "MOON",
+            "name": "Tritus",
             "x": 23,
-            "y": -28
+            "y": -28,
+            "allowsConstruction": True,
+            "ships": [
+                {
+                    "shipId": "ckno99rqo01411ds6dccwchfj",
+                    "username": "joel",
+                    "shipType": "JW-MK-I"
+                }
+            ],
+            "structures": [
+                {
+                    "id": "cknoqq0vm6628641ds6le688tcv",
+                    "type": "MINE",
+                    "location": "OE-PM-TR",
+                    "ownedBy": {
+                        "username": "Foonisher"
+                    }
+                },
+                {
+                    "id": "cknoxwxbq11283341ds6hfuxsar9",
+                    "type": "CHEMICAL_PLANT",
+                    "location": "OE-PM-TR",
+                    "ownedBy": {
+                        "username": "Foonisher"
+                    }
+                },
+                {
+                    "id": "cknoxwxq211284071ds6i1duoruk",
+                    "type": "FARM",
+                    "location": "OE-PM-TR",
+                    "ownedBy": {
+                        "username": "Foonisher"
+                    }
+                }
+            ]
         }
 }
 
@@ -233,6 +269,11 @@ class TestShipInit(unittest.TestCase):
 class TestShipMethods(unittest.TestCase):
     def setUp(self):
         self.ship = Ship(TOKEN, DOCKED_SHIP)
+        self.location = Location(TOKEN, LOCATIONS['OE-PM-TR'])
+        # Load the constant systems json file to stop API call
+        with open('./SpaceTraders/constants/systems.json', 'r') as infile:
+            systems = json.load(infile)
+        self.game = Game(TOKEN, systems)
         logging.disable(logging.INFO)
     
     def tearDown(self):
@@ -267,27 +308,26 @@ class TestShipMethods(unittest.TestCase):
      # Tests the 'update_location' method
     def test_update_location(self):
         # Update the cargo
-        self.ship.update_location(LOCATIONS['OE-PM-TR']['x'], LOCATIONS['OE-PM-TR']['y'], LOCATIONS['OE-PM-TR']['symbol'])
+        self.ship.update_location(self.location.x, self.location.y, self.location.symbol)
         # Check that the x co-ord updated
-        self.assertEqual(self.ship.x, LOCATIONS['OE-PM-TR']['x'], "X coordinate did not update correctly")
+        self.assertEqual(self.ship.x, self.location.x, "X coordinate did not update correctly")
         # Check that the y co-ord updated
-        self.assertEqual(self.ship.y, LOCATIONS['OE-PM-TR']['y'], "Y coordinate did not update correctly")
+        self.assertEqual(self.ship.y, self.location.y, "Y coordinate did not update correctly")
         # Check that the location symbol updated
-        self.assertEqual(self.ship.location, LOCATIONS['OE-PM-TR']['symbol'], "Location symbol did not update correctly")
+        self.assertEqual(self.ship.location, self.location.symbol, "Location symbol did not update correctly")
 
      # Tests the 'calculate_fuel_usage' method
      # This test is only checking that an integer is returned & an impossible value
      # As I don't even know what the exact formula is yet there is no point to test for exact values
     def test_calculate_fuel_usage(self):
-        self.assertIsInstance(self.ship.calculate_fuel_usage(LOCATIONS['OE-PM-TR']['x'], 
-                                                             LOCATIONS['OE-PM-TR']['y']), 
-                              int, "Fuel wasn't returned as an integer")
-        self.assertLess(self.ship.calculate_fuel_usage(LOCATIONS['OE-PM-TR']['x'], LOCATIONS['OE-PM-TR']['y']), 
-                        500, "An impossible value was returned for fuel amount")
+        fuel_usage = self.ship.calculate_fuel_usage(from_loc=self.game.locations[self.ship.location], to_loc=self.location)
+        self.assertIsInstance(fuel_usage, int, "Fuel wasn't returned as an integer")
+        self.assertLess(fuel_usage, 500, "An impossible value was returned for fuel amount")
+        self.assertEqual(fuel_usage, 4, "Incorrect calculation for fuel required")
     
     # Tests the distance calculator - See https://chortle.ccsu.edu/VectorLessons/vch04/vch04_4.html for the 2D vector length formula
     def test_calculate_distance(self):
-        self.assertEqual(self.ship.calculate_distance(LOCATIONS['OE-PM-TR']['x'], LOCATIONS['OE-PM-TR']['y']),4)
+        self.assertEqual(self.ship.calculate_distance(self.location.x, self.location.y),4)
 
     # Tests the get_closest_location method
     def test_get_closest_location(self):
@@ -299,7 +339,8 @@ class TestShipMethods(unittest.TestCase):
 
 class TestUserInit(unittest.TestCase):
     def test_init_user(self):
-        self.assertIsInstance(User(TOKEN, USER), User, "Falied to initiate a User object")
+        self.assertIsInstance(User(TOKEN, USER), User, "Failed to initiate a User object")
+        self.assertIsNotNone(User(TOKEN, USER).token, "Falied to initiate a User object, token not stored correctly")
 
 class TestUserMethods(unittest.TestCase):
     def setUp(self):
@@ -365,6 +406,23 @@ class TestGameInit(unittest.TestCase):
     def test_init_game(self):
         self.assertIsInstance(Game(TOKEN, self.systems), Game, "Failed to initiate a Game")
         
+class TestGameMethods(unittest.TestCase):
+    def setUp(self):
+        # Load the constant systems json file to stop API call
+        with open('./SpaceTraders/constants/systems.json', 'r') as infile:
+            systems = json.load(infile)
+        self.game = Game(TOKEN, systems)
+
+    def test_location(self):
+        self.assertIsInstance(self.game.location('OE-PM'), Location, "Didn't return a Location Object")
+
+    def test_load_locations(self):
+        locations = self.game.load_locations()
+        self.assertIsInstance(locations, dict, "Didn't return a dict object")
+        self.assertTrue(all(isinstance(locations[loc], Location) for loc in locations), "Not all values in Dict are Location objects")
+
+        
+
 if __name__ == '__main__':
     unittest.main()
   

@@ -5,11 +5,11 @@ import math
 import pandas as pd
 
 URL = "https://api.spacetraders.io/"
-# TOKEN = "b33e5ca9-b933-43c3-9249-9fe7ea525fc9"
-GAME = core.Game()
+TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
+GAME = core.Game(TOKEN)
 username = "JimHawkins"
 
-user = core.get_user(username)
+user = core.get_user(TOKEN, username)
 
 # Colours
 R  = '\033[31m' # red
@@ -25,7 +25,7 @@ def trading_run(ship, destination):
       ship = user.get_ship(ship.id)
     
     # Buy Best Good
-    what_to_buy = core.Market().what_should_I_buy(ship, destination)
+    what_to_buy = core.Market(GAME).what_should_I_buy(ship, destination)
     print(G+"Buying {} units of {} for {} with an expected profit of {}".\
       format(what_to_buy['units'], what_to_buy['symbol'], what_to_buy['total_cost'], what_to_buy['expected_profit'])+W)
     user.new_order(ship.id, what_to_buy['symbol'], what_to_buy['units'])
@@ -54,7 +54,7 @@ def find_optimum_trade_route(ship):
     ship_marketplace = GAME.locations[ship.location].marketplace()
 
     # Work out the best trade
-    potential_trades = [core.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
+    potential_trades = [core.Market(GAME).what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
     # Pair up loc with best trade
     pt_loc = list(zip(all_tracker_locs, potential_trades))
     # Return trade with Max expected profit
@@ -63,14 +63,18 @@ def find_optimum_trade_route(ship):
 def find_optimum_trade_routes(ship):
     # Get tracked markets and remove the current market
     all_tracker_locs = [ship.location for ship in user.get_ships(filter_by=[('manufacturer', 'Jackshaw')])]
-    # remove current market of ship
+    # remove current market of ship & the warp locations as they have no markets
     all_tracker_locs.remove(ship.location)
+    if 'XV-OE-2-91' in all_tracker_locs:
+      all_tracker_locs.remove('XV-OE-2-91')
+    if 'OE-XV-91-2' in all_tracker_locs:
+      all_tracker_locs.remove('OE-XV-91-2')
 
     # Get marketplace of ships current location - lessons calls to API
     ship_marketplace = GAME.locations[ship.location].marketplace()
 
     # Work out the best trades
-    return [core.Market().what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
+    return [core.Market(GAME).what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
 
 def any_dest_trading_run(ship):
   did_buy_goods = False
@@ -84,14 +88,14 @@ def any_dest_trading_run(ship):
     print("No Profitable Trades")
     # Calculate distance to closest location
     closet_location = ship.get_closest_location()
-    flight_path = {"to": closet_location[0].symbol, "fuel_required": ship.calculate_fuel_usage(closet_location[1])}
+    flight_path = {"to": closet_location[0].symbol, "fuel_required": ship.calculate_fuel_usage(GAME.locations[ship.location], distance=closet_location[1])}
   else:
     flight_path = max(trade_routes_profit, key=lambda tr: tr['expected_profit'])
     if flight_path['total_cost'] > user.credits:
       print("Not enough money to do trade")
       # Calculate distance to closest location
       closet_location = ship.get_closest_location()
-      flight_path = {"to": closet_location[0].symbol, "fuel_required": ship.calculate_fuel_usage(closet_location[1])}
+      flight_path = {"to": closet_location[0].symbol, "fuel_required": ship.calculate_fuel_usage(GAME.locations[ship.location], distance=closet_location[1])}
     else: 
       # Buy Good
       print(G+"Buying {} units of {} for {} with an expected profit of {}".\
@@ -136,12 +140,14 @@ def any_dest_trading_run(ship):
   flight = user.fly(ship.id, flight_path['to'], track=True)
   # Collate Data to Upload to Datebase
   to = GAME.locations[flight_path['to']]
+  flightReason = "Trade" if did_buy_goods else "Relocating"
   data = [[datetime.datetime.now(), ship.location, flight_path['to'],
           flight['distance'], flight_path['fuel_required'], flight['fuelConsumed'], 
-          flight['timeRemainingInSeconds'], ship.manufacturer, ship.speed, 
-          ship.maxCargo - ship.spaceAvailable, ship.plating, ship.weapons]]
+          flight['timeRemainingInSeconds'], ship.manufacturer, ship.type, ship.speed, 
+          ship.maxCargo - ship.spaceAvailable, ship.plating, ship.weapons, flightReason]]
   columns = ['time', 'from_loc', 'to_loc', 'distance', 'estimated_fuel_required', 'actual_fuel_required',
-              'time_taken', 'ship_manufactorer', 'speed', 'totalVolume', 'plating', 'weapons']
+              'time_taken', 'ship_manufactorer', 'ship_type', 'speed', 'totalVolume', 'plating', 'weapons', 
+              'flight_reason']
   db_handler.write_flight_path_to_db(pd.DataFrame(data, columns=columns))
   # Update Ship
   ship.update_location(GAME.location(flight_path['to']).x, GAME.location(flight_path['to']).y, flight_path['to'])

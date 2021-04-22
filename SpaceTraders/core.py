@@ -102,7 +102,7 @@ class Ship(object):
     self.y = new_y
     return True
 
-  def calculate_fuel_usage(self, *args):
+  def calculate_fuel_usage(self, from_loc, distance=None, to_loc=None):
     '''
     NOT A PERFECT RESULT
 
@@ -113,24 +113,24 @@ class Ship(object):
     OR
     Provide the x & y coordinates of the destination
     '''
-    calc_fuel = lambda d, extra: round((9/37) * d + 4 + extra)
+    calc_fuel = lambda d, p: round((d / 4) + 1 + p)
 
-    # Distance supplied
-    if len(args) == 1:
-      # Handle extra required for Class 2 Gravs
-      if self.type == "GR-MK-II":
-        return calc_fuel(args[0], 2)
-      if self.type == "GR-MK-III":
-        return calc_fuel(args[0], 4)
+    penalties = {
+      "MK-I": 2,
+      "MK-II": 3,
+      "MK-III": 4
+    }
 
-      return calc_fuel(args[0], 0)
-    if len(args) == 2:
-      # Handle extra required for Class 2 Gravs
-      if self.type == "GR-MK-II":
-        return calc_fuel(self.calculate_distance(args[0], args[1]), 2)
-      if self.type == "GR-MK-III":
-        return calc_fuel(self.calculate_distance(args[0], args[1]), 4)
-      return calc_fuel(self.calculate_distance(args[0], args[1]), 0)
+    # Calc distance if not supplied
+    if distance is None:
+      distance = self.calculate_distance(to_loc.x, to_loc.y)
+    
+    # Calc the penalty
+    penalty = penalties[self.kind] if from_loc.type == "PLANET" else 0
+    
+    return calc_fuel(distance, penalty)
+
+
     
   
   def calculate_distance(self, to_x, to_y):
@@ -190,15 +190,28 @@ class User:
   
   https://api.spacetraders.io/#api-users'''
   def __init__(self, token, *args, **kwargs):
-    self.token = token
+    # Handle if Token was incorrectly placed
+    if isinstance(token, str):
+      self.token = token
+    else:
+      raise TypeError("Incorrect data type for token")
+    # Set user Params from the arguments if user dict provided
     if len(args) == 1:
       self.username = args[0]['username']
       self.credits = args[0]['credits']
       self.ships = self.get_ships(ships=args[0]['ships'])
       self.loans = args[0]['loans']
+    # set user params if key word labels used
     else:
       for key in kwargs:
           setattr(self, key, kwargs[key])
+  
+  def __repr__(self):
+    return f"<User Object> "\
+           f"Username: {self.username}, "\
+           f"Credits: {self.credits}, "\
+           f"Ships: {len(self.ships)}, "\
+           f"Loans: {len(self.loans)}"
 
   def request_loan(self, type):
     '''
@@ -364,35 +377,33 @@ class Loan:
     self.type = type
   
 class Market:
-  def how_much_to_buy(self, unit_volume, hull_capacity):
-    '''Returns max amount of units that can fit into the ship'''
-    return math.trunc(hull_capacity / unit_volume)
-
-  def profit_margin(self, good_compare):
-    return good_compare['sellPricePerUnit_to'] - good_compare['purchasePricePerUnit_from']
+  def __init__(self, game):
+    self.game = game
 
   # Expect DataFrames to be passed to it
   def market_compare(self, from_market, to_market):
     """Returns a DataFrame with matching Goods and the profit made/lost if sold from the 'from_market' to the 'to_market'"""
     # Convert to DataFrames if String value of Symbol provided
     if isinstance(from_market, str):
-      from_market = pd.DataFrame(Game().location(from_market).marketplace())
+      from_market = pd.DataFrame(self.game.location(from_market).marketplace())
     if isinstance(to_market, str):
-      to_market = pd.DataFrame(Game().location(to_market).marketplace())
+      to_market = pd.DataFrame(self.game.location(to_market).marketplace())
     # Do an Inner Join of the Markets on available goods (symbols)
     market_compare = from_market.join(to_market.set_index('symbol'), on="symbol", how="inner", lsuffix="_from", rsuffix="_to")
     # Get the Profit Margins - factoring in volume of the good
-    market_compare['profit'] = market_compare.apply(self.profit_margin, axis=1)
-    market_compare['profit_per_volume'] = market_compare.apply(lambda x: x['profit'] / x['volumePerUnit_from'], axis=1)
+    profit_margin = lambda x: x.sellPricePerUnit_to - x.purchasePricePerUnit_from
+    profit_margin_per_volume = lambda x: profit_margin(x) / x.volumePerUnit_from
+    market_compare['profit'] = market_compare.apply(profit_margin, axis=1)
+    market_compare['profit_per_volume'] = market_compare.apply(profit_margin_per_volume, axis=1)
     return market_compare
   
   def best_buy(self, from_market, to_market):
     """Returns a JSON object with the best Good to buy at the 'from_destination' if wanting to sell goods at the 'to_destination'"""
     # Convert to Location and get market if String value of Symbol provided
     if isinstance(from_market, str):
-      from_market = pd.DataFrame(Game().location(from_market).marketplace())
+      from_market = pd.DataFrame(self.game.location(from_market).marketplace())
     if isinstance(to_market, str):
-      to_market = pd.DataFrame(Game().location(to_market).marketplace())
+      to_market = pd.DataFrame(self.game.location(to_market).marketplace())
     # Get the market comparison
     market_comparison = self.market_compare(from_market, to_market)
     # Get the record for the best good - factor in the profit per unit volume
@@ -424,7 +435,7 @@ class Market:
           "fuel_required": The fuel required to make the trip
         }
     """
-    loc = Game().locations[destination]
+    loc = self.game.locations[destination]
     # Get the best good to buy
     if ship_marketplace is None:
       logging.debug("Getting the best goods to trade for from {0} to {1} - Ships Marketplace not supplied".format(ship.location, loc.symbol))
@@ -433,10 +444,10 @@ class Market:
       logging.debug("Getting the best goods to trade for from {0} to {1} - Ships Marketplace supplied".format(ship.location, loc.symbol))
       best_good = self.best_buy(pd.DataFrame(ship_marketplace), loc.symbol)
     # How much fuel would be required
-    fuel_required = ship.calculate_fuel_usage(loc.x, loc.y)
+    fuel_required = ship.calculate_fuel_usage(self.game.locations[ship.location], to_loc=loc)
     logging.debug("Estimated fuel required from {0} to {1} is: {2}".format(ship.location, loc.symbol, fuel_required))
     # Work out many units to buy
-    units_to_buy = self.how_much_to_buy(best_good['volume'], ship.maxCargo - fuel_required)
+    units_to_buy = math.trunc((ship.maxCargo - fuel_required) / best_good['volume'])
     logging.debug("Given fuel requirement of: {0}, max cargo of: {1}, good volume of: {2}, {3} units should be purchased.".format(fuel_required, ship.maxCargo, best_good['volume'], units_to_buy))
     trade_details = {"symbol": best_good['symbol'], 
                      "units": units_to_buy, 
@@ -462,6 +473,11 @@ class Game:
     self.token = token
     self.systems = self.load_sytems() if systems is None else systems
     self.locations = self.load_locations()
+
+  def __repr__(self):
+    return f"<Game Object> "\
+           f"Token: {self.token}, "\
+           f"Game Status: {self.status()['status']}"
   
   # See if the game is currently up
   def status(self):
@@ -483,18 +499,7 @@ class Game:
     **CALL TO API**
     """
     return generic_get_call("game/ships", params={"class":kind}, token=self.token)['ships']
-
-  def calculate_distance(from_x, from_y, to_x, to_y):
-    return round(math.sqrt(math.pow((to_x - from_x),2) + math.pow((to_y - from_y),2)))
   
-  def calculate_fuel_usage(self, distance):
-    '''
-    NOT A PERFECT RESULT
-
-    Based on the distance provided to a location works out the estimated fuel required to fly there
-    '''
-    return round((9/37) * distance + 2 + 2)
-
   def load_sytems(self):
     '''
     This will simply load the complete JSON file with no further transformations
@@ -507,20 +512,37 @@ class Game:
     This will return a dict of Location objects for all the locations across both systems. The key is the locations symbol.
     '''
     # Return each location as an object with it's symbol as the key
-    return {loc['symbol']: Location(self.token, **loc) for sys in self.systems for loc in sys['locations']}
+    return {loc['symbol']: Location(self.token, loc) for sys in self.systems for loc in sys['locations']}
 
 
 class Location:
-  def __init__(self, token, **kwargs):
-      self.token = token
-      self.__dict__.update(kwargs)
+  def __init__(self, token, *args, **kwargs):
+      if isinstance(token, str):
+        self.token = token
+      else:
+        raise TypeError("Incorrect data type for token")
+      if len(args) == 1:
+        self.symbol = args[0]['symbol']
+        self.type = args[0]['type']
+        self.name = args[0]['name']
+        self.x = args[0]['x']
+        self.y = args[0]['y']
+        self.allowsConstruction = args[0]['allowsConstruction']
+        self.ships = args[0]['ships']
+        self.structures = args[0]['structures']
+      if len(args) > 1:
+        for key in kwargs:
+          setattr(self, key, kwargs[key])
   
   def marketplace(self):
     endpoint = "game/locations/{0}/marketplace".format(self.symbol)
     return generic_get_call(endpoint, token=self.token)['location']['marketplace']
   
   def __repr__(self):
-    return "Symbol: " + self.symbol + ", Name: " + self.name
+    return f"<Location Object> Symbol: {self.symbol}, Type: {self.type}, "\
+           f"Name: {self.name}, X: {self.x}, Y: {self.y}, "\
+           f"Allows Construction: {self.allowsConstruction}, "\
+           f"Ships: {len(self.ships)}, Structures: {len(self.structures)}"
 
   def __str__(self):
     return "Symbol: " + self.symbol + ", Name: " + self.name
@@ -539,13 +561,19 @@ def generic_get_call(endpoint, params=None, token=None):
         return r.json()
     else:
         logging.warning("Something went wrong when hitting: {0} with parameters: {1}".format(URL+endpoint, params))
-        logging.warning("Error: " + str(r.json()))
-        # Handle Throttling errors by pausing and trying again
-        logging.info("Pausing to wait for throttle")
-        for n in track(range(10), description="Pausing..."):
-          time.sleep(1)
-        return generic_get_call(endpoint, params)
-
+        error = r.json()
+        code = error['error']['code']
+        message = error['error']['message']
+        logging.warning("Error: " + str(error))        
+        if str(code) == '42901':
+          # Handle Throttling errors by pausing and trying again
+          logging.info("Throttle limit was reached. Pausing to wait for throttle")
+          for n in track(range(10), description="Pausing..."):
+            time.sleep(1)
+          return generic_get_call(endpoint, params, token)
+        else:
+          logging.exception()
+          logging.fatal(f"Something broke the script. Code: {code} Error Message: {message} ")
 
 # Generic call to API
 def generic_post_call(endpoint, params=None, token=None):
@@ -555,17 +583,24 @@ def generic_post_call(endpoint, params=None, token=None):
         return r.json()
     else:
         logging.warning("Something went wrong when hitting: {0} with parameters: {1}".format(URL+endpoint, params))
-        logging.warning("Error: " + str(r.json()))
-        # Handle Throttling errors by pausing and trying again
-        logging.info("Pausing to wait for throttle")
-        for n in track(range(10), description="Pausing..."):
-          time.sleep(1)
-        return generic_post_call(endpoint, params)
+        error = r.json()
+        code = error['error']['code']
+        message = error['error']['message']
+        logging.warning("Error: " + str(error))
+        if str(code) == '42901':
+          # Handle Throttling errors by pausing and trying again
+          logging.info("Throttle limit was reached. Pausing to wait for throttle")
+          for n in track(range(10), description="Pausing..."):
+            time.sleep(1)
+          return generic_get_call(endpoint, params, token)
+        else:
+          logging.exception()
+          logging.fatal(f"Something broke the script. Code: {code} Error Message: {message} ")
 
-def get_user(username, token):
+def get_user(token, username):
   '''Get the user and return a User Object'''
   # Make a call to the API to retrive the user data
-  return User(generic_get_call("users/" + username, token=token)['user'])
+  return User(token, generic_get_call("users/" + username, token=token)['user'])
 
 if __name__ == "__main__":
     # Load Constants

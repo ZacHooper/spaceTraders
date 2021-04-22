@@ -4,6 +4,8 @@
   ## Todo
   ### Core
   - Better Exception handling
+  - Create a constant filter method
+    - Can handle equals, not equals, etc - likely add a third element to the tuple. 
   
   ### General
   - Track Total Credits
