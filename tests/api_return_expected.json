@@ -1091,5 +1091,26 @@
           "terminatedAt": null,
           "timeRemainingInSeconds": 365
         }
-      }
+    },
+    "loans_available": {
+        "loans": [
+            {
+                "amount": 200000,
+                "collateralRequired": false,
+                "rate": 40,
+                "termInDays": 2,
+                "type": "STARTUP"
+            }
+        ]
+    },
+    "new_loan": {
+        "credits": 200000,
+        "loan": {
+            "due": "2021-04-21T07:01:42.868Z",
+            "id": "ckno92mhi0049iiopc2kmylkz",
+            "repaymentAmount": 280000,
+            "status": "CURRENT",
+            "type": "STARTUP"
+        }
+    }
 }

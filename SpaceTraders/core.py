@@ -361,8 +361,7 @@ class User:
     # Don't wont the visual timer in the console
     else:
       # Wait for the length of the flight
-      time.sleep(flight['timeRemainingInSeconds'] + 1
-      5)
+      time.sleep(flight['timeRemainingInSeconds'] + 15)
       logging.info("Ship {0} has landed at {1}".format(shipId, destination))
       return flight
 

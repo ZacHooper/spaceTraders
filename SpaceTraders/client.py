@@ -175,14 +175,63 @@ class Game (Client):
         return res.json() if res else False
 
 class Loans (Client):
-    pass
     # Get available loans
+    def get_loans_available(self):
+        """Gets the list of loans available
 
-    # Get your loans
+        Returns:
+            dict: dict containing a list of loans
+        """
+        endpoint = f"game/loans"
+        warning_log = F"Unable to retrieve the loans available"
+        logging.info(f"Retrieving the loans currently available")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
+
+    # Get user's loans
+    def get_user_loans(self):
+        """Gets the list of loans available
+
+        Returns:
+            dict: dict containing a list of loans
+        """
+        endpoint = f"users/{self.username}/loans"
+        warning_log = F"Unable to retrieve the loans of the user"
+        logging.info(f"Retrieving the loans of the user: {self.username}")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Pay off loan
+    def pay_off_loan(self, loanId):
+        """Pays of the loan with ID provided
+
+        Args:
+            loanId (str): ID of the loan to pay off
+
+        Returns:
+            dict: Success or fail message
+        """
+        endpoint = f"users/{self.username}/loans/{loanId}"
+        warning_log = F"Unable to pay off loan: {loanId}"
+        logging.info(f"Paying off loan")
+        res = self.generic_api_call("PUT", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Request new loan
+    def request_loan(self, type):
+        """Request a new loan
+
+        Args:
+            type (str): The type of loan - e.g. STARTUP
+
+        Returns:
+            dict: The loan taken
+        """
+        endpoint = f"users/{self.username}/loans"
+        warning_log = F"Unable to take loan of type: {type}"
+        logging.info(f"Requesting {type} loan")
+        res = self.generic_api_call("POST", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
 class Locations (Client):
     pass

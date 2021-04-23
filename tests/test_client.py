@@ -108,6 +108,32 @@ class TestGameMethods(unittest.TestCase):
     def test_get_game_status(self):
         self.assertIsInstance(self.game.get_game_status(), dict, "API did not return dict as expected")
 
+class TestLoansInit(unittest.TestCase):
+    def test_game_init(self):
+        self.assertIsInstance(Loans("JimHawkins", "12345"), Loans, "Failed to initiate the Loans Class")
+        self.assertEqual(Loans("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(Loans("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestLoansMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.loans = Loans(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_get_loans_available(self):
+        self.assertIsInstance(self.loans.get_loans_available(), dict, "API did not return dict as expected")
+
+    def test_get_user_loans(self):
+        self.assertIsInstance(self.loans.get_user_loans(), dict, "API did not return dict as expected")
+
+    def test_pay_off_loan(self):
+        self.assertEqual(self.loans.pay_off_loan("asdfasdf"), False, "API did not fail as expected")
+
+    def test_request_loan(self):
+        self.assertEqual(self.loans.pay_off_loan("asdfasdf"), False, "API did not fail as expected")
+
 class TestGetUserToken(unittest.TestCase):
     def test_get_user_token(self):
         self.assertIsNone(get_user_token("JimHawkins"), "Failed to handle a username that already exists")
