@@ -68,6 +68,12 @@ class TestFlightPlanMethods(unittest.TestCase):
     def test_submit_flight_plan_fail(self):
         self.assertEqual(self.fp.new_flight_plan("12345", "OE-PM-TR"), False, "API call didn't fail when expected to")
 
+    def test_get_active_flight_plans_fail(self):
+        self.assertEqual(self.fp.get_active_flight_plans("OEV"), False, "API call didn't fail when expected to")
+
+    def test_get_active_flight_plan(self):
+        self.assertEqual(self.fp.get_flight_plan("456789"), False, "API call didn't fail when expected to")
+
 class TestPurchaseOrderInit(unittest.TestCase):
     def test_purchase_order_init(self):
         self.assertIsInstance(PurchaseOrders("JimHawkins", "12345"), PurchaseOrders, "Failed to initiate the PurchaseOrders Class")
@@ -84,3 +90,25 @@ class TestPurchaseOrderMethods(unittest.TestCase):
 
     def test_submit_flight_plan_fail(self):
         self.assertEqual(self.po.new_purchase_order("12345", "FUEL", 5), False, "API call didn't fail when expected to")
+
+class TestGameInit(unittest.TestCase):
+    def test_game_init(self):
+        self.assertIsInstance(Game("JimHawkins", "12345"), Game, "Failed to initiate the Game Class")
+        self.assertEqual(Game("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(Game("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestGameMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.game = Game(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_get_game_status(self):
+        self.assertIsInstance(self.game.get_game_status(), dict, "API did not return dict as expected")
+
+class TestGetUserToken(unittest.TestCase):
+    def test_get_user_token(self):
+        self.assertIsNone(get_user_token("JimHawkins"), "Failed to handle a username that already exists")
+

@@ -361,7 +361,8 @@ class User:
     # Don't wont the visual timer in the console
     else:
       # Wait for the length of the flight
-      time.sleep(flight['timeRemainingInSeconds'] + 5)
+      time.sleep(flight['timeRemainingInSeconds'] + 1
+      5)
       logging.info("Ship {0} has landed at {1}".format(shipId, destination))
       return flight
 
@@ -591,6 +592,11 @@ def generic_post_call(endpoint, params=None, token=None):
           time.sleep(10)
           # for n in track(range(10), description="Pausing..."):
           #   time.sleep(1)
+          return generic_post_call(endpoint, params, token)
+        if code == 409 or code == 500:
+          # Handle duplicate server call error by pausing and trying again
+          logging.warning("Throttle limit was reached. Pausing to wait for throttle")
+          time.sleep(10)
           return generic_post_call(endpoint, params, token)
         else:
           logging.exception(f"Something broke the script. Code: {code} Error Message: {message} ")

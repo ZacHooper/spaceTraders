@@ -193,5 +193,903 @@
             "plating": 20,
             "weapons": 5
         }
-    }
+    },
+    "new_user": {
+        "token": "3cf8fa76-9573-4cd1-9fce-c999f2420b15",
+        "user": {
+            "username": "JH_Test1",
+            "credits": 0,
+            "ships": [],
+            "loans": []
+        }
+    },
+    "get_systems": {
+        "flightPlans": [
+            {
+                "id": "cknuahv4z6118161cs68yksshnh",
+                "shipId": "cknsr525m31742315s6fxmiwhvd",
+                "createdAt": "2021-04-23T12:28:10.595Z",
+                "arrivesAt": "2021-04-23T12:34:52.574Z",
+                "destination": "OE-PM",
+                "departure": "OE-XV-91-2",
+                "username": "ZERG",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuakzyx6595321cs6ipbm3hhb",
+                "shipId": "cknu1fbz914198091cs60zgzztj0",
+                "createdAt": "2021-04-23T12:30:36.825Z",
+                "arrivesAt": "2021-04-23T12:34:24.804Z",
+                "destination": "OE-BO",
+                "departure": "OE-KO",
+                "username": "umuero",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknual80b6628461cs6wi8qra3m",
+                "shipId": "cknqfw170151086115s6tegkpexv",
+                "createdAt": "2021-04-23T12:30:47.244Z",
+                "arrivesAt": "2021-04-23T12:34:26.227Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknualpzm6696751cs6i39umwl0",
+                "shipId": "cknqfi0tk134732115s659vz0gqh",
+                "createdAt": "2021-04-23T12:31:10.547Z",
+                "arrivesAt": "2021-04-23T12:34:49.500Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknualunt6719111cs6ei6vwi3i",
+                "shipId": "cknp2yz4g12334711ds6d45233gu",
+                "createdAt": "2021-04-23T12:31:16.602Z",
+                "arrivesAt": "2021-04-23T12:34:55.577Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuangv56977781cs60ma3m25m",
+                "shipId": "cknqfzbem154717315s6mfvz4h7y",
+                "createdAt": "2021-04-23T12:32:32.033Z",
+                "arrivesAt": "2021-04-23T12:36:11.015Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuanswp7025421cs61vyxwxbj",
+                "shipId": "cknp9f6xm10086011bs6xvegob8o",
+                "createdAt": "2021-04-23T12:32:47.641Z",
+                "arrivesAt": "2021-04-23T12:34:22.624Z",
+                "destination": "OE-PM",
+                "departure": "OE-KO",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuao8a37092681cs68sa2qxpy",
+                "shipId": "cknqey2po113089715s671mxkvtv",
+                "createdAt": "2021-04-23T12:33:07.563Z",
+                "arrivesAt": "2021-04-23T12:34:15.542Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuao8kq7093411cs6rnpyzxfy",
+                "shipId": "cknu40iju8338871cs6qr5ixgzf",
+                "createdAt": "2021-04-23T12:33:07.946Z",
+                "arrivesAt": "2021-04-23T12:34:15.928Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuao9v27098361cs6fwf8gefi",
+                "shipId": "cknpx79z693923015s6hvkks2ub",
+                "createdAt": "2021-04-23T12:33:09.615Z",
+                "arrivesAt": "2021-04-23T12:34:17.599Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaobbe7104331cs682wc1urq",
+                "shipId": "cknu3h8er5609501cs6lekohjxk",
+                "createdAt": "2021-04-23T12:33:11.498Z",
+                "arrivesAt": "2021-04-23T12:34:19.479Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaobth7106161cs6e37zu337",
+                "shipId": "cknoojk051608201ds6r3lksvav",
+                "createdAt": "2021-04-23T12:33:12.149Z",
+                "arrivesAt": "2021-04-23T12:34:20.128Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaodyw7115361cs6x2gzjjy5",
+                "shipId": "cknu3aorx4890821cs6no9ze3rj",
+                "createdAt": "2021-04-23T12:33:14.937Z",
+                "arrivesAt": "2021-04-23T12:34:22.918Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaog5a7125201cs673dinsb4",
+                "shipId": "cknonbj1o16120561ds6d0xbg83f",
+                "createdAt": "2021-04-23T12:33:17.759Z",
+                "arrivesAt": "2021-04-23T12:34:25.741Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaogyh7129131cs6yccqsl42",
+                "shipId": "cknp3l28m14500381ds6oaeoe7qu",
+                "createdAt": "2021-04-23T12:33:18.810Z",
+                "arrivesAt": "2021-04-23T12:36:57.792Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuaoifj7134491cs62oqlzg3o",
+                "shipId": "cknu3v4v87395371cs6pvy08eco",
+                "createdAt": "2021-04-23T12:33:20.720Z",
+                "arrivesAt": "2021-04-23T12:34:28.688Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaoii87135131cs6960rkbrz",
+                "shipId": "cknokv6bi10261541ds6t6tfbeoy",
+                "createdAt": "2021-04-23T12:33:20.816Z",
+                "arrivesAt": "2021-04-23T12:34:28.798Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaok2n7142061cs6777hqgxs",
+                "shipId": "cknod1lgp1195141ds6w7wlfqt5",
+                "createdAt": "2021-04-23T12:33:22.847Z",
+                "arrivesAt": "2021-04-23T12:34:30.819Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "ZERG",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaon4w7156301cs6kkx3g4wj",
+                "shipId": "cknu43zfd9001011cs6kkkfu4tf",
+                "createdAt": "2021-04-23T12:33:26.816Z",
+                "arrivesAt": "2021-04-23T12:34:34.783Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaoqel7171731cs647o8gv0d",
+                "shipId": "cknpx7fb494110915s6igvhzq63",
+                "createdAt": "2021-04-23T12:33:31.054Z",
+                "arrivesAt": "2021-04-23T12:34:39.016Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaosez7179161cs6iuxejn1b",
+                "shipId": "cknoe2cjl1610831ds6eliyd57g",
+                "createdAt": "2021-04-23T12:33:33.659Z",
+                "arrivesAt": "2021-04-23T12:34:41.598Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "ZERG",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaotxi7184691cs6zgl8icqu",
+                "shipId": "cknpj80no2837161bs66w230o1e",
+                "createdAt": "2021-04-23T12:33:35.622Z",
+                "arrivesAt": "2021-04-23T12:34:37.596Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuam16s6752811cs64cnbxuoa",
+                "shipId": "ckns6f0vj6131615s6144vlzxl",
+                "createdAt": "2021-04-23T12:31:25.060Z",
+                "arrivesAt": "2021-04-23T12:35:13.042Z",
+                "destination": "OE-KO",
+                "departure": "OE-BO",
+                "username": "JimHawkins",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuamdk56807991cs62wv605fu",
+                "shipId": "cknpsqbnv4506691bs6xl66uihw",
+                "createdAt": "2021-04-23T12:31:41.094Z",
+                "arrivesAt": "2021-04-23T12:35:20.074Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuamrqi6876111cs64m6sftrr",
+                "shipId": "cknold6b111508631ds6rxah6kzg",
+                "createdAt": "2021-04-23T12:31:59.467Z",
+                "arrivesAt": "2021-04-23T12:35:15.449Z",
+                "destination": "OE-CR",
+                "departure": "OE-KO",
+                "username": "Foonisher",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuanyel7047711cs6x97yaubb",
+                "shipId": "cknp9fdla10098791bs6nf7kri0e",
+                "createdAt": "2021-04-23T12:32:54.765Z",
+                "arrivesAt": "2021-04-23T12:34:29.744Z",
+                "destination": "OE-PM",
+                "departure": "OE-KO",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuao1uv7064241cs62gg5cr6c",
+                "shipId": "cknsr3pv729576015s6arkrqkzi",
+                "createdAt": "2021-04-23T12:32:59.240Z",
+                "arrivesAt": "2021-04-23T12:35:24.715Z",
+                "destination": "OE-XV-91-2",
+                "departure": "OE-PM",
+                "username": "ZERG",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuap70p7240231cs6x4ttx60u",
+                "shipId": "cknpknkgm8272201bs64gbh71ha",
+                "createdAt": "2021-04-23T12:33:52.585Z",
+                "arrivesAt": "2021-04-23T12:34:54.564Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuap8da7244771cs68jkl9ene",
+                "shipId": "cknp3ii5514258491ds6z4djyyk5",
+                "createdAt": "2021-04-23T12:33:54.335Z",
+                "arrivesAt": "2021-04-23T12:37:33.316Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuapaef7253931cs6cpj19it2",
+                "shipId": "cknp3mchc14641301ds6bwbitt6n",
+                "createdAt": "2021-04-23T12:33:56.967Z",
+                "arrivesAt": "2021-04-23T12:37:35.921Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuam1dy6754081cs6y75s5dr4",
+                "shipId": "cknqfqo3c144906415s61zqz6eot",
+                "createdAt": "2021-04-23T12:31:25.318Z",
+                "arrivesAt": "2021-04-23T12:35:04.302Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuam2546758351cs63ev1s8ps",
+                "shipId": "cknp2ssyl11766271ds6639jvyeh",
+                "createdAt": "2021-04-23T12:31:26.297Z",
+                "arrivesAt": "2021-04-23T12:35:05.279Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuam8u96790711cs6k6wznjk9",
+                "shipId": "cknqfwggm151599915s6bairc7jg",
+                "createdAt": "2021-04-23T12:31:34.978Z",
+                "arrivesAt": "2021-04-23T12:35:13.957Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuamj2a6830231cs69yuiisob",
+                "shipId": "cknqezbd2114423815s6dt2l7z0p",
+                "createdAt": "2021-04-23T12:31:48.226Z",
+                "arrivesAt": "2021-04-23T12:35:27.210Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuan4806925451cs6w2i4xwlv",
+                "shipId": "cknt5wddg25615415s6np0pwo97",
+                "createdAt": "2021-04-23T12:32:15.648Z",
+                "arrivesAt": "2021-04-23T12:37:45.621Z",
+                "destination": "OE-NY",
+                "departure": "OE-KO",
+                "username": "umuero",
+                "shipType": "GR-MK-II"
+            },
+            {
+                "id": "cknuam4xn6771551cs6745oafmp",
+                "shipId": "cknp2sgz611733331ds67cw0vgvu",
+                "createdAt": "2021-04-23T12:31:29.915Z",
+                "arrivesAt": "2021-04-23T12:35:08.877Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuamrkz6874821cs6mt93c9vw",
+                "shipId": "ckns6euib5837215s6tx8ahm0u",
+                "createdAt": "2021-04-23T12:31:59.267Z",
+                "arrivesAt": "2021-04-23T12:35:47.248Z",
+                "destination": "OE-KO",
+                "departure": "OE-BO",
+                "username": "JimHawkins",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuanhny6980571cs6n4elj41x",
+                "shipId": "cknqfxn54152934915s6mfq0oye9",
+                "createdAt": "2021-04-23T12:32:33.071Z",
+                "arrivesAt": "2021-04-23T12:36:12.054Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-NY",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuanm0z6996551cs6qcdg61oj",
+                "shipId": "cknp3c8m213646761ds6ujvzo9f4",
+                "createdAt": "2021-04-23T12:32:38.724Z",
+                "arrivesAt": "2021-04-23T12:36:17.706Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuao6b17083801cs6vxb6cnr0",
+                "shipId": "cknpx7isr94228315s6n9kl4ht9",
+                "createdAt": "2021-04-23T12:33:05.005Z",
+                "arrivesAt": "2021-04-23T12:34:12.987Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaoam47100911cs6of1td3zt",
+                "shipId": "cknu4q23u13415751cs6wqlvys54",
+                "createdAt": "2021-04-23T12:33:10.588Z",
+                "arrivesAt": "2021-04-23T12:34:18.565Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaoen57118581cs6ovgms4y6",
+                "shipId": "cknphf6nx14922771bs654qeu1ms",
+                "createdAt": "2021-04-23T12:33:15.810Z",
+                "arrivesAt": "2021-04-23T12:35:01.770Z",
+                "destination": "OE-NY",
+                "departure": "OE-PM",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuaof3r7120361cs6qdbxppos",
+                "shipId": "cknoe2awh1609111ds6166xave4",
+                "createdAt": "2021-04-23T12:33:16.408Z",
+                "arrivesAt": "2021-04-23T12:34:24.369Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "ZERG",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaojxj7141211cs64k1ddzs5",
+                "shipId": "cknpi54nj16574481bs6y2ufgtlu",
+                "createdAt": "2021-04-23T12:33:22.664Z",
+                "arrivesAt": "2021-04-23T12:34:24.646Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuaooix7163281cs645yj4ki7",
+                "shipId": "cknu4px0s13385771cs6zi113diz",
+                "createdAt": "2021-04-23T12:33:28.617Z",
+                "arrivesAt": "2021-04-23T12:34:36.595Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaoot27164611cs6d2co2rta",
+                "shipId": "cknpx7eer94081115s6s2xvqf74",
+                "createdAt": "2021-04-23T12:33:28.983Z",
+                "arrivesAt": "2021-04-23T12:34:36.963Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaoqv57173461cs6b3dvlay3",
+                "shipId": "cknu32u0s4058551cs681bva02o",
+                "createdAt": "2021-04-23T12:33:31.649Z",
+                "arrivesAt": "2021-04-23T12:34:39.632Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuao4ix7076121cs69qfm79lx",
+                "shipId": "cknphi0kz15088161bs6e9izwoyu",
+                "createdAt": "2021-04-23T12:33:02.697Z",
+                "arrivesAt": "2021-04-23T12:34:48.676Z",
+                "destination": "OE-NY",
+                "departure": "OE-PM",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuao5g07079421cs6fcqpdy6r",
+                "shipId": "cknu1fwe914270631cs6zdqi306s",
+                "createdAt": "2021-04-23T12:33:03.888Z",
+                "arrivesAt": "2021-04-23T12:35:23.365Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "umuero",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuao60p7083161cs6ct9ls53p",
+                "shipId": "cknu4e7oa11155441cs6qd6eric5",
+                "createdAt": "2021-04-23T12:33:04.633Z",
+                "arrivesAt": "2021-04-23T12:34:12.589Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuao9647095831cs6opdhqekb",
+                "shipId": "cknphh5wc15047681bs6t1gnzeen",
+                "createdAt": "2021-04-23T12:33:08.716Z",
+                "arrivesAt": "2021-04-23T12:34:54.597Z",
+                "destination": "OE-NY",
+                "departure": "OE-PM",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuaode57113181cs6u0nit4g7",
+                "shipId": "cknonly1416645451ds60g7i63ga",
+                "createdAt": "2021-04-23T12:33:14.190Z",
+                "arrivesAt": "2021-04-23T12:34:22.172Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaok537143021cs6hcoii5bs",
+                "shipId": "cknonv75y357691ds6zccubpng",
+                "createdAt": "2021-04-23T12:33:22.936Z",
+                "arrivesAt": "2021-04-23T12:34:30.893Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaolnx7148921cs65zj1e0lv",
+                "shipId": "cknon5wlp15793871ds61gjhqd3q",
+                "createdAt": "2021-04-23T12:33:24.909Z",
+                "arrivesAt": "2021-04-23T12:34:32.886Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaolwx7150171cs643nfovqo",
+                "shipId": "cknocoq6o1049591ds6kdfvqlkx",
+                "createdAt": "2021-04-23T12:33:25.233Z",
+                "arrivesAt": "2021-04-23T12:34:33.211Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "ZERG",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaon8i7157111cs6lnefdj29",
+                "shipId": "cknqexrvq112752215s6f1elcaw1",
+                "createdAt": "2021-04-23T12:33:26.947Z",
+                "arrivesAt": "2021-04-23T12:34:34.929Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaonsn7159981cs6a10bjaoh",
+                "shipId": "cknu3h2yu5589651cs6x316t2q5",
+                "createdAt": "2021-04-23T12:33:27.672Z",
+                "arrivesAt": "2021-04-23T12:34:35.636Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaookn7163791cs6guuj0418",
+                "shipId": "cknpij65a738831bs60njwi0tv",
+                "createdAt": "2021-04-23T12:33:28.680Z",
+                "arrivesAt": "2021-04-23T12:34:30.653Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuaopkn7166951cs6hu5q4fy5",
+                "shipId": "cknu25ca51128661cs6o392z0x8",
+                "createdAt": "2021-04-23T12:33:29.975Z",
+                "arrivesAt": "2021-04-23T12:34:37.950Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaot2w7180671cs6mcip8399",
+                "shipId": "cknoe8qq51682341ds6hm7dfjx8",
+                "createdAt": "2021-04-23T12:33:34.521Z",
+                "arrivesAt": "2021-04-23T12:34:42.503Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "ZERG",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaotyu7185021cs6319mqx6j",
+                "shipId": "cknqexq5p112710115s60tvhztul",
+                "createdAt": "2021-04-23T12:33:35.670Z",
+                "arrivesAt": "2021-04-23T12:34:43.633Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaox387197751cs6hi73j5on",
+                "shipId": "cknpx7br693984715s6i8bw0y2m",
+                "createdAt": "2021-04-23T12:33:39.717Z",
+                "arrivesAt": "2021-04-23T12:34:47.684Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuap3y67228211cs6i1zqjabu",
+                "shipId": "cknr0wynw51684015s6wvq7q1th",
+                "createdAt": "2021-04-23T12:33:48.606Z",
+                "arrivesAt": "2021-04-23T12:37:36.586Z",
+                "destination": "OE-KO",
+                "departure": "OE-BO",
+                "username": "JimHawkins",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuap4xi7232201cs6i4h02pxk",
+                "shipId": "cknsn1v19140193615s6rkpfd4ec",
+                "createdAt": "2021-04-23T12:33:49.878Z",
+                "arrivesAt": "2021-04-23T12:40:33.834Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-BO",
+                "username": "umuero",
+                "shipType": "GR-MK-II"
+            },
+            {
+                "id": "cknuap76k7241151cs6nke2db0f",
+                "shipId": "cknqexr07112730415s6rsbtivgm",
+                "createdAt": "2021-04-23T12:33:52.796Z",
+                "arrivesAt": "2021-04-23T12:35:00.777Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuap98n7248801cs6eiz1xg8a",
+                "shipId": "cknoiq04w5850301ds6me94fs30",
+                "createdAt": "2021-04-23T12:33:55.464Z",
+                "arrivesAt": "2021-04-23T12:35:09.435Z",
+                "destination": "OE-UC",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "GR-MK-II"
+            },
+            {
+                "id": "cknuapb7z7258361cs6158t7jqv",
+                "shipId": "cknu25gio1136241cs6xntzhl16",
+                "createdAt": "2021-04-23T12:33:58.031Z",
+                "arrivesAt": "2021-04-23T12:35:06.003Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaph157284211cs6xyyuc5q2",
+                "shipId": "cknplui2j13235761bs62h1smm6o",
+                "createdAt": "2021-04-23T12:34:05.562Z",
+                "arrivesAt": "2021-04-23T12:35:51.525Z",
+                "destination": "OE-NY",
+                "departure": "OE-PM",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuaph867285331cs6yafa5u8r",
+                "shipId": "cknu25kpo1144151cs6zgtm0lt8",
+                "createdAt": "2021-04-23T12:34:05.815Z",
+                "arrivesAt": "2021-04-23T12:35:13.796Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaphf77286101cs61nghowvr",
+                "shipId": "cknqextmg112796515s6ymru5t2m",
+                "createdAt": "2021-04-23T12:34:06.067Z",
+                "arrivesAt": "2021-04-23T12:35:14.050Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaosds7178741cs664d9w8hj",
+                "shipId": "cknp2s1u911686061ds61zsd8mxp",
+                "createdAt": "2021-04-23T12:33:33.616Z",
+                "arrivesAt": "2021-04-23T12:37:12.582Z",
+                "destination": "OE-NY",
+                "departure": "OE-UC-AD",
+                "username": "Foonisher",
+                "shipType": "ZA-MK-III"
+            },
+            {
+                "id": "cknuaowcc7195721cs6acvyh0vw",
+                "shipId": "cknu258351111861cs63xx87s2o",
+                "createdAt": "2021-04-23T12:33:38.748Z",
+                "arrivesAt": "2021-04-23T12:34:46.701Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuaoxxm7202001cs6s280maj9",
+                "shipId": "cknu47mov9780421cs6i6qa1l3i",
+                "createdAt": "2021-04-23T12:33:40.810Z",
+                "arrivesAt": "2021-04-23T12:34:48.749Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuap2nu7221601cs6d8g0251m",
+                "shipId": "cknpkm9e48115661bs6ci440r1q",
+                "createdAt": "2021-04-23T12:33:46.939Z",
+                "arrivesAt": "2021-04-23T12:34:48.919Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuap5ou7234871cs6g0aj5xh7",
+                "shipId": "cknqexmnv112616015s62t3g5wva",
+                "createdAt": "2021-04-23T12:33:50.862Z",
+                "arrivesAt": "2021-04-23T12:34:58.778Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuapa7p7252711cs6g6pyd0hx",
+                "shipId": "cknu1f7o314181821cs62736oseq",
+                "createdAt": "2021-04-23T12:33:56.725Z",
+                "arrivesAt": "2021-04-23T12:35:42.702Z",
+                "destination": "OE-NY",
+                "departure": "OE-PM",
+                "username": "umuero",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuapbx77261121cs6902g1je0",
+                "shipId": "cknop2b1z2673281ds6lq0utb1j",
+                "createdAt": "2021-04-23T12:33:58.939Z",
+                "arrivesAt": "2021-04-23T12:35:06.896Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuapcbx7263031cs6uakcr6ar",
+                "shipId": "cknpl8pyi10711061bs6mjvxgmn1",
+                "createdAt": "2021-04-23T12:33:59.469Z",
+                "arrivesAt": "2021-04-23T12:35:01.445Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuapfuu7278151cs6g8s1jmoh",
+                "shipId": "cknpx7hx294203715s6i2e8umy0",
+                "createdAt": "2021-04-23T12:34:04.039Z",
+                "arrivesAt": "2021-04-23T12:35:12.018Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaovk37191891cs6oaab9qdz",
+                "shipId": "cknqexpao112680315s6yp4z3g5d",
+                "createdAt": "2021-04-23T12:33:37.731Z",
+                "arrivesAt": "2021-04-23T12:34:45.681Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuaoyhf7204471cs6q4ol5zjm",
+                "shipId": "cknpjyp4h5537661bs6o4fdodlo",
+                "createdAt": "2021-04-23T12:33:41.523Z",
+                "arrivesAt": "2021-04-23T12:34:43.505Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "SilverSpar",
+                "shipType": "HM-MK-III"
+            },
+            {
+                "id": "cknuaoz1p7206361cs6o7ow63hu",
+                "shipId": "cknpx7g7o94155015s6ojhw0utm",
+                "createdAt": "2021-04-23T12:33:42.253Z",
+                "arrivesAt": "2021-04-23T12:34:50.235Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuap0nb7212921cs6zj07cg2j",
+                "shipId": "cknqey04f113009315s6taloqbj9",
+                "createdAt": "2021-04-23T12:33:44.327Z",
+                "arrivesAt": "2021-04-23T12:34:52.283Z",
+                "destination": "OE-PM",
+                "departure": "OE-PM-TR",
+                "username": "Foonisher",
+                "shipType": "GR-MK-III"
+            },
+            {
+                "id": "cknuap29o7219451cs6d51d9yta",
+                "shipId": "cknu4hfu511860281cs6gsw6cu3u",
+                "createdAt": "2021-04-23T12:33:46.429Z",
+                "arrivesAt": "2021-04-23T12:34:54.402Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-PM",
+                "username": "agricultural-amber-crane-§",
+                "shipType": "JW-MK-I"
+            },
+            {
+                "id": "cknuapd307264971cs6lwzt1xmd",
+                "shipId": "cknok8quv8823071ds6lbh28kf4",
+                "createdAt": "2021-04-23T12:34:00.445Z",
+                "arrivesAt": "2021-04-23T12:35:14.426Z",
+                "destination": "OE-UC-AD",
+                "departure": "OE-UC",
+                "username": "Foonisher",
+                "shipType": "GR-MK-II"
+            },
+            {
+                "id": "cknuapflk7276531cs6h7q5o677",
+                "shipId": "cknruennn89569315s6x6n0xhx8",
+                "createdAt": "2021-04-23T12:34:03.704Z",
+                "arrivesAt": "2021-04-23T12:35:53.004Z",
+                "destination": "OE-PM-TR",
+                "departure": "OE-KO",
+                "username": "umuero",
+                "shipType": "HM-MK-I"
+            },
+            {
+                "id": "cknuapfrx7277621cs6sn1yy0y9",
+                "shipId": "ckns6eyet6022415s65sct9f5h",
+                "createdAt": "2021-04-23T12:34:03.933Z",
+                "arrivesAt": "2021-04-23T12:37:51.912Z",
+                "destination": "OE-KO",
+                "departure": "OE-BO",
+                "username": "JimHawkins",
+                "shipType": "GR-MK-III"
+            }
+        ]
+    },
+    "flight_plan": {
+        "flightPlan": {
+          "arrivesAt": "2021-03-28T23:11:50.068Z",
+          "createdAt": "2021-03-28T23:05:05.078Z",
+          "departure": "OE-PM-TR",
+          "destination": "OE-CR",
+          "distance": 46,
+          "fuelConsumed": 13,
+          "fuelRemaining": 67,
+          "id": "ckmtrssae0402zgopsy39y9z7",
+          "shipId": "ckmtrlqpz0109zgopkeqs4m5s",
+          "terminatedAt": null,
+          "timeRemainingInSeconds": 365
+        }
+      }
 }
