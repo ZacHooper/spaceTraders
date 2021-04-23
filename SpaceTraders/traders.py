@@ -3,6 +3,7 @@ import time
 import datetime
 import math
 import pandas as pd
+import logging
 
 URL = "https://api.spacetraders.io/"
 TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
@@ -32,7 +33,7 @@ def trading_run(ship, destination):
     ship = user.get_ship(ship.id)
     
     # Fly to destination
-    user.fly(ship.id, destination, track=True)
+    user.fly(ship.id, destination, track=False)
     ship = user.get_ship(ship.id)
 
     # Sell goods
@@ -82,7 +83,19 @@ def any_dest_trading_run(ship):
     if any(x['good'] != "FUEL" for x in ship.cargo):
       print(f"{R}Goods still left on ship that require selling{W}")
       cargo_to_sell = next(good for good in ship.cargo if good['good'] != "FUEL")
-      sell_order = user.sell_order(ship.id, cargo_to_sell['good'], cargo_to_sell['quantity'])
+      if cargo_to_sell['quantity'] > 300:
+        # Rounding up - how many order to make
+        count = math.ceil(cargo_to_sell['quantity'] / 300)
+        temp_units = cargo_to_sell['quantity']
+        # Do buy order as many times as requried
+        for i in range(count):
+            if temp_units / 300 > 1:
+                sell_order = user.sell_order(ship.id, cargo_to_sell['good'], 300)
+                temp_units = temp_units - 300
+            else:
+                sell_order = user.sell_order(ship.id, cargo_to_sell['good'], temp_units)
+      else:
+        sell_order = user.sell_order(ship.id, cargo_to_sell['good'], cargo_to_sell['quantity'])
       print(f"{G}Sold {cargo_to_sell['quantity']} units of {cargo_to_sell['good']} for {sell_order['order']['total']}{W}")
       ship.update_cargo(sell_order['ship']['cargo'], sell_order['ship']['spaceAvailable'])
 
@@ -146,14 +159,17 @@ def any_dest_trading_run(ship):
   ship.update_cargo(fuel_order['ship']['cargo'], fuel_order['ship']['spaceAvailable'])
 
   # Fly
-  flight = user.fly(ship.id, flight_path['to'], track=True)
+  flight = user.fly(ship.id, flight_path['to'], track=False)
   # Collate Data to Upload to Datebase
   to = GAME.locations[flight_path['to']]
   flightReason = "Trade" if did_buy_goods else "Relocating"
-  data = [[datetime.datetime.now(), ship.location, flight_path['to'],
+  try:
+    data = [[datetime.datetime.now(), ship.location, flight_path['to'],
           flight['distance'], flight_path['fuel_required'], flight['fuelConsumed'], 
           flight['timeRemainingInSeconds'], ship.manufacturer, ship.type, ship.speed, 
           ship.maxCargo - ship.spaceAvailable, ship.plating, ship.weapons, flightReason]]
+  except Exception:
+    logging.exception(f"Something went wrong flight: {str(flight)}, to: {to}, flight_path: {str(flight_path)}, ship: {ship}")
   columns = ['time', 'from_loc', 'to_loc', 'distance', 'estimated_fuel_required', 'actual_fuel_required',
               'time_taken', 'ship_manufactorer', 'ship_type', 'speed', 'totalVolume', 'plating', 'weapons', 
               'flight_reason']

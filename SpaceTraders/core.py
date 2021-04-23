@@ -9,7 +9,7 @@ import logging
 URL = "https://api.spacetraders.io/"
 
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(format='%(asctime)s - %(thread)d - %(levelname)s - %(message)s', level=logging.INFO)
 
 R  = '\033[31m' # red
 G  = '\033[32m' # green
@@ -89,13 +89,13 @@ class Ship(object):
 
     Enures that any downstream calls of this object have the correct information. Ensure to use this method after any orders.
     '''
-    logging.info("Updating Cargo & Space Available of ship: {0}. Previous Cargo: {1}. New Cargo: {2}. Previous Space Available: {3}. New Space Available: {4}".format(self.id, self.cargo, new_cargo, self.spaceAvailable, new_spaceAvailable))
+    logging.debug("Updating Cargo & Space Available of ship: {0}. Previous Cargo: {1}. New Cargo: {2}. Previous Space Available: {3}. New Space Available: {4}".format(self.id, self.cargo, new_cargo, self.spaceAvailable, new_spaceAvailable))
     self.cargo = new_cargo
     self.spaceAvailable = new_spaceAvailable
     return True
 
   def update_location(self, new_x, new_y, new_location):
-    logging.info("Updating location of ship. Previous Location: {0}. Previous X: {1}. Previous Y: {2}. New Location: {3}, New X: {4}, New Y: {5}".\
+    logging.debug("Updating location of ship. Previous Location: {0}. Previous X: {1}. Previous Y: {2}. New Location: {3}, New X: {4}, New Y: {5}".\
       format(self.location, self.x, self.y, new_location, new_x, new_y))
     self.location = new_location
     self.x = new_x
@@ -338,12 +338,11 @@ class User:
 
   def fly(self, shipId, destination, track=False):
     endpoint = "users/{0}/flight-plans".format(self.username)
-
+    flight = generic_post_call(endpoint, params={"shipId": shipId,
+                                                   "destination": destination}, token=self.token)['flightPlan']
+    logging.info("Ship {0} has left {1} and is flying to {2}. It will take {3} seconds.".format(shipId, flight['departure'], destination, flight['timeRemainingInSeconds']))
     # Track the flights progress in the console
     if track:
-      flight = generic_post_call(endpoint, params={"shipId": shipId,
-                                                   "destination": destination}, token=self.token)['flightPlan']
-      logging.info("Ship {0} has left {1} and is flying to {2}".format(shipId, flight['departure'], destination))
       # Create Progress Bar
       with Progress() as progress:
         flightTime = flight['timeRemainingInSeconds']
@@ -359,11 +358,12 @@ class User:
             time.sleep(1)
         logging.info("Ship {0} has landed at {1}".format(shipId, destination))
         return flight
-      
-    return generic_post_call(endpoint, params={
-      "shipId": shipId,
-      "destination": destination
-    }, token=self.token)
+    # Don't wont the visual timer in the console
+    else:
+      # Wait for the length of the flight
+      time.sleep(flight['timeRemainingInSeconds'] + 5)
+      logging.info("Ship {0} has landed at {1}".format(shipId, destination))
+      return flight
 
   def flight(self, flightPlanId):
     return generic_get_call("users/{0}/flight-plans/{1}".format(self.username, flightPlanId), token=self.token)
@@ -560,16 +560,16 @@ def generic_get_call(endpoint, params=None, token=None):
     if r.ok:
         return r.json()
     else:
-        logging.warning(f"Something went wrong when hitting: {r.request.method} {r.url} with parameters: {params}")
         error = r.json()
         code = error['error']['code']
         message = error['error']['message']
-        logging.warning("Error: " + str(error))        
+        logging.warning(f"Something went wrong when hitting: {r.request.method} {r.url} with parameters: {params}, Error: {str(error)}")     
         if str(code) == '42901':
           # Handle Throttling errors by pausing and trying again
-          logging.info("Throttle limit was reached. Pausing to wait for throttle")
-          for n in track(range(10), description="Pausing..."):
-            time.sleep(1)
+          logging.warning("Throttle limit was reached. Pausing to wait for throttle")
+          time.sleep(10)
+          # for n in track(range(10), description="Pausing..."):
+          #   time.sleep(1)
           return generic_get_call(endpoint, params, token)
         else:
           logging.exception(f"Something broke the script. Code: {code} Error Message: {message} ")
@@ -581,16 +581,16 @@ def generic_post_call(endpoint, params=None, token=None):
     if r.ok:
         return r.json()
     else:
-        logging.warning(f"Something went wrong when hitting: {r.request.method} {r.url} with parameters: {params}")
         error = r.json()
         code = error['error']['code']
         message = error['error']['message']
-        logging.warning("Error: " + str(error))
+        logging.warning(f"Something went wrong when hitting: {r.request.method} {r.url} with parameters: {params}, Error: {str(error)}")
         if str(code) == '42901':
           # Handle Throttling errors by pausing and trying again
-          logging.info("Throttle limit was reached. Pausing to wait for throttle")
-          for n in track(range(10), description="Pausing..."):
-            time.sleep(1)
+          logging.warning("Throttle limit was reached. Pausing to wait for throttle")
+          time.sleep(10)
+          # for n in track(range(10), description="Pausing..."):
+          #   time.sleep(1)
           return generic_post_call(endpoint, params, token)
         else:
           logging.exception(f"Something broke the script. Code: {code} Error Message: {message} ")

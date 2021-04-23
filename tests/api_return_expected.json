@@ -160,5 +160,38 @@
                 }
             ]
         }
+    },
+    "flightPlan": {
+        "flightPlan": {
+            "id": "ckntps2t04056451cs636r6w96l",
+            "shipId": "cknqp69if160592515s6qcu4ebjx",
+            "createdAt": "2021-04-23T02:48:15.157Z",
+            "arrivesAt": "2021-04-23T02:51:43.137Z",
+            "destination": "OE-PM-TR",
+            "departure": "OE-KO",
+            "distance": 74,
+            "fuelConsumed": 23,
+            "fuelRemaining": 27,
+            "terminatedAt": false,
+            "timeRemainingInSeconds": 207
+        }
+    },
+    "buy_ship": {
+        "credits": 4862603,
+        "ship": {
+            "id": "ckntq87y15674821cs61t5owe9s",
+            "location": "OE-UC-AD",
+            "x": -82,
+            "y": 82,
+            "cargo": [],
+            "spaceAvailable": 300,
+            "type": "HM-MK-III",
+            "class": "MK-III",
+            "maxCargo": 300,
+            "speed": 4,
+            "manufacturer": "Hermes",
+            "plating": 20,
+            "weapons": 5
+        }
     }
 }

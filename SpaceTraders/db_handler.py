@@ -13,11 +13,11 @@ engine = sqlalchemy.create_engine(DATABASE_LOCATION)
 
 def write_to_db(df, table, create_table_sql):
   conn = sqlite3.connect('/Users/zachooper/Documents/Personal/Projects/SpaceTraders/spaceTraders/SpaceTraders_DB.sqlite')
-  logging.info("Connecting to Database: 'SpaceTraders_DB.sqlite'")
+  logging.debug("Connecting to Database: 'SpaceTraders_DB.sqlite'")
   cursor = conn.cursor()
   # Create Table if not already created
   cursor.execute(create_table_sql)
-  logging.info("Connected to Database")
+  logging.debug("Connected to Database")
 
   # Add the data to the DB
   try:
@@ -29,7 +29,7 @@ def write_to_db(df, table, create_table_sql):
 
   # Close the DB
   conn.close()
-  logging.info("Diconnected from Database")
+  logging.debug("Diconnected from Database")
 
 def write_marketplace_to_db(marketplace):
   table = "marketplace_tracker"
