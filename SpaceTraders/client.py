@@ -19,7 +19,7 @@ def make_request(method, url, headers, params):
         Request: Returns the request
 
     Exceptions:
-        Exception: Invalid method - must be GET, POST or PUT
+        Exception: Invalid method - must be GET, POST, PUT or DELETE
     """
     # Define the different HTTP methods
     methods = {
@@ -292,7 +292,7 @@ class Ships (Client):
         """Scraps the shipId for a small amount of credits. 
         Ships need to be scraped at a location with a Shipyard.
         Known Shipyards:
-            - OE-PM-TR
+        - OE-PM-TR
 
         Args:
             shipId (str): ID of the ship to scrap

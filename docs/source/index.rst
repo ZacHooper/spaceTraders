@@ -1,10 +1,74 @@
-.. SpacePyTraders documentation master file, created by
-   sphinx-quickstart on Tue Apr 20 21:27:40 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to SpacePyTraders's documentation!
 ==========================================
+
+.. automodule:: SpaceTraders.client
+    :members:
+
+Api
+########    
+.. autoclass:: SpaceTraders.client.Api
+    :members:
+    :special-members: __init__
+
+Client
+########    
+.. autoclass:: SpaceTraders.client.Client
+    :members:
+
+Flight Plans
+############    
+.. autoclass:: SpaceTraders.client.FlightPlans
+   :members:
+
+Game
+#### 
+.. autoclass:: SpaceTraders.client.Game
+   :members:
+
+Loans
+#####
+.. autoclass:: SpaceTraders.client.Loans
+   :members:
+
+Locations
+#########
+.. autoclass:: SpaceTraders.client.Locations
+   :members:
+
+Marketplace
+###########
+.. autoclass:: SpaceTraders.client.Marketplace
+   :members:
+
+PurchaseOrders
+##############
+.. autoclass:: SpaceTraders.client.PurchaseOrders
+   :members:
+
+SellOrders
+##########
+.. autoclass:: SpaceTraders.client.SellOrders
+   :members:
+
+Ships
+##########
+.. autoclass:: SpaceTraders.client.Ships
+   :members:
+
+Structures
+##########
+.. autoclass:: SpaceTraders.client.Structures
+   :members:
+
+Systems
+##########
+.. autoclass:: SpaceTraders.client.Systems
+   :members:
+
+Users
+##########
+.. autoclass:: SpaceTraders.client.Users
+   :members:
 
 .. toctree::
    :maxdepth: 2
