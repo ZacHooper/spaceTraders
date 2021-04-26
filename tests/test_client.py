@@ -52,7 +52,19 @@ class TestShipMethods(unittest.TestCase):
         self.assertEqual(self.ships.buy_ship("OE-BO", "HM-MK-III"), False, "API call didn't fail when expected to")
     
     def test_get_available_ships(self):
-        self.assertEqual(self.ships.get_available_ships("MK-III"), False, "API call didn't fail when expected to")
+        self.assertEqual(self.ships.get_available_ships("MK-IIII"), False, "API call didn't fail when expected to")
+
+    def test_ships_get_ship_info(self):
+        self.assertEqual(self.ships.get_ship("1234"), False, "API call didn't fail when expected to")
+    
+    def test_get_list_of_users_ships(self):
+        self.assertIsInstance(self.ships.get_user_ships()['ships'], list, "API didn't return the expected list")
+
+    def test_jettison_cargo(self):
+        self.assertEqual(self.ships.jettinson_cargo("1234", "FUEL", 50), False, "API call didn't fail when expected to")
+
+    def test_transfer_cargo(self):
+        self.assertEqual(self.ships.transfer_cargo("1221345", "1234", "FUEL", 50), False, "API call didn't fail when expected to")
 
 class TestFlightPlanInit(unittest.TestCase):
     def test_flight_plan_init(self):

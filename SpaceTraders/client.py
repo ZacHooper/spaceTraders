@@ -240,7 +240,7 @@ class Locations (Client):
         """Get info on a location with the provided Symbol
 
         Args:
-            symbol (str): The symbol for the location eg: OM-PM
+            symbol (str): The symbol for the location eg: OE-PM
 
         Returns:
             dict: A dict containing info about a location
@@ -256,7 +256,7 @@ class Locations (Client):
         """Get the ships docked at a location
 
         Args:
-            symbol (str): The symbol for the location eg: OM-PM
+            symbol (str): The symbol for the location eg: OE-PM
 
         Returns:
             dict: A dict containing a JSON list of the ships docked at the location. 
@@ -272,7 +272,7 @@ class Locations (Client):
         """Get locations in the defined system
 
         Args:
-            symbol (str): The symbol for the system eg: OM
+            symbol (str): The symbol for the system eg: OE
 
         Returns:
             dict: A dict containing a JSON list of the locations in the system
@@ -289,7 +289,7 @@ class Marketplace (Client):
         """Get the marketplace for the location provided
 
         Args:
-            symbol (str): The symbol for the location eg: OM-PM
+            symbol (str): The symbol for the location eg: OE-PM
 
         Returns:
             dict: A dict containing details of the location and a JSON list of the items available in the marketplace
@@ -367,11 +367,60 @@ class Ships (Client):
         return res.json() if res else False
 
     # Get Ship
+    def get_ship(self, shipId):
+        """Get info on the ship
+
+        Args:
+            shipId (str): The shipId of the ship you want to get info on
+
+        Returns:
+            dict: A dict containing the info about the ship
+
+        API LINK: https://api.spacetraders.io/#api-ships-GetShip
+        """
+        endpoint = f"users/{self.username}/ships/{shipId}"
+        warning_log = F"Unable to get info fo ship: {shipId}"
+        logging.info(f"Getting info on ship: {shipId}")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Get Users ships
+    def get_user_ships(self):
+        """Get a list of all the ships you own
+
+        Returns:
+            dict: A JSON list of the ships you own. Each item is a return from the get_ship_info endpoint.
+
+        API Link: https://api.spacetraders.io/#api-ships-GetShips
+        """
+        endpoint = f"users/{self.username}/ships"
+        warning_log = F"Unable to get list of owned ships."
+        logging.info(f"Getting a list of owned ships")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Jettison Cargo
+    def jettinson_cargo(self, shipId, good, quantity):
+        """Jettison (delete) some cargo from a ship
 
+        Args:
+            shipId (str): The shipId of the ship you want to jettison cargo from
+            good (str): The symbol of the good you want to jettison. Eg. FUEL
+            quantity (int): How many units of the good you want to jettison
+
+        Returns:
+            dict: If successful a dict is returned with the remaining quantitiy of the good on the ship
+
+        API Link: https://api.spacetraders.io/#api-ships-JettisonCargo
+        """
+        endpoint = f"users/{self.username}/ships/{shipId}/jettison"
+        warning_log = F"Unable to jettison cargo from ship. Params - shipId: {shipId}, good: {good}, quantity: {quantity}"
+        logging.info(f"Jettison the following cargo from ship: {shipId}, good: {good}, quantity: {quantity}")
+        params = {"good": good, "quantity": quantity}
+        res = self.generic_api_call("PUT", endpoint, params=params, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
+
+    # Scrap Ship
     def scrap_ship(self, shipId):
         """Scraps the shipId for a small amount of credits. 
         Ships need to be scraped at a location with a Shipyard.
@@ -394,6 +443,26 @@ class Ships (Client):
         return res
 
     # Transfer Cargo
+    def transfer_cargo(self, fromShipId, toShipId, good, quantity):
+        """Move cargo from own ship to another that are in the same location
+
+        Args:
+            fromShipId (str): The shipId of the ship you want to transfer the cargo FROM
+            toShipId (str): The shipId of the ship you want to transfer the cargo TO
+            good (str): The symbol of the good you want to transfer. Eg. FUEL
+            quantity (int): How many units of the good you want to transfer
+
+        Returns:
+            dict: A dict is returned with two keys "fromShip" & "toShip" each with the updated ship info for the respective ships
+
+        API Link: https://api.spacetraders.io/#api-ships-TransferCargo
+        """
+        endpoint = f"users/{self.username}/ships/{fromShipId}/transfer"
+        warning_log = F"Unable to transfer {quantity} units of {good} from ship: {fromShipId} to ship: {toShipId}"
+        logging.info(f"Transferring {quantity} units of {good} from ship: {fromShipId} to ship: {toShipId}")
+        params = {"toShipId": toShipId, "good": good, "quantity": quantity}
+        res = self.generic_api_call("PUT", endpoint, params=params, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
 class Structures (Client):
     pass
