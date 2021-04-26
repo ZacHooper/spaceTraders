@@ -3,7 +3,7 @@ import threading
 import time
 
 if __name__ == "__main__":
-    ships = ['cknxw0jyz10305031bs6rdlv226q']
+    ships = ['cknxw0jyz10305031bs6rdlv226q','cknxxb0cc3225531ds6mlo8va44']
     
     threads = []
     for i in range(len(ships)):

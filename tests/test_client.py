@@ -124,7 +124,7 @@ class TestGameMethods(unittest.TestCase):
         self.assertIsInstance(self.game.get_game_status(), dict, "API did not return dict as expected")
 
 class TestLoansInit(unittest.TestCase):
-    def test_game_init(self):
+    def test_loans_init(self):
         self.assertIsInstance(Loans("JimHawkins", "12345"), Loans, "Failed to initiate the Loans Class")
         self.assertEqual(Loans("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
         self.assertEqual(Loans("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
@@ -150,7 +150,7 @@ class TestLoansMethods(unittest.TestCase):
         self.assertEqual(self.loans.pay_off_loan("asdfasdf"), False, "API did not fail as expected")
 
 class TestUsersInit(unittest.TestCase):
-    def test_game_init(self):
+    def test_users_init(self):
         self.assertIsInstance(Users("JimHawkins", "12345"), Users, "Failed to initiate the Users Class")
         self.assertEqual(Users("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
         self.assertEqual(Users("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
@@ -167,7 +167,7 @@ class TestUsersMethods(unittest.TestCase):
         self.assertIsInstance(self.users.get_your_info(), dict, "API did not return dict as expected")
 
 class TestLocationsInit(unittest.TestCase):
-    def test_game_init(self):
+    def test_locations_init(self):
         self.assertIsInstance(Locations("JimHawkins", "12345"), Locations, "Failed to initiate the Locations Class")
         self.assertEqual(Locations("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
         self.assertEqual(Locations("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
@@ -190,7 +190,7 @@ class TestLocationsMethods(unittest.TestCase):
         self.assertIsInstance(self.locations.get_system_locations("OE"), dict, "API did not return dict as expected")
 
 class TestMarketplaceInit(unittest.TestCase):
-    def test_game_init(self):
+    def test_marketplace_init(self):
         self.assertIsInstance(Marketplace("JimHawkins", "12345"), Marketplace, "Failed to initiate the Marketplace Class")
         self.assertEqual(Marketplace("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
         self.assertEqual(Marketplace("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
@@ -207,7 +207,7 @@ class TestMarketplaceMethods(unittest.TestCase):
         self.assertIsInstance(self.marketplace.get_marketplace("OE-PM-TR"), dict, "API did not return dict as expected")
 
 class TestSellOrdersInit(unittest.TestCase):
-    def test_purchase_order_init(self):
+    def test_sell_order_init(self):
         self.assertIsInstance(SellOrders("JimHawkins", "12345"), SellOrders, "Failed to initiate the SellOrders Class")
         self.assertEqual(SellOrders("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
         self.assertEqual(SellOrders("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
@@ -223,7 +223,54 @@ class TestSellOrdersMethods(unittest.TestCase):
     def test_submit_flight_plan_fail(self):
         self.assertEqual(self.so.new_sell_order("12345", "FUEL", 5), False, "API call didn't fail when expected to")
 
+class TestStructuresInit(unittest.TestCase):
+    def test_structures_init(self):
+        self.assertIsInstance(Structures("JimHawkins", "12345"), Structures, "Failed to initiate the Structures Class")
+        self.assertEqual(Structures("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(Structures("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestStructuresMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.structures = Structures(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_create_new_structure(self):
+        self.assertEqual(self.structures.create_new_structure("OE-PM", "MINE"), False, "API call didn't fail when expected to")
+
+    def test_deposit_goods(self):
+        self.assertEqual(self.structures.deposit_goods("1234", "1234", "FUEL", 50), False, "API call didn't fail when expected to")
+
+    def test_get_structure(self):
+        self.assertEqual(self.structures.get_structure("1234"), False, "API call didn't fail when expected to")
+
+    def test_get_users_structures(self):
+        self.assertIsInstance(self.structures.get_users_structures()['structures'], list, "API call didn't fail when expected to")
+
+    def test_transfer_goods(self):
+        self.assertEqual(self.structures.transfer_goods("1234", "1234", "FUEL", 50), False, "API call didn't fail when expected to")
+
+class TestSystemsInit(unittest.TestCase):
+    def test_systems_init(self):
+        self.assertIsInstance(Systems("JimHawkins", "12345"), Systems, "Failed to initiate the Systems Class")
+        self.assertEqual(Systems("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(Systems("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestSystemsMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.systems = Systems(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_get_systems(self):
+        self.assertIsInstance(self.systems.get_systems()['systems'], list, "API call didn't return the expected list of systems")
+
 class TestGetUserToken(unittest.TestCase):
     def test_get_user_token(self):
         self.assertIsNone(get_user_token("JimHawkins"), "Failed to handle a username that already exists")
 
+ 

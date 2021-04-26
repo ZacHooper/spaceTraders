@@ -465,21 +465,104 @@ class Ships (Client):
         return res.json() if res else False
 
 class Structures (Client):
-    pass
-
     # Create a new structure
+    def create_new_structure(self, location, type):
+        """Create a new structure on the location provided. Note that only certain structures can be built at specific locations
+
+        Args:
+            location (str): symbol of the location to build the structure
+            type (str): type of structure you want to build
+        """
+        endpoint = f"users/{self.username}/structures"
+        params = {"location": location, "type": type}
+        warning_log = F"Unable to create structure type: {type}, at location: {location}."
+        logging.info(f"Creating structure of type: {type} at location: {location}")
+        res = self.generic_api_call("POST", endpoint, params=params, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Deposit Goods
+    def deposit_goods(self, structureId, shipId, good, quantity):
+        """Deposit goods from a ship to a structure. The ship must be at the location the structure has been built.
+
+        Args:
+            structureId (str): ID of the structure to deposit the goods into
+            shipId (str): ID of the ship to take the goods from
+            good (str): symbol of the good to deposite. Eg: FUEL
+            quantity (str): How many units of the good to deposit
+        
+        Returns:
+            dict : dict containing the updated info of the ship and structure
+        """
+        endpoint = f"users/{self.username}/structures/{structureId}/deposit"
+        params = {"shipId": shipId, "good": good, "quantity": quantity}
+        warning_log = F"Unable to deposit {quantity} units of {good} from ship: {shipId} into structure: {structureId}"
+        logging.info(f"Depositing {quantity} units of {good} from ship: {shipId} into structure: {structureId}")
+        res = self.generic_api_call("POST", endpoint, params=params, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Get your structure info
+    def get_structure(self, structureId):
+        """Get the info about a structure
+
+        Args:
+            structureId (str): ID of the structure to deposit the goods into
+
+        Returns:
+            dict : dict containing the info of the strucutre
+        """
+        endpoint = f"users/{self.username}/structures/{structureId}"
+        warning_log = F"Unable to get the info for structure: {structureId}"
+        logging.info(f"Getting info about structure: {structureId}")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Get your strucutres
+    def get_users_structures(self):
+        """Get the info about a structure
+
+        Returns:
+            dict : dict containings a JSON list of the structures the user owns
+        """
+        endpoint = f"users/{self.username}/structures"
+        warning_log = F"Unable to get the info about your structures"
+        logging.info(f"Getting info about the user's structures")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Transfer goods
+    def transfer_goods(self, structureId, shipId, good, quantity):
+        """Transfer goods from a structure to a ship. The ship must be docked at the location the structure has been built.
+
+        Args:
+            structureId (str): ID of the structure to deposit the goods into
+            shipId (str): ID of the ship to take the goods from
+            good (str): symbol of the good to deposite. Eg: FUEL
+            quantity (str): How many units of the good to deposit
+        
+        Returns:
+            dict : dict containing the updated info of the ship and structure
+        """
+        endpoint = f"users/{self.username}/structures/{structureId}/transfer"
+        params = {"shipId": shipId, "good": good, "quantity": quantity}
+        warning_log = F"Unable to transfer {quantity} units of {good} from structure: {structureId} into ship: {shipId}"
+        logging.info(f"Transferring {quantity} units of {good} from structure: {structureId} into ship: {shipId}")
+        res = self.generic_api_call("POST", endpoint, params=params, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
 class Systems (Client):
-    pass
     # Get system info
+    def get_systems(self):
+        """Get your user info
+
+        Returns:
+            dict: dict containing a JSON list of the different systems
+        """
+        # Get user
+        endpoint = f"game/systems"
+        warning_log = F"Unable to get systems"
+        logging.info(f"Getting systems")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False    
 
 class Users (Client):
 

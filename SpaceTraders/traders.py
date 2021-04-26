@@ -79,6 +79,7 @@ def find_optimum_trade_routes(ship):
     return [core.Market(GAME).what_should_I_buy(ship, loc, ship_marketplace) for loc in all_tracker_locs]
 
 def any_dest_trading_run(ship):
+  print(ship.location)
   # First sell any existing cargo
   if len(ship.cargo) > 0:
     if any(x['good'] != "FUEL" for x in ship.cargo):
@@ -236,6 +237,6 @@ def do_trading_run(shipId, times):
   print("Profit per Hour: " + str(profit_per_hour))
 
 if __name__ == "__main__":
-  do_trading_run('cknoj34cd6480541ds6mlnvsxh2', 1)
+  do_trading_run('cknxw0jyz10305031bs6rdlv226q', 1)
 
   
