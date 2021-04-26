@@ -8,7 +8,6 @@ import logging
 
 URL = "https://api.spacetraders.io/"
 
-
 logging.basicConfig(format='%(asctime)s - %(thread)d - %(levelname)s - %(message)s', level=logging.INFO)
 
 R  = '\033[31m' # red
@@ -528,7 +527,6 @@ class Location:
         self.x = args[0]['x']
         self.y = args[0]['y']
         self.allowsConstruction = args[0]['allowsConstruction']
-        self.ships = args[0]['ships']
         self.structures = args[0]['structures']
       if len(args) > 1:
         for key in kwargs:
@@ -542,7 +540,7 @@ class Location:
     return f"<Location Object> Symbol: {self.symbol}, Type: {self.type}, "\
            f"Name: {self.name}, X: {self.x}, Y: {self.y}, "\
            f"Allows Construction: {self.allowsConstruction}, "\
-           f"Ships: {len(self.ships)}, Structures: {len(self.structures)}"
+           f"Structures: {len(self.structures)}"
 
   def __str__(self):
     return "Symbol: " + self.symbol + ", Name: " + self.name

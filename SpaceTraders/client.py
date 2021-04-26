@@ -44,7 +44,7 @@ def get_user_token(username):
     Returns:
         str: Token if user valid else None
     """
-    url = f"https://api.spacetraders.io/users/{username}/loans"
+    url = f"https://api.spacetraders.io/users/{username}/token"
     try:
         res = make_request("POST", url, None, None)
         if res.ok:
@@ -230,20 +230,75 @@ class Loans (Client):
         endpoint = f"users/{self.username}/loans"
         warning_log = F"Unable to take loan of type: {type}"
         logging.info(f"Requesting {type} loan")
-        res = self.generic_api_call("POST", endpoint, token=self.token, warning_log=warning_log)
+        params = {"type": type}
+        res = self.generic_api_call("POST", endpoint, params=params, token=self.token, warning_log=warning_log)
         return res.json() if res else False
 
 class Locations (Client):
-    pass
     # Get Location
+    def get_location(self, symbol):
+        """Get info on a location with the provided Symbol
+
+        Args:
+            symbol (str): The symbol for the location eg: OM-PM
+
+        Returns:
+            dict: A dict containing info about a location
+        """
+        endpoint = f"game/locations/{symbol}"
+        warning_log = F"Unable to get info for the location: {symbol}"
+        logging.info(f"Getting location info for {symbol}")
+        res = self.generic_api_call("GET", endpoint,token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Get Ships at Location
+    def get_ships_at_location(self, symbol):
+        """Get the ships docked at a location
+
+        Args:
+            symbol (str): The symbol for the location eg: OM-PM
+
+        Returns:
+            dict: A dict containing a JSON list of the ships docked at the location. 
+        """
+        endpoint = f"game/locations/{symbol}/ships"
+        warning_log = F"Unable to get ships docked at the location: {symbol}"
+        logging.info(f"Getting the ships docked at: {symbol}")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False    
 
     # Get System's Locations
+    def get_system_locations(self, symbol):
+        """Get locations in the defined system
+
+        Args:
+            symbol (str): The symbol for the system eg: OM
+
+        Returns:
+            dict: A dict containing a JSON list of the locations in the system
+        """
+        endpoint = f"game/systems/{symbol}/locations"
+        warning_log = F"Unable to get the locations in the system: {symbol}"
+        logging.info(f"Getting the locations in system: {symbol}")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False  
 
 class Marketplace (Client):
-    pass
     # Get Location's marketplace
+    def get_marketplace(self, symbol):
+        """Get the marketplace for the location provided
+
+        Args:
+            symbol (str): The symbol for the location eg: OM-PM
+
+        Returns:
+            dict: A dict containing details of the location and a JSON list of the items available in the marketplace
+        """
+        endpoint = f"game/locations/{symbol}/marketplace"
+        warning_log = F"Unable to get the marketplace for the location: {symbol}"
+        logging.info(f"Getting the marketplace for location: {symbol}")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False  
 
 class PurchaseOrders (Client):
     def new_purchase_order(self, shipId, good, quantity):
@@ -261,8 +316,20 @@ class PurchaseOrders (Client):
         return res.json() if res else False
 
 class SellOrders (Client):
-    pass
     # Sell Orders
+    def new_sell_order(self, shipId, good, quantity):
+        """Makes a sell order to the location the ship is currently located at. 
+
+        Args:
+            shipId (str): ID of the ship to offload the goods from
+            good (str): Symbol of the good to sell
+            quantity (int): How many units of the good to sell
+        """
+        endpoint = f"users/{self.username}/sell-orders"
+        params = {"shipId": shipId, "good": good, "quantity": quantity}
+        warning_log = F"Unable to make sell order for ship: {shipId}, good: {good} & quantity: {quantity}"
+        res = self.generic_api_call("POST", endpoint, params=params, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
 class Ships (Client):
     def buy_ship(self, location, type):
@@ -281,6 +348,23 @@ class Ships (Client):
         return res.json() if res else False
 
     # Get available ships
+    def get_available_ships(self, type=None):
+        """Get the avialable ships to purchase across all systems
+
+        Args:
+            type (str, optional): Filter the list of ships to the class level. eg 'MK-II' (Note: those are capital i's). Defaults to None.
+
+        Returns:
+            dict: A dict containing a JSON list of ships that are available. 
+
+        API LINK: https://api.spacetraders.io/#api-ships-ships
+        """
+        endpoint = f"game/ships"
+        params = {"class": type}
+        warning_log = F"Unable to get available ships. Class Filter: {type}"
+        logging.info(f"Getting available ships to purchase. Filter: {type}")
+        res = self.generic_api_call("GET", endpoint, params=params, token=self.token, warning_log=warning_log)
+        return res.json() if res else False
 
     # Get Ship
 
@@ -329,8 +413,19 @@ class Systems (Client):
     # Get system info
 
 class Users (Client):
-    pass
-    # Get user
+
+    def get_your_info(self):
+        """Get your user info
+
+        Returns:
+            dict: dict containing your user data
+        """
+        # Get user
+        endpoint = f"users/{self.username}"
+        warning_log = F"Unable to get {self.username} user info"
+        logging.info(f"Getting user info for {self.username}")
+        res = self.generic_api_call("GET", endpoint, token=self.token, warning_log=warning_log)
+        return res.json() if res else False    
 
 
 class Api ():
@@ -351,12 +446,9 @@ class Api ():
 
 
 if __name__ == "__main__":
-    token = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
     username = "JimHawkins"
-    shipId = "cknppgtu510080651bs6hc90sb4s"
+    token = "0930cc36-7dc7-4cb1-8823-d8e72594d91e"
 
     api = Api(username, token)
-    # api.purchaseOrders.new_purchase_order(shipId, "FUEL", 50)
-    # api.flightplans.new_flight_plan(shipId, "OE-PM-TR")
-    api.ships.scrap_ship(shipId)
-    # api.ships.buy_ship('OE-UC-AD', 'HM-MK-III')
+
+    print(api.loans.get_loans_available())

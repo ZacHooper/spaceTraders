@@ -2,7 +2,7 @@ import unittest
 import logging
 from SpaceTraders.client import *
 
-TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
+TOKEN = "0930cc36-7dc7-4cb1-8823-d8e72594d91e"
 USERNAME = "JimHawkins"
 
 class TestMakeRequestFunction(unittest.TestCase):
@@ -50,6 +50,9 @@ class TestShipMethods(unittest.TestCase):
     
     def test_ships_buy_ship(self):
         self.assertEqual(self.ships.buy_ship("OE-BO", "HM-MK-III"), False, "API call didn't fail when expected to")
+    
+    def test_get_available_ships(self):
+        self.assertEqual(self.ships.get_available_ships("MK-III"), False, "API call didn't fail when expected to")
 
 class TestFlightPlanInit(unittest.TestCase):
     def test_flight_plan_init(self):
@@ -133,6 +136,80 @@ class TestLoansMethods(unittest.TestCase):
 
     def test_request_loan(self):
         self.assertEqual(self.loans.pay_off_loan("asdfasdf"), False, "API did not fail as expected")
+
+class TestUsersInit(unittest.TestCase):
+    def test_game_init(self):
+        self.assertIsInstance(Users("JimHawkins", "12345"), Users, "Failed to initiate the Users Class")
+        self.assertEqual(Users("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(Users("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestUsersMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.users = Users(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_get_loans_available(self):
+        self.assertIsInstance(self.users.get_your_info(), dict, "API did not return dict as expected")
+
+class TestLocationsInit(unittest.TestCase):
+    def test_game_init(self):
+        self.assertIsInstance(Locations("JimHawkins", "12345"), Locations, "Failed to initiate the Locations Class")
+        self.assertEqual(Locations("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(Locations("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestLocationsMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.locations = Locations(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_get_location(self):
+        self.assertIsInstance(self.locations.get_location("OE-PM-TR"), dict, "API did not return dict as expected")
+    
+    def test_get_ships_at_location(self):
+        self.assertIsInstance(self.locations.get_ships_at_location("OE-PM-TR"), dict, "API did not return dict as expected")
+
+    def test_get_locations_in_system(self):
+        self.assertIsInstance(self.locations.get_system_locations("OE"), dict, "API did not return dict as expected")
+
+class TestMarketplaceInit(unittest.TestCase):
+    def test_game_init(self):
+        self.assertIsInstance(Marketplace("JimHawkins", "12345"), Marketplace, "Failed to initiate the Marketplace Class")
+        self.assertEqual(Marketplace("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(Marketplace("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestMarketplaceMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.marketplace = Marketplace(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_get_location(self):
+        self.assertIsInstance(self.marketplace.get_marketplace("OE-PM-TR"), dict, "API did not return dict as expected")
+
+class TestSellOrdersInit(unittest.TestCase):
+    def test_purchase_order_init(self):
+        self.assertIsInstance(SellOrders("JimHawkins", "12345"), SellOrders, "Failed to initiate the SellOrders Class")
+        self.assertEqual(SellOrders("JimHawkins", "12345").username, "JimHawkins", "Did not set the username attribute correctly")
+        self.assertEqual(SellOrders("JimHawkins", "12345").token, "12345", "Did not set the token attribute correctly")
+
+class TestSellOrdersMethods(unittest.TestCase):
+    def setUp(self):
+        logging.disable()
+        self.so = SellOrders(USERNAME, TOKEN)
+    
+    def tearDown(self):
+        logging.disable(logging.NOTSET)
+
+    def test_submit_flight_plan_fail(self):
+        self.assertEqual(self.so.new_sell_order("12345", "FUEL", 5), False, "API call didn't fail when expected to")
 
 class TestGetUserToken(unittest.TestCase):
     def test_get_user_token(self):

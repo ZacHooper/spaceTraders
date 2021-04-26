@@ -4,9 +4,10 @@ import datetime
 import math
 import pandas as pd
 import logging
+from .config.secrets import get_token
 
 URL = "https://api.spacetraders.io/"
-TOKEN = "4c9f072a-4e95-48d6-bccd-54f1569bd3c5"
+TOKEN = get_token()
 GAME = core.Game(TOKEN)
 username = "JimHawkins"
 
@@ -154,9 +155,11 @@ def any_dest_trading_run(ship):
       did_buy_goods = True
   
   # Buy Fuel
-  fuel_order = user.new_order(ship.id, "FUEL", flight_path['fuel_required'] - ship.get_fuel_level())
-  # Update Ship
-  ship.update_cargo(fuel_order['ship']['cargo'], fuel_order['ship']['spaceAvailable'])
+  # Check if fuel order is required
+  if flight_path['fuel_required'] - ship.get_fuel_level() > 0:
+    fuel_order = user.new_order(ship.id, "FUEL", flight_path['fuel_required'] - ship.get_fuel_level())
+    # Update Ship
+    ship.update_cargo(fuel_order['ship']['cargo'], fuel_order['ship']['spaceAvailable'])
 
   # Fly
   flight = user.fly(ship.id, flight_path['to'], track=False)

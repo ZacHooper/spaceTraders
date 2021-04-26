@@ -5,6 +5,7 @@
 .gitattributes
 spaceTraders.pyc
 /.ipynb_checkpoints
+*/secrets
 
 # Misc Folders
 /Archived_Databases
